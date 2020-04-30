@@ -13,6 +13,7 @@ export class LifecycleHooksDemoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(`${LifecycleHooksDemoComponent.name} OnInit`);
     this.changeCardContent();
   }
 

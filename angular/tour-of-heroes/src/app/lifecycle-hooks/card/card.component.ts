@@ -14,10 +14,11 @@ export class CardComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('CardComponent OnChanges:', changes);
+    console.log(`${CardComponent.name} OnChanges:`, changes);
   }
   
   ngOnInit(): void {
+    console.log(`${CardComponent.name} OnInit`);
   }
 
 }
