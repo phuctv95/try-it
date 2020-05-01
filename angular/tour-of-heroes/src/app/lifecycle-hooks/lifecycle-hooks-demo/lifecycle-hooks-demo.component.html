@@ -1,3 +1,4 @@
 <app-card [content]="card1"></app-card> <br>
 <app-card [contents]="card2"></app-card> <br>
-<button (click)="changeCardContent()">Change cards' content</button>
+<p appHighlight [highlightColor]="highlightColor">Highlight me</p>
+<button (click)="changeCardContent(); changeHighlightColor();">Change cards' content</button>

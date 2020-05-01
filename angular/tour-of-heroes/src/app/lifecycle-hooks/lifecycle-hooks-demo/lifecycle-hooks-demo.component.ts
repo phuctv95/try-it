@@ -9,12 +9,14 @@ export class LifecycleHooksDemoComponent implements OnInit {
 
   card1: string;
   card2: string[] = [];
+  highlightColor: string;
 
   constructor() { }
 
   ngOnInit(): void {
     console.log(`${LifecycleHooksDemoComponent.name} OnInit`);
     this.changeCardContent();
+    this.changeHighlightColor();
   }
 
   changeCardContent(): void {
@@ -22,5 +24,20 @@ export class LifecycleHooksDemoComponent implements OnInit {
     this.card1 = now;
     this.card2 = [...this.card2, now];
   }
+
+  changeHighlightColor(): void {
+    this.highlightColor = this.randomColor();
+    console.log(this.highlightColor);
+  }
+
+  randomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
 
 }
