@@ -10,6 +10,7 @@ export class LifecycleHooksDemoComponent implements OnInit {
   card1: string;
   card2: string[] = [];
   highlightColor: string;
+  s1: string = 'abc';
 
   constructor() { }
 
@@ -27,7 +28,6 @@ export class LifecycleHooksDemoComponent implements OnInit {
 
   changeHighlightColor(): void {
     this.highlightColor = this.randomColor();
-    console.log(this.highlightColor);
   }
 
   randomColor(): string {
@@ -39,5 +39,10 @@ export class LifecycleHooksDemoComponent implements OnInit {
     return color;
   }
   
+  doNothing(): void { }
 
+  setTimeoutAndDoNothing(): void {
+    setTimeout(() => {}, 1000);
+  }
+  
 }
