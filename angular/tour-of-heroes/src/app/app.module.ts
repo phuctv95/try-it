@@ -11,6 +11,11 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { LifecycleHooksModule } from './lifecycle-hooks/lifecycle-hooks.module';
+import { ChangeDetectionModule } from './change-detection/change-detection.module';
+import { MyFormsModule } from './my-forms/my-forms.module';
+import { MyTemplateFormsModule } from './my-template-forms/my-template-forms.module';
 
 @NgModule({
   declarations: [
@@ -18,13 +23,18 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroSearchComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    LifecycleHooksModule,
+    ChangeDetectionModule,
+    MyFormsModule,
+    MyTemplateFormsModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )

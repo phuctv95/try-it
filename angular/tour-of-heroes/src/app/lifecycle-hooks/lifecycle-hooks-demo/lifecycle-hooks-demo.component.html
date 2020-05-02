@@ -1,0 +1,8 @@
+<app-card [content]="card1"></app-card> <br>
+<app-card [contents]="card2"></app-card> <br>
+<p appHighlight [highlightColor]="highlightColor">Highlight me</p>
+<input type="text" [(ngModel)]="s1">
+<p>{{s1}}</p>
+<button (click)="changeCardContent(); changeHighlightColor();">Change cards' content</button>
+<button (click)="doNothing()">Do nothing</button>
+<button (click)="setTimeoutAndDoNothing()">Set timeout and do nothing</button>
