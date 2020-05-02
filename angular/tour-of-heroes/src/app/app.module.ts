@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { LifecycleHooksModule } from './lifecycle-hooks/lifecycle-hooks.module';
+import { ChangeDetectionModule } from './change-detection/change-detection.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LifecycleHooksModule } from './lifecycle-hooks/lifecycle-hooks.module';
     AppRoutingModule,
     HttpClientModule,
     LifecycleHooksModule,
+    ChangeDetectionModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
