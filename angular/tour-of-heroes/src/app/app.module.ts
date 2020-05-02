@@ -15,6 +15,7 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { LifecycleHooksModule } from './lifecycle-hooks/lifecycle-hooks.module';
 import { ChangeDetectionModule } from './change-detection/change-detection.module';
 import { MyFormsModule } from './my-forms/my-forms.module';
+import { MyTemplateFormsModule } from './my-template-forms/my-template-forms.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MyFormsModule } from './my-forms/my-forms.module';
     LifecycleHooksModule,
     ChangeDetectionModule,
     MyFormsModule,
+    MyTemplateFormsModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )

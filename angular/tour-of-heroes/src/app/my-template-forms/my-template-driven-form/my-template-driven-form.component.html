@@ -1,0 +1,19 @@
+<h2>Tempalate-driven Form</h2>
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+    <label>
+        Name: <input type="text" [(ngModel)]="model.name" name="name" #name="ngModel" required>
+    </label><br>
+    <p *ngIf="name.invalid">This field is required.</p>
+    <label>
+        Alter Ego: <input type="text" [(ngModel)]="model.alterEgo" name="alterEgo">
+    </label><br>
+    <label>
+        Hero Power:
+        <select [(ngModel)]="model.power" name="power" required>
+            <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+        </select>
+    </label>
+
+    <p>Diagnostic: {{diagnostic}}</p>
+    <button type="submit" [disabled]="myForm.form.invalid">Submit</button>
+</form>
