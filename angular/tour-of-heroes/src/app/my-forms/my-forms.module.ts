@@ -17,7 +17,6 @@ import { ArrayControlComponent } from './array-control/array-control.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule
-  ],
-  exports: [ReactiveFormComponent]
+  ]
 })
 export class MyFormsModule { }

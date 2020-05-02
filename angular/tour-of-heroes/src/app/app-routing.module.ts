@@ -6,6 +6,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { LifecycleHooksDemoComponent } from './lifecycle-hooks/lifecycle-hooks-demo/lifecycle-hooks-demo.component';
 import { ChangeDetectionComponent } from './change-detection/change-detection/change-detection.component';
 import { MyFormsComponent } from './my-forms/my-forms/my-forms.component';
+import { DemoComponent } from './my-template-forms/demo/demo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'lifecycle-hooks', component: LifecycleHooksDemoComponent },
   { path: 'change-detection', component: ChangeDetectionComponent },
   { path: 'my-forms', component: MyFormsComponent },
+  { path: 'my-template-forms', component: DemoComponent },
 ];
 
 @NgModule({
