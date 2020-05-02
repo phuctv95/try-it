@@ -1,0 +1,31 @@
+<h2>Nested Group Using FormBuiler - Reactive Form</h2>
+<form [formGroup]="profile" (ngSubmit)="onSubmit()">
+    <label>
+        First Name: <input type="text" formControlName="firstName">
+    </label>
+    <label>
+        Last Name: <input type="text" formControlName="lastName">
+    </label>
+
+    <div formGroupName="address">
+        <h3>Address</h3>
+        <label>
+            Street: <input type="text" formControlName="street">
+        </label>
+        <label>
+            City: <input type="text" formControlName="city">
+        </label>
+    </div>
+
+    <div formArrayName="emails">
+        <h3>Emails</h3>
+        <button (click)="addEmailControl()">Add email</button>
+        <div *ngFor="let email of emails.controls; let i = index">
+            <label>
+                Email: <input type="text" [formControlName]="i">
+            </label>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!profile.valid">Save</button>
+</form>

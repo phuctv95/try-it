@@ -7,11 +7,12 @@ import { TemplateDrivenFormComponent } from './template-driven-form/template-dri
 import { NestedGroupReactiveFormComponent } from './nested-group-reactive-form/nested-group-reactive-form.component';
 import { FormBuilderGroupComponent } from './form-builder-group/form-builder-group.component';
 import { FormValidationComponent } from './form-validation/form-validation.component';
+import { ArrayControlComponent } from './array-control/array-control.component';
 
 
 
 @NgModule({
-  declarations: [MyFormsComponent, ReactiveFormComponent, TemplateDrivenFormComponent, NestedGroupReactiveFormComponent, FormBuilderGroupComponent, FormValidationComponent],
+  declarations: [MyFormsComponent, ReactiveFormComponent, TemplateDrivenFormComponent, NestedGroupReactiveFormComponent, FormBuilderGroupComponent, FormValidationComponent, ArrayControlComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
