@@ -1,0 +1,8 @@
+.row {
+    border: 2px solid green;
+    padding: 1px;
+}
+
+div[class^="col"] {
+    border: 2px solid blue;
+}
