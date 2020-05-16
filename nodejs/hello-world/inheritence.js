@@ -1,3 +1,5 @@
+// Reference: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance
+
 exports.demo = () => {
     let s = new Student('Leo', 30, 'male', 100);
     s.greeting();
