@@ -37,9 +37,12 @@ class Game {
         //     + if it's in the can-not-switch time, switch to a opposite type
         //     + otherwise, switch to a random type// MAIN
         me.pacs.forEach(myPac => {
-            myPac.findNearestBigPelletAndTriggerSpeed(this);
-            myPac.findNearestNormalPelletIfBigPelletOver(this);
-            // myPac.goRandomPlaceIfDontFindAnyPelletInCurrentView();
+            myPac.resetTargetIfAlreadyCameTarget();
+            if (!myPac.targetMove) {
+                myPac.findNearestBigPelletAndTriggerSpeed(this, me);
+                myPac.findNearestNormalPelletIfNotSetTargetYet(this, myPac);
+            }
+            // myPac.goRandomPlaceIfNotSetTargetYet();
             // myPac.turnBackIfFaceTeammate();
             // myPac.switchTypeIfNearCompetitor();
         });
@@ -48,21 +51,23 @@ class Game {
     writeOutput(pacs) {
         let cmds = [];
         pacs.forEach(pac => {
-            if (pac.targetMove) {
+            if (pac.targetMove && !pac.triggerSpeed && !pac.targetSwitch) {
                 cmds.push(`MOVE ${pac.id} ${pac.targetMove.x} ${pac.targetMove.y}`);
             } else if (pac.triggerSpeed) {
                 cmds.push(`SPEED ${pac.id}`);
+                pac.triggerSpeed = false;
             } else if (pac.targetSwitch) {
                 cmds.push(`SPEED ${pac.id} ${pac.targetSwitch}`);
+                pac.targetSwitch = null;
             }
         });
         console.log(cmds.join(' | '));
     }
-    findNearestBigPelletNotAssignYet(pac) {
+    findNearestBigPelletNotAssignYet(pac, me) {
         let min = Number.MAX_VALUE, iMin = null;
         for (let i = 0; i < this.bigPellets.length; i++) {
             let bigPellet = this.bigPellets[i];
-            if (bigPellet.pac) { continue; }
+            if (me.bigPelletAssigned(bigPellet)) { continue; }
             let d = tool.distance(pac, bigPellet);
             if (d < min) {
                 min = d;
@@ -71,7 +76,7 @@ class Game {
         }
         if (iMin === null) { return null; }
     
-        this.bigPellets[iMin].pac = pac;
+        pac.bigPellet = this.bigPellets[iMin];
         return this.bigPellets[iMin];
     }
     bigPelletAvailable() { return this.bigPellets.length > 0; }
@@ -80,8 +85,11 @@ class Game {
 }
 class Player {
     constructor() {
-        this.pacs = null;
+        this.pacs = [];
         this.score = null;
+    }
+    bigPelletAssigned(bigPellet) {
+        return !!this.pacs.find(pac => pac.bigPellet && tool.samePlace(pac.bigPellet, bigPellet));
     }
 }
 class Pac {
@@ -95,26 +103,16 @@ class Pac {
         this.targetMove = null;
         this.targetSwitch = null;
         this.triggerSpeed = false;
+        this.bigPellet = null;
     }
-    findNearestBigPelletAndTriggerSpeed(game) {
-        const nearestBigPelletNotAssignYet = game.findNearestBigPelletNotAssignYet(this);
+    findNearestBigPelletAndTriggerSpeed(game, me) {
+        const nearestBigPelletNotAssignYet = game.findNearestBigPelletNotAssignYet(this, me);
         if (!nearestBigPelletNotAssignYet) { return; }
-
-        if (this.notTriggerSpeedYet(game)) {
-            this.triggerSpeed = true;
-            this.setTriggerSpeedCache(game);
-        } else {
-            this.targetMove = nearestBigPelletNotAssignYet;
-        }
+        this.triggerSpeed = true;
+        this.targetMove = nearestBigPelletNotAssignYet;
     }
-    notTriggerSpeedYet(game) {
-        return !game.cache[`SPEED_${this.id}`];
-    }
-    setTriggerSpeedCache(game) {
-        game.cache[`SPEED_${this.id}`] = true;
-    }
-    findNearestNormalPelletIfBigPelletOver(game) {
-        if (game.bigPelletAvailable()) { return; }
+    findNearestNormalPelletIfNotSetTargetYet(game, pac) {
+        if (pac.targetMove) { return; }
         
         function allNextPlaces(place, game) {
             let l = {x: place.x - 1, y: place.y};
@@ -153,13 +151,25 @@ class Pac {
                 });
         }
     }
+    resetTargetIfAlreadyCameTarget() {
+        if (this.targetMove && tool.samePlace(this, this.targetMove)) {
+            this.targetMove = null;
+        }
+    }
+    updateAfterRereshFrame(pac) {
+        this.x = pac.x;
+        this.y = pac.y;
+        this.type = pac.type;
+        this.speedTurnsLeft = pac.speedTurnsLeft;
+        this.abilityCooldown = pac.abilityCooldown;
+        this.upToDate = true;
+    }
 }
 class Pellet {
     constructor() {
         this.x = null;
         this.y = null;
         this.value = null;
-        this.pac = null;
     }
     isTheBig() { return this.value && this.value === 10; }
 }
@@ -180,8 +190,8 @@ while (true) {
     me.score = parseInt(inputs[0]);
     comp.score = parseInt(inputs[1]);
     game.numOfPacs = parseInt(readline()); // all your pacs and enemy pacs in sight
-    me.pacs = [];
-    comp.pacs = [];
+    me.pacs.forEach(p => p.upToDate = false);
+    comp.pacs.forEach(p => p.upToDate = false);
     for (let i = 0; i < game.numOfPacs; i++) {
         var inputs = readline().split(' ');
         let pac = new Pac();
@@ -192,11 +202,17 @@ while (true) {
         pac.speedTurnsLeft = parseInt(inputs[5]); // unused in wood leagues
         pac.abilityCooldown = parseInt(inputs[6]); // unused in wood leagues
         const mine = inputs[1] !== '0'; // true if this pac is yours
-        if (mine)
-            { me.pacs.push(pac); }
-        else
-            { comp.pacs.push(pac); }
+        let pacs = mine ? me.pacs : comp.pacs;
+        let found = pacs.find(p => p.id === pac.id);
+        pac.upToDate = true;
+        if (found) {
+            found.updateAfterRereshFrame(pac);
+        } else {
+            pacs.push(pac);
+        }
     }
+    me.pacs = me.pacs.filter(p => p.upToDate);
+    comp.pacs = comp.pacs.filter(p => p.upToDate);
     game.visiblePelletCount = parseInt(readline()); // all pellets in sight
     game.pellets = [];
     for (let i = 0; i < game.visiblePelletCount; i++) {
