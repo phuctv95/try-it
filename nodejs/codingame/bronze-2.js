@@ -32,7 +32,7 @@ class Game {
         // Strategy:
         // - find the nearest big pellets if still remaining, and trigger speed
         // - find nearest pellets if big pellets not available anymore
-        // - go to a random place if this pac be blocked (face a teammate or didn't find any pellet in view)
+        // - go to a random place (but not visited yet) if this pac be blocked (face a teammate or didn't find any pellet in view)
         // - while going to a random place, if see a pellet, set target to that
         // - if near a competitor
         //     + if it's in the can-not-switch time, switch to a opposite type
@@ -43,7 +43,7 @@ class Game {
                 myPac.findNearestBigPelletAndTriggerSpeed(this, me, false);
                 myPac.findNearestNormalPelletInViewIfNotSetTargetYet(this);
             }
-            myPac.goToARandomPlaceIfIsBlocking(this, me);
+            myPac.goToARandomPlaceButNotVisitYetIfIsBlocking(this, me);
             myPac.findNearestNormalPelletInViewWhileGoToRandomPlace(this);
             myPac.switchTypeIfNearCompetitor(this, comp);
         });
@@ -83,7 +83,9 @@ class Game {
     bigPelletAvailable() { return this.bigPellets.length > 0; }
     findPellet(place) { return this.pellets.find(pellet => pellet.x === place.x && pellet.y === place.y); }
     isWall(place) { return this.rows[place.y][place.x] === '#'; }
-    getRandomPlace() { return this.floors[tool.random(0, this.floors.length - 1)]; }
+    getRandomPlaceButNotVisitYet() {
+        return this.notVisitedFloors[tool.random(0, this.notVisitedFloors.length - 1)];
+    }
     initFloors(rows) {
         this.floors = [];
         for (let i = 0; i < rows.length; i++) {
@@ -93,6 +95,13 @@ class Game {
                     this.floors.push({x: j, y: i});
                 }
             }
+        }
+        this.notVisitedFloors = [...this.floors];
+    }
+    updateNotVisitedFloors(pac) {
+        let foundIndex = this.notVisitedFloors.findIndex(f => f.x === pac.x && f.y === pac.y);
+        if (foundIndex > -1) {
+            this.notVisitedFloors.splice(foundIndex, 1);
         }
     }
     oppositeTypeOf(type) {
@@ -208,9 +217,9 @@ class Pac {
         this.abilityCooldown = pac.abilityCooldown;
         this.upToDate = true;
     }
-    goToARandomPlaceIfIsBlocking(game, me) {
+    goToARandomPlaceButNotVisitYetIfIsBlocking(game, me) {
         if (this.isBlocking()) {
-            this.targetMove = game.getRandomPlace();
+            this.targetMove = game.getRandomPlaceButNotVisitYet();
             this.bigPellet = null;
             this.isGoingToARandomPlace = true;
             this.delayFindPelletAfterGoToRandomPlace = 3;
@@ -271,8 +280,8 @@ game.w = parseInt(inputs[0]); // size of the grid
 game.h = parseInt(inputs[1]); // top left corner is (x=0, y=0)
 for (let i = 0; i < game.h; i++) {
     game.rows.push(readline().split('')); // one line of the grid: space " " is floor, pound "#" is wall
-    game.initFloors(game.rows);
 }
+game.initFloors(game.rows);
 
 while (true) {
     var inputs = readline().split(' ');
@@ -299,6 +308,7 @@ while (true) {
         } else {
             pacs.push(pac);
         }
+        game.updateNotVisitedFloors(pac);
     }
     me.pacs = me.pacs.filter(p => p.upToDate);
     comp.pacs = comp.pacs.filter(p => p.upToDate);
