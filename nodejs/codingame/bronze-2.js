@@ -45,7 +45,7 @@ class Game {
             }
             myPac.goToARandomPlaceIfIsBlocking(this, me);
             myPac.findNearestNormalPelletInViewWhileGoToRandomPlace(this);
-            // myPac.switchTypeIfNearCompetitor();
+            myPac.switchTypeIfNearCompetitor(this, comp);
         });
         this.writeOutput(me.pacs);
     }
@@ -58,7 +58,7 @@ class Game {
                 cmds.push(`SPEED ${pac.id}`);
                 pac.triggerSpeed = false;
             } else if (pac.targetSwitch) {
-                cmds.push(`SPEED ${pac.id} ${pac.targetSwitch}`);
+                cmds.push(`SWITCH ${pac.id} ${pac.targetSwitch}`);
                 pac.targetSwitch = null;
             }
         });
@@ -95,6 +95,15 @@ class Game {
             }
         }
     }
+    oppositeTypeOf(type) {
+        if (type === 'ROCK') {
+            return 'PAPER';
+        } else if (type === 'PAPER') {
+            return 'SCISSORS';
+        } else {
+            return 'ROCK';
+        }
+    }
 }
 class Player {
     constructor() {
@@ -129,26 +138,42 @@ class Pac {
         if (this.targetMove) { return; }
         this.findNearestNormalPelletInView(game);
     }
-    findNearestNormalPelletInView(game) {
-        function allNextPlaces(place, game) {
-            let l = {x: place.x - 1, y: place.y};
+    allNextPlacesOf(place, game, oneMoreLayer) {
+        let l = {x: place.x - 1, y: place.y};
+        if (l.x < 0) { l = {x: game.w - 1, y: place.y}; }
+        let r = {x: place.x + 1, y: place.y};
+        if (r.x > game.w - 1) { r = {x: 0, y: place.y}; }
+        let t = {x: place.x, y: place.y - 1};
+        if (t.y < 0) { t = null; }
+        let b = {x: place.x, y: place.y + 1};
+        if (b.y > game.h - 1) { b = null; }
+
+        let result = [];
+        if (!game.isWall(l)) { result.push(l); }
+        if (!game.isWall(r)) { result.push(r); }
+        if (t && !game.isWall(t)) { result.push(t); }
+        if (b && !game.isWall(b)) { result.push(b); }
+
+        if (oneMoreLayer) {
+            l = {x: place.x - 2, y: place.y};
             if (l.x < 0) { l = {x: game.w - 1, y: place.y}; }
-            let r = {x: place.x + 1, y: place.y};
+            r = {x: place.x + 2, y: place.y};
             if (r.x > game.w - 1) { r = {x: 0, y: place.y}; }
-            let t = {x: place.x, y: place.y - 1};
+            t = {x: place.x, y: place.y - 2};
             if (t.y < 0) { t = null; }
-            let b = {x: place.x, y: place.y + 1};
+            b = {x: place.x, y: place.y + 2};
             if (b.y > game.h - 1) { b = null; }
-    
-            let result = [];
+
             if (!game.isWall(l)) { result.push(l); }
             if (!game.isWall(r)) { result.push(r); }
             if (t && !game.isWall(t)) { result.push(t); }
             if (b && !game.isWall(b)) { result.push(b); }
-            return result;
         }
-
-        let cur = this;
+        
+        return result;
+    }
+    findNearestNormalPelletInView(game) {
+                let cur = this;
         let markedPlaces = [cur];
         let queue = [cur];
         while (queue.length > 0) {
@@ -158,7 +183,7 @@ class Pac {
                 this.targetMove = pellet;
                 return pellet;
             }
-            allNextPlaces(place, game)
+            this.allNextPlacesOf(place, game, false)
                 .forEach(nextPlace => {
                     if (!markedPlaces.find(markedPlace => tool.samePlace(markedPlace, nextPlace))) {
                         markedPlaces.push(nextPlace);
@@ -204,6 +229,28 @@ class Pac {
             this.isGoingToARandomPlace = false;
         }
     }
+    switchTypeIfNearCompetitor(game, comp) {
+        let nearCompetitorPac = this.findNearCompetitorPac(game, comp);
+        if (nearCompetitorPac) {
+            if (nearCompetitorPac.isInCooldown()) {
+                this.targetSwitch = game.oppositeTypeOf(nearCompetitorPac.type);
+            } else {
+                this.targetSwitch = game.pacTypes[tool.random(0, game.pacTypes.length - 1)];
+            }
+        }
+    }
+    findNearCompetitorPac(game, comp) {
+        let nextPlaces = this.allNextPlacesOf(this, game, true);
+        if (!nextPlaces || !nextPlaces.length) { return null; }
+
+        for (let i = 0; i < nextPlaces.length; i++) {
+            let nextPlace = nextPlaces[i];
+            let found = comp.pacs.find(pac => pac.x === nextPlace.x && pac.y === nextPlace.y);
+            if (found) { return found; }
+        }
+        return null;
+    }
+    isInCooldown() { return this.abilityCooldown > 0; }
 }
 class Pellet {
     constructor() {
