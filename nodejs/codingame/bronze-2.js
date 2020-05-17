@@ -26,13 +26,13 @@ class Game {
         this.pellets = null;
         this.pacTypes = ['ROCK', 'PAPER', 'SCISSORS'];
         this.cache = {};
+        this.floors = [];
     }
     doForEachFrame(me, comp) {
         // Strategy:
         // - find the nearest big pellets if still remaining, and trigger speed
         // - find nearest pellets if big pellets not available anymore
-        // - go to a random place to find another pellet if don't see any pellets in current view
-        // - if face teammate, turn back
+        // - go to a random place if this pac be blocked (face a teammate or didn't find any pellet in view)
         // - if near a competitor
         //     + if it's in the can-not-switch time, switch to a opposite type
         //     + otherwise, switch to a random type// MAIN
@@ -41,9 +41,8 @@ class Game {
             if (!myPac.targetMove) {
                 myPac.findNearestBigPelletAndTriggerSpeed(this, me, false);
                 myPac.findNearestNormalPelletIfNotSetTargetYet(this, myPac);
-                // myPac.goRandomPlaceIfNotSetTargetYet();
-                // myPac.turnBackIfFaceTeammate();
             }
+            myPac.goToARandomPlaceIfIsBlocking(this, me);
             // myPac.switchTypeIfNearCompetitor();
         });
         this.writeOutput(me.pacs);
@@ -82,6 +81,18 @@ class Game {
     bigPelletAvailable() { return this.bigPellets.length > 0; }
     findPellet(place) { return this.pellets.find(pellet => pellet.x === place.x && pellet.y === place.y); }
     isWall(place) { return this.rows[place.y][place.x] === '#'; }
+    getRandomPlace() { return this.floors[tool.random(0, this.floors.length - 1)]; }
+    initFloors(rows) {
+        this.floors = [];
+        for (let i = 0; i < rows.length; i++) {
+            for (let j = 0; j < rows[i].length; j++) {
+                let item = rows[i][j];
+                if (item === ' ') {
+                    this.floors.push({x: j, y: i});
+                }
+            }
+        }
+    }
 }
 class Player {
     constructor() {
@@ -97,6 +108,7 @@ class Pac {
         this.id = null;
         this.x = null;
         this.y = null;
+        this.prev = null;
         this.type = null;
         this.speedTurnsLeft = null;
         this.abilityCooldown = null;
@@ -157,12 +169,22 @@ class Pac {
         }
     }
     updateAfterRereshFrame(pac) {
+        this.prev = {x: this.x, y: this.y};
         this.x = pac.x;
         this.y = pac.y;
         this.type = pac.type;
         this.speedTurnsLeft = pac.speedTurnsLeft;
         this.abilityCooldown = pac.abilityCooldown;
         this.upToDate = true;
+    }
+    goToARandomPlaceIfIsBlocking(game, me) {
+        if (this.isBlocking()) {
+            this.targetMove = game.getRandomPlace();
+            this.bigPellet = null;
+        }
+    }
+    isBlocking() {
+        return this.prev && tool.samePlace(this, this.prev);
     }
 }
 class Pellet {
@@ -183,6 +205,7 @@ game.w = parseInt(inputs[0]); // size of the grid
 game.h = parseInt(inputs[1]); // top left corner is (x=0, y=0)
 for (let i = 0; i < game.h; i++) {
     game.rows.push(readline().split('')); // one line of the grid: space " " is floor, pound "#" is wall
+    game.initFloors(game.rows);
 }
 
 while (true) {
