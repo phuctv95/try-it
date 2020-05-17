@@ -230,6 +230,7 @@ class Pac {
         }
     }
     switchTypeIfNearCompetitor(game, comp) {
+        if (this.isInCooldown()) { return; }
         let nearCompetitorPac = this.findNearCompetitorPac(game, comp);
         if (nearCompetitorPac) {
             if (nearCompetitorPac.isInCooldown()) {
