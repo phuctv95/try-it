@@ -33,6 +33,7 @@ class Game {
         // - find the nearest big pellets if still remaining, and trigger speed
         // - find nearest pellets if big pellets not available anymore
         // - go to a random place if this pac be blocked (face a teammate or didn't find any pellet in view)
+        // - while going to a random place, if see a pellet, set target to that
         // - if near a competitor
         //     + if it's in the can-not-switch time, switch to a opposite type
         //     + otherwise, switch to a random type// MAIN
@@ -40,9 +41,10 @@ class Game {
             myPac.resetTargetIfAlreadyCameTarget();
             if (!myPac.targetMove) {
                 myPac.findNearestBigPelletAndTriggerSpeed(this, me, false);
-                myPac.findNearestNormalPelletIfNotSetTargetYet(this, myPac);
+                myPac.findNearestNormalPelletInViewIfNotSetTargetYet(this);
             }
             myPac.goToARandomPlaceIfIsBlocking(this, me);
+            myPac.findNearestNormalPelletInViewWhileGoToRandomPlace(this);
             // myPac.switchTypeIfNearCompetitor();
         });
         this.writeOutput(me.pacs);
@@ -123,9 +125,11 @@ class Pac {
         this.triggerSpeed = wantToTriggerSpeed;
         this.targetMove = nearestBigPelletNotAssignYet;
     }
-    findNearestNormalPelletIfNotSetTargetYet(game, pac) {
-        if (pac.targetMove) { return; }
-        
+    findNearestNormalPelletInViewIfNotSetTargetYet(game) {
+        if (this.targetMove) { return; }
+        this.findNearestNormalPelletInView(game);
+    }
+    findNearestNormalPelletInView(game) {
         function allNextPlaces(place, game) {
             let l = {x: place.x - 1, y: place.y};
             if (l.x < 0) { l = {x: game.w - 1, y: place.y}; }
@@ -152,7 +156,7 @@ class Pac {
             let pellet = game.findPellet(place);
             if (pellet) {
                 this.targetMove = pellet;
-                return;
+                return pellet;
             }
             allNextPlaces(place, game)
                 .forEach(nextPlace => {
@@ -162,10 +166,12 @@ class Pac {
                     }
                 });
         }
+        return null;
     }
     resetTargetIfAlreadyCameTarget() {
         if (this.targetMove && tool.samePlace(this, this.targetMove)) {
             this.targetMove = null;
+            this.isGoingToARandomPlace = false;
         }
     }
     updateAfterRereshFrame(pac) {
@@ -181,10 +187,22 @@ class Pac {
         if (this.isBlocking()) {
             this.targetMove = game.getRandomPlace();
             this.bigPellet = null;
+            this.isGoingToARandomPlace = true;
+            this.delayFindPelletAfterGoToRandomPlace = 3;
         }
     }
     isBlocking() {
         return this.prev && tool.samePlace(this, this.prev);
+    }
+    findNearestNormalPelletInViewWhileGoToRandomPlace(game) {
+        this.delayFindPelletAfterGoToRandomPlace--;
+        if (!this.isGoingToARandomPlace || !this.delayFindPelletAfterGoToRandomPlace || this.delayFindPelletAfterGoToRandomPlace > 0) {
+            return;
+        }
+        let found = this.findNearestNormalPelletInView(game);
+        if (found) {
+            this.isGoingToARandomPlace = false;
+        }
     }
 }
 class Pellet {
