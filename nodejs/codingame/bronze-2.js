@@ -39,11 +39,11 @@ class Game {
         me.pacs.forEach(myPac => {
             myPac.resetTargetIfAlreadyCameTarget();
             if (!myPac.targetMove) {
-                myPac.findNearestBigPelletAndTriggerSpeed(this, me);
+                myPac.findNearestBigPelletAndTriggerSpeed(this, me, false);
                 myPac.findNearestNormalPelletIfNotSetTargetYet(this, myPac);
+                // myPac.goRandomPlaceIfNotSetTargetYet();
+                // myPac.turnBackIfFaceTeammate();
             }
-            // myPac.goRandomPlaceIfNotSetTargetYet();
-            // myPac.turnBackIfFaceTeammate();
             // myPac.switchTypeIfNearCompetitor();
         });
         this.writeOutput(me.pacs);
@@ -105,10 +105,10 @@ class Pac {
         this.triggerSpeed = false;
         this.bigPellet = null;
     }
-    findNearestBigPelletAndTriggerSpeed(game, me) {
+    findNearestBigPelletAndTriggerSpeed(game, me, wantToTriggerSpeed) {
         const nearestBigPelletNotAssignYet = game.findNearestBigPelletNotAssignYet(this, me);
         if (!nearestBigPelletNotAssignYet) { return; }
-        this.triggerSpeed = true;
+        this.triggerSpeed = wantToTriggerSpeed;
         this.targetMove = nearestBigPelletNotAssignYet;
     }
     findNearestNormalPelletIfNotSetTargetYet(game, pac) {
