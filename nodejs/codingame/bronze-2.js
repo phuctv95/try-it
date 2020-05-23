@@ -32,7 +32,9 @@ class Game {
         // Strategy:
         // - find the nearest big pellets if still remaining, and trigger speed
         // - find nearest pellets if big pellets not available anymore
-        // - go to a random place (but not visited yet) if this pac be blocked (face a teammate or didn't find any pellet in view)
+        // - go to a random place (but not visited yet), but in a specific region 
+        //   for each pac (total maybe 3 regions) if this pac be blocked
+        //   (face a teammate or didn't find any pellet in view)
         // - while going to a random place, if see a pellet, set target to that
         // - if near a competitor
         //     + if it's in the can-not-switch time, switch to a opposite type
@@ -43,6 +45,7 @@ class Game {
                 myPac.findNearestBigPelletAndTriggerSpeed(this, me, false);
                 myPac.findNearestNormalPelletInViewIfNotSetTargetYet(this);
             }
+            // TODO: go to a random place but in a specific region.
             myPac.goToARandomPlaceButNotVisitYetIfIsBlocking(this, me);
             myPac.findNearestNormalPelletInViewWhileGoToRandomPlace(this);
             myPac.switchTypeIfNearCompetitor(this, comp);
