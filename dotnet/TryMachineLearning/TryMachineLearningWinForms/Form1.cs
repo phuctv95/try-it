@@ -15,8 +15,8 @@ namespace TryMachineLearningWinForms
         {
             var input = new ModelInput { Col0 = sentenceTxtBx.Text };
             var predictionResult = ConsumeModel.Predict(input);
-            var chanceOfBad = predictionResult.Score[0];
-            var chanceOfGood = predictionResult.Score[1];
+            var chanceOfBad = predictionResult.Score[1];
+            var chanceOfGood = predictionResult.Score[0];
             messageLbl.Text = chanceOfBad > chanceOfGood
                 ? $"I'm sure {chanceOfBad * 100f:0.##}% I feel bad 🙁 about that sentence."
                 : $"I'm sure {chanceOfGood * 100f:0.##}% I feel good 🙂 about that sentence.";

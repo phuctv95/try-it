@@ -16,7 +16,7 @@ namespace SampleClassification.ConsoleApp
 {
     public static class ModelBuilder
     {
-        private static string TRAIN_DATA_FILEPATH = @"C:\Users\puyed\Projects\mlnet-test\yelp_labelled.txt";
+        private static string TRAIN_DATA_FILEPATH = @"C:\Users\puyed\Projects\mlnet-test\dataset.txt";
         private static string MODEL_FILEPATH = @"C:\Users\puyed\Projects\mlnet-test\SampleClassification\SampleClassification.Model\MLModel.zip";
         // Create MLContext to be shared across the model creation workflow objects 
         // Set a random seed for repeatable/deterministic results across multiple trainings.
@@ -50,11 +50,9 @@ namespace SampleClassification.ConsoleApp
             // Data process configuration with pipeline data transformations 
             var dataProcessPipeline = mlContext.Transforms.Conversion.MapValueToKey("col1", "col1")
                                       .Append(mlContext.Transforms.Text.FeaturizeText("col0_tf", "col0"))
-                                      .Append(mlContext.Transforms.CopyColumns("Features", "col0_tf"))
-                                      .Append(mlContext.Transforms.NormalizeMinMax("Features", "Features"))
-                                      .AppendCacheCheckpoint(mlContext);
+                                      .Append(mlContext.Transforms.CopyColumns("Features", "col0_tf"));
             // Set the training algorithm 
-            var trainer = mlContext.MulticlassClassification.Trainers.OneVersusAll(mlContext.BinaryClassification.Trainers.AveragedPerceptron(labelColumnName: "col1", numberOfIterations: 10, featureColumnName: "Features"), labelColumnName: "col1")
+            var trainer = mlContext.MulticlassClassification.Trainers.LightGbm(labelColumnName: "col1", featureColumnName: "Features")
                                       .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel", "PredictedLabel"));
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);

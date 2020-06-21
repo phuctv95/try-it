@@ -31,7 +31,7 @@ namespace SampleClassification.Model
             MLContext mlContext = new MLContext();
 
             // Load model & create prediction engine
-            string modelPath = @"C:\Users\puyed\Projects\mlnet-test\SampleClassification\SampleClassification.Model\MLModel.zip";
+            string modelPath = "MLModel.zip";
             ITransformer mlModel = mlContext.Model.Load(modelPath, out var modelInputSchema);
             var predEngine = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
 
