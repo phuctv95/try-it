@@ -1,4 +1,4 @@
-﻿namespace TryWindowsForms
+﻿namespace TryWindowsForms.DarkModeHelper
 {
     public enum WindowsColorMode
     {
