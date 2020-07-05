@@ -13,10 +13,20 @@ namespace TryWindowsForms
             config.Save(ConfigurationSaveMode.Modified);
         }
 
+        public static void Write(string key, bool value)
+        {
+            Write(key, value ? true.ToString() : false.ToString());
+        }
+
         public static string Read(string key)
         {
             var config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
             return config.AppSettings.Settings[key]?.Value;
+        }
+
+        public static bool ReadBoolean(string key)
+        {
+            return bool.Parse(Read(key));
         }
     }
 }

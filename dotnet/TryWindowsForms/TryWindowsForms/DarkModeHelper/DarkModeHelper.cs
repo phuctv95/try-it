@@ -9,81 +9,95 @@ namespace TryWindowsForms.DarkModeHelper
     {
         private const string BasePath = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
         private const string AppsUseLightThemeValueName = "AppsUseLightTheme";
+        private const string SystemUsesLightThemeValueName = "SystemUsesLightTheme";
         private const string EnableScheduleKey = "EnableSchedule";
         private const string LightModeTimeSettingKey = "TimeToTriggerLightMode";
         private const string DarkModeTimeSettingKey = "TimeToTriggerDarkMode";
+        private const string ApplyForWindowsControlsKey = "ApplyForWindowsControls";
+        private const string ApplyForAppsKey = "ApplyForApps";
         public delegate void AfterToggleModeEvent(WindowsColorMode mode);
         public static AfterToggleModeEvent AfterToggleModeHandlers;
 
-        public static bool IsEnableSchedule
-        {
-            get
-            {
-                return Settings.Read(EnableScheduleKey) == "1";
-            } 
-        }
+        public static bool IsEnableSchedule => Settings.ReadBoolean(EnableScheduleKey);
+        public static bool IsApplyForWindowsControls => Settings.ReadBoolean(ApplyForWindowsControlsKey);
+        public static bool IsApplyForApps => Settings.ReadBoolean(ApplyForAppsKey);
 
-        public static void ToggleWindowsColorMode()
+        public static void ToggleColorMode(DarkModeApplyArea area)
         {
-            var currentMode = GetCurrentWindowsColorMode();
+            var currentMode = GetCurrentWindowsColorMode(area);
             if (currentMode == WindowsColorMode.Dark)
             {
-                SwitchWindowsColorModeTo(WindowsColorMode.Light);
+                SwitchColorModeTo(area, WindowsColorMode.Light);
             }
             else
             {
-                SwitchWindowsColorModeTo(WindowsColorMode.Dark);
+                SwitchColorModeTo(area, WindowsColorMode.Dark);
             }
         }
 
-        public static WindowsColorMode GetCurrentWindowsColorMode()
+        public static WindowsColorMode GetCurrentWindowsColorMode(
+            DarkModeApplyArea area)
         {
-            var appUseLightTheme = Registry.GetValue(BasePath, AppsUseLightThemeValueName, null);
-            if (appUseLightTheme == null) { throw new Exception(); }
-            return appUseLightTheme as int? == 1 ? WindowsColorMode.Light : WindowsColorMode.Dark;
+            var value = area == DarkModeApplyArea.ForWindowsControls
+                ? Registry.GetValue(BasePath, SystemUsesLightThemeValueName, null)
+                : Registry.GetValue(BasePath, AppsUseLightThemeValueName, null);
+            if (value == null) { throw new Exception(); }
+
+            return value as int? == 1 
+                ? WindowsColorMode.Light 
+                : WindowsColorMode.Dark;
         }
 
-        public static void SwitchWindowsColorModeTo(WindowsColorMode target)
+        public static void SwitchColorModeTo(DarkModeApplyArea area,
+            WindowsColorMode target)
         {
-            var appsUseLightTheme = target == WindowsColorMode.Light ? 1 : 0;
-            Registry.SetValue(BasePath, AppsUseLightThemeValueName, appsUseLightTheme);
+            if (GetCurrentWindowsColorMode(area) == target)
+            {
+                return;
+            }
+
+            var value = target == WindowsColorMode.Light ? 1 : 0;
+            var key = area == DarkModeApplyArea.ForWindowsControls
+                ? SystemUsesLightThemeValueName
+                : AppsUseLightThemeValueName;
+            Registry.SetValue(BasePath, key, value);
             AfterToggleModeHandlers?.Invoke(target);
         }
 
-        public static void SwitchWindowsColorModeIfOnTime()
+        public static void SwitchModeIfOnTime()
         {
             if (!IsEnableSchedule) { return; }
 
             var lightModeTime = DateTime.Parse(Settings.Read(LightModeTimeSettingKey));
             var darkModeTime = DateTime.Parse(Settings.Read(DarkModeTimeSettingKey));
+            SwitchModeIfOnTime(lightModeTime, WindowsColorMode.Light);
+            SwitchModeIfOnTime(darkModeTime, WindowsColorMode.Dark);
+        }
+
+        private static void SwitchModeIfOnTime(DateTime scheduleTime, 
+            WindowsColorMode target)
+        {
             var now = DateTime.Now;
-            if (lightModeTime.Hour == now.Hour && lightModeTime.Minute == now.Minute)
+            var onTime = scheduleTime.Hour == now.Hour && scheduleTime.Minute == now.Minute;
+            if (!onTime) { return; }
+
+            if (IsApplyForWindowsControls)
             {
-                var target = WindowsColorMode.Light;
-                if (GetCurrentWindowsColorMode() == target)
-                {
-                    return;
-                }
-                SwitchWindowsColorModeTo(target);
-                return;
+                SwitchColorModeTo(DarkModeApplyArea.ForWindowsControls, target);
             }
-            if (darkModeTime.Hour == now.Hour && darkModeTime.Minute == now.Minute)
+            if (IsApplyForApps)
             {
-                var target = WindowsColorMode.Light;
-                if (GetCurrentWindowsColorMode() == target)
-                {
-                    return;
-                }
-                SwitchWindowsColorModeTo(target);
-                return;
+                SwitchColorModeTo(DarkModeApplyArea.ForApps, target);
             }
         }
 
         public static void WriteToSettingFile(DarkModeSetting settings)
         {
-            Settings.Write(EnableScheduleKey, settings.EnableSchedule ? "1" : "0");
+            Settings.Write(EnableScheduleKey, settings.EnableSchedule);
             Settings.Write(LightModeTimeSettingKey, settings.LightTime);
             Settings.Write(DarkModeTimeSettingKey, settings.DarkTime);
+            Settings.Write(ApplyForWindowsControlsKey, settings.IsApplyForWindowsControls);
+            Settings.Write(ApplyForAppsKey, settings.IsApplyForApps);
         }
 
         public static DarkModeSetting ReadConfigFile()
@@ -92,7 +106,9 @@ namespace TryWindowsForms.DarkModeHelper
             {
                 EnableSchedule = IsEnableSchedule,
                 LightTime = Settings.Read(LightModeTimeSettingKey),
-                DarkTime = Settings.Read(DarkModeTimeSettingKey)
+                DarkTime = Settings.Read(DarkModeTimeSettingKey),
+                IsApplyForWindowsControls = Settings.ReadBoolean(ApplyForWindowsControlsKey),
+                IsApplyForApps = Settings.ReadBoolean(ApplyForAppsKey)
             };
         }
     }

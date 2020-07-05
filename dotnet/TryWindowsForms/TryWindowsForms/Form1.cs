@@ -38,22 +38,32 @@ namespace TryWindowsForms
         {
             Shown += (sender, e) => Hide();
             scheduleDarkModeItm.Click += (sender, e) => ShowUiAndData();
-            toggleDarkModeItm.Click += (sender, e) => DMH.ToggleWindowsColorMode();
+            toggleForWindowsControlsItm.Click += (sender, e) => DMH.ToggleColorMode(DarkModeApplyArea.ForApps);
             exitItm.Click += (sender, e) => ExitApplication();
             notifyIcon.DoubleClick += (sender, e) => ShowUiAndData();
             saveBtn.Click += (sender, e) => ClickSaveHandler();
             cancelBtn.Click += (sender, e) => Hide();
-            scheduleTicker.Tick += (sender, e) => DMH.SwitchWindowsColorModeIfOnTime();
+            scheduleTicker.Tick += (sender, e) => DMH.SwitchModeIfOnTime();
             FormClosing += (sender, e) => MinimizeToSysTrayIfClickClose(e);
             DMH.AfterToggleModeHandlers += AfterToggleModeHandler;
-            lightModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfScheduleBtn();
-            darkModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfScheduleBtn();
+            lightModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfSaveBtn();
+            darkModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfSaveBtn();
             enableScheduleRbtn.CheckedChanged += (sender, e) => UpdateVisibleOfScheduleControls();
             disableScheduleRbtn.CheckedChanged += (sender, e) => UpdateVisibleOfScheduleControls();
         }
 
         private void ClickSaveHandler()
         {
+            var isEmptyApply = 
+                !applyForWindowsControlsChbx.Checked && !applyForAppsChbx.Checked;
+            if (isEmptyApply)
+            {
+                MessageBox.Show(
+                    "Please apply at least one: for Windows controls, or for apps, or both.",
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             WriteToSettingFileAndCloseDialog();
             StartOrStopTicker(enableScheduleRbtn.Checked, scheduleTicker.Enabled);
         }
@@ -73,13 +83,10 @@ namespace TryWindowsForms
         private void UpdateVisibleOfScheduleControls()
         {
             var enableSchedule = enableScheduleRbtn.Checked;
-            lightModeTimeDtpkr.Enabled = enableSchedule;
-            lightModeTimeLbl.Enabled = enableSchedule;
-            darkModeTimeDtpkr.Enabled = enableSchedule;
-            darkModeTimeLbl.Enabled = enableSchedule;
+            scheduleControlsGrp.Enabled = enableSchedule;
         }
 
-        private void UpdateVisibleOfScheduleBtn()
+        private void UpdateVisibleOfSaveBtn()
         {
             var sameTime = lightModeTimeDtpkr.Value.Hour == darkModeTimeDtpkr.Value.Hour
                 && lightModeTimeDtpkr.Value.Minute == darkModeTimeDtpkr.Value.Minute;
@@ -111,7 +118,9 @@ namespace TryWindowsForms
             {
                 EnableSchedule = enableScheduleRbtn.Checked,
                 LightTime = lightModeTimeDtpkr.Value.ToString(TimeFormat),
-                DarkTime = darkModeTimeDtpkr.Value.ToString(TimeFormat)
+                DarkTime = darkModeTimeDtpkr.Value.ToString(TimeFormat),
+                IsApplyForWindowsControls = applyForWindowsControlsChbx.Checked,
+                IsApplyForApps = applyForAppsChbx.Checked
             };
             DMH.WriteToSettingFile(settings);
             Hide();
@@ -132,6 +141,8 @@ namespace TryWindowsForms
                 : new DateTime(now.Year, now.Month, now.Day, 18, 0, 0);
             enableScheduleRbtn.Checked = settings.EnableSchedule;
             disableScheduleRbtn.Checked = !settings.EnableSchedule;
+            applyForWindowsControlsChbx.Checked = settings.IsApplyForWindowsControls;
+            applyForAppsChbx.Checked = settings.IsApplyForApps;
         }
 
         private void ShowBalloonTipText(string message)

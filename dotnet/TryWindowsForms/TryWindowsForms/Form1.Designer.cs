@@ -35,7 +35,7 @@ namespace TryWindowsForms
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.scheduleDarkModeItm = new System.Windows.Forms.ToolStripMenuItem();
-            this.toggleDarkModeItm = new System.Windows.Forms.ToolStripMenuItem();
+            this.toggleForWindowsControlsItm = new System.Windows.Forms.ToolStripMenuItem();
             this.exitItm = new System.Windows.Forms.ToolStripMenuItem();
             this.lightModeTimeLbl = new System.Windows.Forms.Label();
             this.darkModeTimeLbl = new System.Windows.Forms.Label();
@@ -47,7 +47,11 @@ namespace TryWindowsForms
             this.enableScheduleRbtn = new System.Windows.Forms.RadioButton();
             this.disableScheduleRbtn = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
+            this.applyForWindowsControlsChbx = new System.Windows.Forms.CheckBox();
+            this.applyForAppsChbx = new System.Windows.Forms.CheckBox();
+            this.scheduleControlsGrp = new System.Windows.Forms.GroupBox();
             this.notifyIconContextMenu.SuspendLayout();
+            this.scheduleControlsGrp.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -61,10 +65,10 @@ namespace TryWindowsForms
             this.notifyIconContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.notifyIconContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.scheduleDarkModeItm,
-            this.toggleDarkModeItm,
+            this.toggleForWindowsControlsItm,
             this.exitItm});
             this.notifyIconContextMenu.Name = "notifyIconContextMenu";
-            this.notifyIconContextMenu.Size = new System.Drawing.Size(217, 76);
+            this.notifyIconContextMenu.Size = new System.Drawing.Size(266, 76);
             // 
             // scheduleDarkModeItm
             // 
@@ -74,9 +78,9 @@ namespace TryWindowsForms
             // 
             // toggleDarkModeItm
             // 
-            this.toggleDarkModeItm.Name = "toggleDarkModeItm";
-            this.toggleDarkModeItm.Size = new System.Drawing.Size(216, 24);
-            this.toggleDarkModeItm.Text = "Toggle Dark Mode";
+            this.toggleForWindowsControlsItm.Name = "toggleDarkModeItm";
+            this.toggleForWindowsControlsItm.Size = new System.Drawing.Size(265, 24);
+            this.toggleForWindowsControlsItm.Text = "Toggle Dark Mode For Apps";
             // 
             // exitItm
             // 
@@ -87,7 +91,7 @@ namespace TryWindowsForms
             // lightModeTimeLbl
             // 
             this.lightModeTimeLbl.AutoSize = true;
-            this.lightModeTimeLbl.Location = new System.Drawing.Point(106, 116);
+            this.lightModeTimeLbl.Location = new System.Drawing.Point(16, 33);
             this.lightModeTimeLbl.Name = "lightModeTimeLbl";
             this.lightModeTimeLbl.Size = new System.Drawing.Size(159, 20);
             this.lightModeTimeLbl.TabIndex = 1;
@@ -96,7 +100,7 @@ namespace TryWindowsForms
             // darkModeTimeLbl
             // 
             this.darkModeTimeLbl.AutoSize = true;
-            this.darkModeTimeLbl.Location = new System.Drawing.Point(108, 154);
+            this.darkModeTimeLbl.Location = new System.Drawing.Point(16, 71);
             this.darkModeTimeLbl.Name = "darkModeTimeLbl";
             this.darkModeTimeLbl.Size = new System.Drawing.Size(157, 20);
             this.darkModeTimeLbl.TabIndex = 1;
@@ -106,7 +110,7 @@ namespace TryWindowsForms
             // 
             this.lightModeTimeDtpkr.CustomFormat = "hh:mm tt";
             this.lightModeTimeDtpkr.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.lightModeTimeDtpkr.Location = new System.Drawing.Point(271, 111);
+            this.lightModeTimeDtpkr.Location = new System.Drawing.Point(188, 28);
             this.lightModeTimeDtpkr.Name = "lightModeTimeDtpkr";
             this.lightModeTimeDtpkr.ShowUpDown = true;
             this.lightModeTimeDtpkr.Size = new System.Drawing.Size(112, 27);
@@ -116,7 +120,7 @@ namespace TryWindowsForms
             // 
             this.darkModeTimeDtpkr.CustomFormat = "hh:mm tt";
             this.darkModeTimeDtpkr.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.darkModeTimeDtpkr.Location = new System.Drawing.Point(271, 149);
+            this.darkModeTimeDtpkr.Location = new System.Drawing.Point(188, 66);
             this.darkModeTimeDtpkr.Name = "darkModeTimeDtpkr";
             this.darkModeTimeDtpkr.ShowUpDown = true;
             this.darkModeTimeDtpkr.Size = new System.Drawing.Size(112, 27);
@@ -124,7 +128,7 @@ namespace TryWindowsForms
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(130, 205);
+            this.saveBtn.Location = new System.Drawing.Point(125, 290);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(94, 29);
             this.saveBtn.TabIndex = 3;
@@ -137,7 +141,7 @@ namespace TryWindowsForms
             // 
             // cancelBtn
             // 
-            this.cancelBtn.Location = new System.Drawing.Point(262, 205);
+            this.cancelBtn.Location = new System.Drawing.Point(257, 290);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(94, 29);
             this.cancelBtn.TabIndex = 4;
@@ -176,20 +180,52 @@ namespace TryWindowsForms
             this.label3.TabIndex = 7;
             this.label3.Text = "Schedule Dark/Light Mode";
             // 
+            // applyForWindowsControlsChbx
+            // 
+            this.applyForWindowsControlsChbx.AutoSize = true;
+            this.applyForWindowsControlsChbx.Location = new System.Drawing.Point(16, 99);
+            this.applyForWindowsControlsChbx.Name = "applyForWindowsControlsChbx";
+            this.applyForWindowsControlsChbx.Size = new System.Drawing.Size(215, 24);
+            this.applyForWindowsControlsChbx.TabIndex = 8;
+            this.applyForWindowsControlsChbx.Text = "Apply for Windows controls";
+            this.applyForWindowsControlsChbx.UseVisualStyleBackColor = true;
+            // 
+            // applyForAppsChbx
+            // 
+            this.applyForAppsChbx.AutoSize = true;
+            this.applyForAppsChbx.Location = new System.Drawing.Point(16, 129);
+            this.applyForAppsChbx.Name = "applyForAppsChbx";
+            this.applyForAppsChbx.Size = new System.Drawing.Size(129, 24);
+            this.applyForAppsChbx.TabIndex = 8;
+            this.applyForAppsChbx.Text = "Apply for apps";
+            this.applyForAppsChbx.UseVisualStyleBackColor = true;
+            // 
+            // scheduleControlsGrp
+            // 
+            this.scheduleControlsGrp.Controls.Add(this.applyForAppsChbx);
+            this.scheduleControlsGrp.Controls.Add(this.lightModeTimeLbl);
+            this.scheduleControlsGrp.Controls.Add(this.applyForWindowsControlsChbx);
+            this.scheduleControlsGrp.Controls.Add(this.darkModeTimeLbl);
+            this.scheduleControlsGrp.Controls.Add(this.lightModeTimeDtpkr);
+            this.scheduleControlsGrp.Controls.Add(this.darkModeTimeDtpkr);
+            this.scheduleControlsGrp.Location = new System.Drawing.Point(87, 107);
+            this.scheduleControlsGrp.Name = "scheduleControlsGrp";
+            this.scheduleControlsGrp.Size = new System.Drawing.Size(312, 165);
+            this.scheduleControlsGrp.TabIndex = 9;
+            this.scheduleControlsGrp.TabStop = false;
+            this.scheduleControlsGrp.Text = "Schedule";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 251);
+            this.ClientSize = new System.Drawing.Size(486, 333);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.disableScheduleRbtn);
             this.Controls.Add(this.enableScheduleRbtn);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.darkModeTimeDtpkr);
-            this.Controls.Add(this.lightModeTimeDtpkr);
-            this.Controls.Add(this.darkModeTimeLbl);
-            this.Controls.Add(this.lightModeTimeLbl);
+            this.Controls.Add(this.scheduleControlsGrp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -197,6 +233,8 @@ namespace TryWindowsForms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.notifyIconContextMenu.ResumeLayout(false);
+            this.scheduleControlsGrp.ResumeLayout(false);
+            this.scheduleControlsGrp.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,7 +245,7 @@ namespace TryWindowsForms
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private ContextMenuStrip notifyIconContextMenu;
         private ToolStripMenuItem exitItm;
-        private ToolStripMenuItem toggleDarkModeItm;
+        private ToolStripMenuItem toggleForWindowsControlsItm;
         private ToolStripMenuItem scheduleDarkModeItm;
         private Label lightModeTimeLbl;
         private Label darkModeTimeLbl;
@@ -220,6 +258,9 @@ namespace TryWindowsForms
         private RadioButton enableScheduleRbtn;
         private RadioButton disableScheduleRbtn;
         private Label label3;
+        private CheckBox applyForWindowsControlsChbx;
+        private CheckBox applyForAppsChbx;
+        private GroupBox scheduleControlsGrp;
     }
 }
 
