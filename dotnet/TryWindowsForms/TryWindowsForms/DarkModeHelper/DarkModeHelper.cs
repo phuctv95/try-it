@@ -9,10 +9,19 @@ namespace TryWindowsForms.DarkModeHelper
     {
         private const string BasePath = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
         private const string AppsUseLightThemeValueName = "AppsUseLightTheme";
+        private const string EnableScheduleKey = "EnableSchedule";
         private const string LightModeTimeSettingKey = "TimeToTriggerLightMode";
         private const string DarkModeTimeSettingKey = "TimeToTriggerDarkMode";
         public delegate void AfterToggleModeEvent(WindowsColorMode mode);
         public static AfterToggleModeEvent AfterToggleModeHandlers;
+
+        public static bool IsEnableSchedule
+        {
+            get
+            {
+                return Settings.Read(EnableScheduleKey) == "1";
+            } 
+        }
 
         public static void ToggleWindowsColorMode()
         {
@@ -43,19 +52,10 @@ namespace TryWindowsForms.DarkModeHelper
 
         public static void SwitchWindowsColorModeIfOnTime()
         {
-            var config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
-            var lightModeTimeFromSettingFile =
-                config.AppSettings.Settings[LightModeTimeSettingKey]?.Value;
-            var darkModeTimeFromSettingFile =
-                config.AppSettings.Settings[DarkModeTimeSettingKey]?.Value;
-            var isScheduledInSettingFile =
-                lightModeTimeFromSettingFile != null
-                || darkModeTimeFromSettingFile != null;
+            if (!IsEnableSchedule) { return; }
 
-            if (!isScheduledInSettingFile) { return; }
-
-            var lightModeTime = DateTime.Parse(lightModeTimeFromSettingFile);
-            var darkModeTime = DateTime.Parse(darkModeTimeFromSettingFile);
+            var lightModeTime = DateTime.Parse(Settings.Read(LightModeTimeSettingKey));
+            var darkModeTime = DateTime.Parse(Settings.Read(DarkModeTimeSettingKey));
             var now = DateTime.Now;
             if (lightModeTime.Hour == now.Hour && lightModeTime.Minute == now.Minute)
             {
@@ -79,16 +79,18 @@ namespace TryWindowsForms.DarkModeHelper
             }
         }
 
-        public static void WriteToSettingFile(string lightModeTime, string darkModeTime)
+        public static void WriteToSettingFile(DarkModeSetting settings)
         {
-            Settings.Write(LightModeTimeSettingKey, lightModeTime);
-            Settings.Write(DarkModeTimeSettingKey, darkModeTime);
+            Settings.Write(EnableScheduleKey, settings.EnableSchedule ? "1" : "0");
+            Settings.Write(LightModeTimeSettingKey, settings.LightTime);
+            Settings.Write(DarkModeTimeSettingKey, settings.DarkTime);
         }
 
         public static DarkModeSetting ReadConfigFile()
         {
             return new DarkModeSetting
             {
+                EnableSchedule = IsEnableSchedule,
                 LightTime = Settings.Read(LightModeTimeSettingKey),
                 DarkTime = Settings.Read(DarkModeTimeSettingKey)
             };

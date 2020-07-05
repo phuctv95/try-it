@@ -24,7 +24,10 @@ namespace TryWindowsForms
 
         private void InitOthers()
         {
-            timer.Start();
+            if (DMH.IsEnableSchedule)
+            {
+                scheduleTicker.Start();
+            }
             notifyIcon.Icon = ApplicationIconLight;
             Icon = ApplicationIcon;
             notifyIcon.Text = ApplicationName;
@@ -38,20 +41,49 @@ namespace TryWindowsForms
             toggleDarkModeItm.Click += (sender, e) => DMH.ToggleWindowsColorMode();
             exitItm.Click += (sender, e) => ExitApplication();
             notifyIcon.DoubleClick += (sender, e) => ShowUiAndData();
-            scheduleBtn.Click += (sender, e) => WriteToSettingFileAndCloseDialog();
+            saveBtn.Click += (sender, e) => ClickSaveHandler();
             cancelBtn.Click += (sender, e) => Hide();
-            timer.Tick += (sender, e) => DMH.SwitchWindowsColorModeIfOnTime();
+            scheduleTicker.Tick += (sender, e) => DMH.SwitchWindowsColorModeIfOnTime();
             FormClosing += (sender, e) => MinimizeToSysTrayIfClickClose(e);
             DMH.AfterToggleModeHandlers += AfterToggleModeHandler;
             lightModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfScheduleBtn();
             darkModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfScheduleBtn();
+            enableScheduleRbtn.CheckedChanged += (sender, e) => UpdateVisibleOfScheduleControls();
+            disableScheduleRbtn.CheckedChanged += (sender, e) => UpdateVisibleOfScheduleControls();
+        }
+
+        private void ClickSaveHandler()
+        {
+            WriteToSettingFileAndCloseDialog();
+            StartOrStopTicker(enableScheduleRbtn.Checked, scheduleTicker.Enabled);
+        }
+
+        private void StartOrStopTicker(bool enableSchedule, bool tickerIsRunning)
+        {
+            if (enableSchedule && !tickerIsRunning)
+            {
+                scheduleTicker.Start();
+            }
+            else if (!enableSchedule && tickerIsRunning)
+            {
+                scheduleTicker.Stop();
+            }
+        }
+
+        private void UpdateVisibleOfScheduleControls()
+        {
+            var enableSchedule = enableScheduleRbtn.Checked;
+            lightModeTimeDtpkr.Enabled = enableSchedule;
+            lightModeTimeLbl.Enabled = enableSchedule;
+            darkModeTimeDtpkr.Enabled = enableSchedule;
+            darkModeTimeLbl.Enabled = enableSchedule;
         }
 
         private void UpdateVisibleOfScheduleBtn()
         {
             var sameTime = lightModeTimeDtpkr.Value.Hour == darkModeTimeDtpkr.Value.Hour
                 && lightModeTimeDtpkr.Value.Minute == darkModeTimeDtpkr.Value.Minute;
-            scheduleBtn.Enabled = !sameTime;
+            saveBtn.Enabled = !sameTime;
         }
 
         private void AfterToggleModeHandler(WindowsColorMode mode)
@@ -62,8 +94,8 @@ namespace TryWindowsForms
         private void ExitApplication()
         {
             UserClickedExitMenuItem = true;
-            timer.Stop();
-            timer.Dispose();
+            scheduleTicker.Stop();
+            scheduleTicker.Dispose();
             Application.Exit();
         }
 
@@ -75,9 +107,13 @@ namespace TryWindowsForms
 
         private void WriteToSettingFileAndCloseDialog()
         {
-            var lightModeTime = lightModeTimeDtpkr.Value.ToString(TimeFormat);
-            var darkModeTime = darkModeTimeDtpkr.Value.ToString(TimeFormat);
-            DMH.WriteToSettingFile(lightModeTime, darkModeTime);
+            var settings = new DarkModeSetting
+            {
+                EnableSchedule = enableScheduleRbtn.Checked,
+                LightTime = lightModeTimeDtpkr.Value.ToString(TimeFormat),
+                DarkTime = darkModeTimeDtpkr.Value.ToString(TimeFormat)
+            };
+            DMH.WriteToSettingFile(settings);
             Hide();
         }
 
@@ -94,6 +130,8 @@ namespace TryWindowsForms
             darkModeTimeDtpkr.Value = settings.DarkTime != null
                 ? DateTime.Parse(settings.DarkTime)
                 : new DateTime(now.Year, now.Month, now.Day, 18, 0, 0);
+            enableScheduleRbtn.Checked = settings.EnableSchedule;
+            disableScheduleRbtn.Checked = !settings.EnableSchedule;
         }
 
         private void ShowBalloonTipText(string message)
