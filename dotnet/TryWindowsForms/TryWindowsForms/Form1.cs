@@ -43,6 +43,15 @@ namespace TryWindowsForms
             timer.Tick += (sender, e) => DMH.SwitchWindowsColorModeIfOnTime(notifyIcon);
             FormClosing += (sender, e) => MinimizeToSysTrayIfClickClose(e);
             DMH.AfterToggleModeHandlers += AfterToggleModeHandler;
+            lightModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfScheduleBtn();
+            darkModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfScheduleBtn();
+        }
+
+        private void UpdateVisibleOfScheduleBtn()
+        {
+            var sameTime = lightModeTimeDtpkr.Value.Hour == darkModeTimeDtpkr.Value.Hour
+                && lightModeTimeDtpkr.Value.Minute == darkModeTimeDtpkr.Value.Minute;
+            scheduleBtn.Enabled = !sameTime;
         }
 
         private void AfterToggleModeHandler(WindowsColorMode mode)

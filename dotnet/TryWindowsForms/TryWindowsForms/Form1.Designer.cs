@@ -107,7 +107,7 @@ namespace TryWindowsForms
             this.lightModeTimeDtpkr.Name = "lightModeTimeDtpkr";
             this.lightModeTimeDtpkr.ShowUpDown = true;
             this.lightModeTimeDtpkr.Size = new System.Drawing.Size(112, 27);
-            this.lightModeTimeDtpkr.TabIndex = 2;
+            this.lightModeTimeDtpkr.TabIndex = 1;
             // 
             // darkModeTimeDtpkr
             // 
