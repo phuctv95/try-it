@@ -11,7 +11,6 @@ namespace TryWindowsForms
         private const string ApplicationName = "Windows Tools";
         private const string TimeFormat = "hh:mm tt";
         private bool UserClickedExitMenuItem = false;
-        private readonly Icon ApplicationIcon = new Icon("Assets/icon.ico");
         private readonly Icon ApplicationIconLight = new Icon("Assets/icon-light.ico");
         private readonly Icon ApplicationIconDark = new Icon("Assets/icon-dark.ico");
 
@@ -31,7 +30,6 @@ namespace TryWindowsForms
             notifyIcon.Icon = DMH.GetSystemTrayIcon(
                     ApplicationIconLight,
                     ApplicationIconDark);
-            Icon = ApplicationIcon;
             notifyIcon.Text = ApplicationName;
             Text = ApplicationName;
         }

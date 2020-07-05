@@ -32,6 +32,7 @@ namespace TryWindowsForms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.scheduleDarkModeItm = new System.Windows.Forms.ToolStripMenuItem();
@@ -243,6 +244,7 @@ namespace TryWindowsForms
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.scheduleControlsGrp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
