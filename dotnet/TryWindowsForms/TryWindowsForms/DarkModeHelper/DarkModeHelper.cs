@@ -41,7 +41,7 @@ namespace TryWindowsForms.DarkModeHelper
             AfterToggleModeHandlers?.Invoke(target);
         }
 
-        public static void SwitchWindowsColorModeIfOnTime(NotifyIcon notifyIcon)
+        public static void SwitchWindowsColorModeIfOnTime()
         {
             var config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
             var lightModeTimeFromSettingFile =

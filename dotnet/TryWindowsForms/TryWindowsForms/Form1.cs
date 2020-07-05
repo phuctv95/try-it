@@ -40,7 +40,7 @@ namespace TryWindowsForms
             notifyIcon.DoubleClick += (sender, e) => ShowUiAndData();
             scheduleBtn.Click += (sender, e) => WriteToSettingFileAndCloseDialog();
             cancelBtn.Click += (sender, e) => Hide();
-            timer.Tick += (sender, e) => DMH.SwitchWindowsColorModeIfOnTime(notifyIcon);
+            timer.Tick += (sender, e) => DMH.SwitchWindowsColorModeIfOnTime();
             FormClosing += (sender, e) => MinimizeToSysTrayIfClickClose(e);
             DMH.AfterToggleModeHandlers += AfterToggleModeHandler;
             lightModeTimeDtpkr.ValueChanged += (sender, e) => UpdateVisibleOfScheduleBtn();
