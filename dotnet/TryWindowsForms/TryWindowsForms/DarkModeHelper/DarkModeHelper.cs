@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Configuration;
-using System.Windows.Forms;
+using System.Drawing;
 
 namespace TryWindowsForms.DarkModeHelper
 {
@@ -15,12 +14,22 @@ namespace TryWindowsForms.DarkModeHelper
         private const string DarkModeTimeSettingKey = "TimeToTriggerDarkMode";
         private const string ApplyForWindowsControlsKey = "ApplyForWindowsControls";
         private const string ApplyForAppsKey = "ApplyForApps";
-        public delegate void AfterToggleModeEvent(WindowsColorMode mode);
+        public delegate void AfterToggleModeEvent(DarkModeApplyArea area, WindowsColorMode mode);
         public static AfterToggleModeEvent AfterToggleModeHandlers;
 
         public static bool IsEnableSchedule => Settings.ReadBoolean(EnableScheduleKey);
         public static bool IsApplyForWindowsControls => Settings.ReadBoolean(ApplyForWindowsControlsKey);
         public static bool IsApplyForApps => Settings.ReadBoolean(ApplyForAppsKey);
+
+        public static Icon GetSystemTrayIcon(Icon iconUseForDarkMode, 
+            Icon iconUseForLightMode)
+        {
+            var currentMode = 
+                GetCurrentWindowsColorMode(DarkModeApplyArea.ForWindowsControls);
+            return currentMode == WindowsColorMode.Dark
+                ? iconUseForDarkMode
+                : iconUseForLightMode;
+        }
 
         public static void ToggleColorMode(DarkModeApplyArea area)
         {
@@ -33,6 +42,12 @@ namespace TryWindowsForms.DarkModeHelper
             {
                 SwitchColorModeTo(area, WindowsColorMode.Dark);
             }
+        }
+
+        public static void ToggleColorModeInBothAreas()
+        {
+            ToggleColorMode(DarkModeApplyArea.ForWindowsControls);
+            ToggleColorMode(DarkModeApplyArea.ForApps);
         }
 
         public static WindowsColorMode GetCurrentWindowsColorMode(
@@ -61,7 +76,7 @@ namespace TryWindowsForms.DarkModeHelper
                 ? SystemUsesLightThemeValueName
                 : AppsUseLightThemeValueName;
             Registry.SetValue(BasePath, key, value);
-            AfterToggleModeHandlers?.Invoke(target);
+            AfterToggleModeHandlers?.Invoke(area, target);
         }
 
         public static void SwitchModeIfOnTime()

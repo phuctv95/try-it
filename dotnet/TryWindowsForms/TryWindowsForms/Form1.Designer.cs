@@ -35,7 +35,9 @@ namespace TryWindowsForms
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.scheduleDarkModeItm = new System.Windows.Forms.ToolStripMenuItem();
+            this.toggleForBoth = new System.Windows.Forms.ToolStripMenuItem();
             this.toggleForWindowsControlsItm = new System.Windows.Forms.ToolStripMenuItem();
+            this.toggleForAppsItm = new System.Windows.Forms.ToolStripMenuItem();
             this.exitItm = new System.Windows.Forms.ToolStripMenuItem();
             this.lightModeTimeLbl = new System.Windows.Forms.Label();
             this.darkModeTimeLbl = new System.Windows.Forms.Label();
@@ -65,27 +67,41 @@ namespace TryWindowsForms
             this.notifyIconContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.notifyIconContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.scheduleDarkModeItm,
+            this.toggleForBoth,
             this.toggleForWindowsControlsItm,
+            this.toggleForAppsItm,
             this.exitItm});
             this.notifyIconContextMenu.Name = "notifyIconContextMenu";
-            this.notifyIconContextMenu.Size = new System.Drawing.Size(266, 76);
+            this.notifyIconContextMenu.Size = new System.Drawing.Size(372, 124);
             // 
             // scheduleDarkModeItm
             // 
             this.scheduleDarkModeItm.Name = "scheduleDarkModeItm";
-            this.scheduleDarkModeItm.Size = new System.Drawing.Size(216, 24);
+            this.scheduleDarkModeItm.Size = new System.Drawing.Size(371, 24);
             this.scheduleDarkModeItm.Text = "Schedule Dark Mode";
             // 
-            // toggleDarkModeItm
+            // toggleForBoth
             // 
-            this.toggleForWindowsControlsItm.Name = "toggleDarkModeItm";
-            this.toggleForWindowsControlsItm.Size = new System.Drawing.Size(265, 24);
-            this.toggleForWindowsControlsItm.Text = "Toggle Dark Mode For Apps";
+            this.toggleForBoth.Name = "toggleForBoth";
+            this.toggleForBoth.Size = new System.Drawing.Size(371, 24);
+            this.toggleForBoth.Text = "Toggle Dark Mode For Windows && For Apps";
+            // 
+            // toggleForWindowsControlsItm
+            // 
+            this.toggleForWindowsControlsItm.Name = "toggleForWindowsControlsItm";
+            this.toggleForWindowsControlsItm.Size = new System.Drawing.Size(371, 24);
+            this.toggleForWindowsControlsItm.Text = "Toggle Dark Mode For Windows";
+            // 
+            // toggleForAppsItm
+            // 
+            this.toggleForAppsItm.Name = "toggleForAppsItm";
+            this.toggleForAppsItm.Size = new System.Drawing.Size(371, 24);
+            this.toggleForAppsItm.Text = "Toggle Dark Mode For Apps";
             // 
             // exitItm
             // 
             this.exitItm.Name = "exitItm";
-            this.exitItm.Size = new System.Drawing.Size(216, 24);
+            this.exitItm.Size = new System.Drawing.Size(371, 24);
             this.exitItm.Text = "Exit";
             // 
             // lightModeTimeLbl
@@ -245,7 +261,7 @@ namespace TryWindowsForms
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private ContextMenuStrip notifyIconContextMenu;
         private ToolStripMenuItem exitItm;
-        private ToolStripMenuItem toggleForWindowsControlsItm;
+        private ToolStripMenuItem toggleForAppsItm;
         private ToolStripMenuItem scheduleDarkModeItm;
         private Label lightModeTimeLbl;
         private Label darkModeTimeLbl;
@@ -261,6 +277,8 @@ namespace TryWindowsForms
         private CheckBox applyForWindowsControlsChbx;
         private CheckBox applyForAppsChbx;
         private GroupBox scheduleControlsGrp;
+        private ToolStripMenuItem toggleForWindowsControlsItm;
+        private ToolStripMenuItem toggleForBoth;
     }
 }
 

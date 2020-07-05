@@ -28,7 +28,9 @@ namespace TryWindowsForms
             {
                 scheduleTicker.Start();
             }
-            notifyIcon.Icon = ApplicationIconLight;
+            notifyIcon.Icon = DMH.GetSystemTrayIcon(
+                    ApplicationIconLight,
+                    ApplicationIconDark);
             Icon = ApplicationIcon;
             notifyIcon.Text = ApplicationName;
             Text = ApplicationName;
@@ -38,7 +40,9 @@ namespace TryWindowsForms
         {
             Shown += (sender, e) => Hide();
             scheduleDarkModeItm.Click += (sender, e) => ShowUiAndData();
-            toggleForWindowsControlsItm.Click += (sender, e) => DMH.ToggleColorMode(DarkModeApplyArea.ForApps);
+            toggleForWindowsControlsItm.Click += (sender, e) => DMH.ToggleColorMode(DarkModeApplyArea.ForWindowsControls);
+            toggleForAppsItm.Click += (sender, e) => DMH.ToggleColorMode(DarkModeApplyArea.ForApps);
+            toggleForBoth.Click += (sender, e) => DMH.ToggleColorModeInBothAreas();
             exitItm.Click += (sender, e) => ExitApplication();
             notifyIcon.DoubleClick += (sender, e) => ShowUiAndData();
             saveBtn.Click += (sender, e) => ClickSaveHandler();
@@ -93,8 +97,16 @@ namespace TryWindowsForms
             saveBtn.Enabled = !sameTime;
         }
 
-        private void AfterToggleModeHandler(WindowsColorMode mode)
+        private void AfterToggleModeHandler(DarkModeApplyArea area, 
+            WindowsColorMode mode)
         {
+            if (area == DarkModeApplyArea.ForWindowsControls)
+            {
+                notifyIcon.Icon = DMH.GetSystemTrayIcon(
+                    ApplicationIconLight,
+                    ApplicationIconDark);
+            }
+
             ShowBalloonTipText($"Switched successfully to {mode} Mode.");
         }
 
