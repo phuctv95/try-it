@@ -11,9 +11,9 @@ namespace TryWindowsForms
         private const string ApplicationName = "Windows Tools";
         private const string TimeFormat = "hh:mm tt";
         private bool UserClickedExitMenuItem = false;
-        private readonly Icon ApplicationIcon = new Icon("icon.ico");
-        private readonly Icon ApplicationIconLight = new Icon("icon-light.ico");
-        private readonly Icon ApplicationIconDark = new Icon("icon-dark.ico");
+        private readonly Icon ApplicationIcon = new Icon("Assets/icon.ico");
+        private readonly Icon ApplicationIconLight = new Icon("Assets/icon-light.ico");
+        private readonly Icon ApplicationIconDark = new Icon("Assets/icon-dark.ico");
 
         public Form1()
         {

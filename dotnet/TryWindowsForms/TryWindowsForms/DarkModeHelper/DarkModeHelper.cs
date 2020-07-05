@@ -81,21 +81,16 @@ namespace TryWindowsForms.DarkModeHelper
 
         public static void WriteToSettingFile(string lightModeTime, string darkModeTime)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
-            config.AppSettings.Settings.Remove(LightModeTimeSettingKey);
-            config.AppSettings.Settings.Add(LightModeTimeSettingKey, lightModeTime);
-            config.AppSettings.Settings.Remove(DarkModeTimeSettingKey);
-            config.AppSettings.Settings.Add(DarkModeTimeSettingKey, darkModeTime);
-            config.Save(ConfigurationSaveMode.Modified);
+            Settings.Write(LightModeTimeSettingKey, lightModeTime);
+            Settings.Write(DarkModeTimeSettingKey, darkModeTime);
         }
 
         public static DarkModeSetting ReadConfigFile()
         {
-            var config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
             return new DarkModeSetting
             {
-                LightTime = config.AppSettings.Settings[LightModeTimeSettingKey]?.Value,
-                DarkTime = config.AppSettings.Settings[DarkModeTimeSettingKey]?.Value
+                LightTime = Settings.Read(LightModeTimeSettingKey),
+                DarkTime = Settings.Read(DarkModeTimeSettingKey)
             };
         }
     }
