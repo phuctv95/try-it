@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using TryWindowsForms.DarkModeHelper;
 using DMH = TryWindowsForms.DarkModeHelper.DarkModeHelper;
 
 namespace TryWindowsForms
@@ -10,6 +11,9 @@ namespace TryWindowsForms
         private const string ApplicationName = "Windows Tools";
         private const string TimeFormat = "hh:mm tt";
         private bool UserClickedExitMenuItem = false;
+        private readonly Icon ApplicationIcon = new Icon("icon.ico");
+        private readonly Icon ApplicationIconLight = new Icon("icon-light.ico");
+        private readonly Icon ApplicationIconDark = new Icon("icon-dark.ico");
 
         public Form1()
         {
@@ -20,8 +24,9 @@ namespace TryWindowsForms
 
         private void InitOthers()
         {
-            notifyIcon.Icon = SystemIcons.Asterisk;
             timer.Start();
+            notifyIcon.Icon = ApplicationIconLight;
+            Icon = ApplicationIcon;
             notifyIcon.Text = ApplicationName;
             Text = ApplicationName;
         }
@@ -37,6 +42,12 @@ namespace TryWindowsForms
             cancelBtn.Click += (sender, e) => Hide();
             timer.Tick += (sender, e) => DMH.SwitchWindowsColorModeIfOnTime(notifyIcon);
             FormClosing += (sender, e) => MinimizeToSysTrayIfClickClose(e);
+            DMH.AfterToggleModeHandlers += AfterToggleModeHandler;
+        }
+
+        private void AfterToggleModeHandler(WindowsColorMode mode)
+        {
+            ShowBalloonTipText($"Switched successfully to {mode} Mode.");
         }
 
         private void ExitApplication()
@@ -74,6 +85,12 @@ namespace TryWindowsForms
             darkModeTimeDtpkr.Value = settings.DarkTime != null
                 ? DateTime.Parse(settings.DarkTime)
                 : new DateTime(now.Year, now.Month, now.Day, 18, 0, 0);
+        }
+
+        private void ShowBalloonTipText(string message)
+        {
+            notifyIcon.BalloonTipText = message;
+            notifyIcon.ShowBalloonTip(500);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace TryWindowsForms.DarkModeHelper
         private const string AppsUseLightThemeValueName = "AppsUseLightTheme";
         private const string LightModeTimeSettingKey = "TimeToTriggerLightMode";
         private const string DarkModeTimeSettingKey = "TimeToTriggerDarkMode";
+        public delegate void AfterToggleModeEvent(WindowsColorMode mode);
+        public static AfterToggleModeEvent AfterToggleModeHandlers;
 
         public static void ToggleWindowsColorMode()
         {
@@ -36,6 +38,7 @@ namespace TryWindowsForms.DarkModeHelper
         {
             var appsUseLightTheme = target == WindowsColorMode.Light ? 1 : 0;
             Registry.SetValue(BasePath, AppsUseLightThemeValueName, appsUseLightTheme);
+            AfterToggleModeHandlers?.Invoke(target);
         }
 
         public static void SwitchWindowsColorModeIfOnTime(NotifyIcon notifyIcon)
@@ -62,7 +65,6 @@ namespace TryWindowsForms.DarkModeHelper
                     return;
                 }
                 SwitchWindowsColorModeTo(target);
-                ShowBalloonTipText(notifyIcon, $"Switched successfully to {target} Mode.");
                 return;
             }
             if (darkModeTime.Hour == now.Hour && darkModeTime.Minute == now.Minute)
@@ -73,7 +75,6 @@ namespace TryWindowsForms.DarkModeHelper
                     return;
                 }
                 SwitchWindowsColorModeTo(target);
-                ShowBalloonTipText(notifyIcon, $"Switched successfully to {target} Mode.");
                 return;
             }
         }
@@ -96,12 +97,6 @@ namespace TryWindowsForms.DarkModeHelper
                 LightTime = config.AppSettings.Settings[LightModeTimeSettingKey]?.Value,
                 DarkTime = config.AppSettings.Settings[DarkModeTimeSettingKey]?.Value
             };
-        }
-
-        private static void ShowBalloonTipText(NotifyIcon notifyIcon, string message)
-        {
-            notifyIcon.BalloonTipText = message;
-            notifyIcon.ShowBalloonTip(500);
         }
     }
 }
