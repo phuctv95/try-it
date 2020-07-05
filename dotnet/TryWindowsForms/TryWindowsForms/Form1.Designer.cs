@@ -266,7 +266,6 @@ namespace TryWindowsForms
         private Label lightModeTimeLbl;
         private Label darkModeTimeLbl;
         private DateTimePicker lightModeTimeDtpkr;
-        private DateTimePicker dateTimePicker2;
         private Button saveBtn;
         private DateTimePicker darkModeTimeDtpkr;
         private Timer scheduleTicker;
