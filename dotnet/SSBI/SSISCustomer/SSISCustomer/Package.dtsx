@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{21735DC4-2110-4E76-A4F4-7DD3467479D1}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{CAA72B47-FE0B-4796-BD6D-51BC32C27E9F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,7 +29,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\puyed\Projects\try-it\dotnet\SSBI\ErrorConversion.txt">
+          DTS:ConnectionString="C:\Users\PRV\Documents\GitHub\try-it\dotnet\SSBI\ErrorConversion.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -38,7 +38,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CustomerCode"
-              DTS:DTSID="{A8AD0434-CAD7-4D91-95F7-4303FA13F7BC}"
+              DTS:DTSID="{A4CC2973-CC14-464D-B2C1-8DE324537015}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -47,7 +47,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CustomerName"
-              DTS:DTSID="{430C2936-7715-49E8-A949-670263FC64A2}"
+              DTS:DTSID="{071C1025-CC14-4A4A-A5AA-9516C73572E9}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -56,16 +56,15 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CustomerAmount"
-              DTS:DTSID="{C9272CD9-D03B-44B9-A8D2-E4727A7BBF0C}"
+              DTS:DTSID="{E877953E-C8EF-4360-9911-48B9E2C9AE95}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:DataType="7"
               DTS:TextQualified="True"
               DTS:ObjectName="SalesDate"
-              DTS:DTSID="{93820283-F765-4A8B-9036-C99A46416E6B}"
+              DTS:DTSID="{F1753F2B-552E-4897-9906-C1FB6928CB64}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -73,7 +72,7 @@
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="ErrorCode"
-              DTS:DTSID="{80D33FE8-5CD5-471E-B2EA-BDF793D6B24D}"
+              DTS:DTSID="{E0011BC7-DC29-4452-B47D-650E2C472056}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -81,7 +80,7 @@
               DTS:DataType="3"
               DTS:TextQualified="True"
               DTS:ObjectName="ErrorColumn"
-              DTS:DTSID="{FCA21E89-59A3-45A5-A4D4-366B3AB5A778}"
+              DTS:DTSID="{F7F1F29B-B458-4EC6-A0D2-873E3D81B376}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -157,7 +156,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\puyed\Projects\try-it\dotnet\SSBI\Error.txt">
+          DTS:ConnectionString="C:\Users\PRV\Documents\GitHub\try-it\dotnet\SSBI\Error.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -166,7 +165,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CustomerCode"
-              DTS:DTSID="{0821DCE8-EE3E-41EE-BBA1-26BA06D97443}"
+              DTS:DTSID="{CE76B401-50BD-42F3-8A4E-181F824C3FAC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -175,7 +174,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CustomerName"
-              DTS:DTSID="{AA0A08D3-0067-4666-AC0B-A478715B8A8F}"
+              DTS:DTSID="{18B6A0C1-0685-485D-B3BC-FC1E2CC4491B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -184,24 +183,31 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="CustomerAmount"
-              DTS:DTSID="{BBAF509F-E768-48EC-A9FE-67661B58B004}"
+              DTS:DTSID="{1D4DFF6E-011E-4058-A2CA-9E8217D628DD}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="129"
+              DTS:DataType="7"
               DTS:TextQualified="True"
               DTS:ObjectName="SalesDate"
-              DTS:DTSID="{D4D61F05-CC01-4FCC-B729-DB6F298E3BDF}"
+              DTS:DTSID="{2D462FC3-A352-4813-9B94-E8E06E7C86D0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorCode"
+              DTS:DTSID="{132C62D8-FAA6-4CF9-A0B2-DA36B0C294DE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x000D__x000A_"
-              DTS:DataType="6"
+              DTS:DataType="3"
               DTS:TextQualified="True"
-              DTS:ObjectName="CustomerAmountCY"
-              DTS:DTSID="{AB82EE2A-3DA1-49FC-9938-C40B95EE0269}"
+              DTS:ObjectName="ErrorColumn"
+              DTS:DTSID="{837B6C63-E226-4A14-B46A-F72463964809}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -218,6 +224,17 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{BACD1D14-A3A5-4BAF-A409-25AD4BDBB17C}"
+      DTS:ObjectName="BulkFilePath">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">C:\Users\PRV\Documents\GitHub\try-it\dotnet\SSBI\Data</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
@@ -243,10 +260,12 @@
         DTS:CreationName="Microsoft.ForEachFileEnumerator"
         DTS:DTSID="{FA4422E4-FB3C-4B7B-9613-F44EF98FABAB}"
         DTS:ObjectName="{FA4422E4-FB3C-4B7B-9613-F44EF98FABAB}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Package::BulkFilePath]</DTS:PropertyExpression>
         <DTS:ObjectData>
           <ForEachFileEnumeratorProperties>
             <FEFEProperty
-              Folder="C:\Users\puyed\Projects\try-it\dotnet\SSBI\Data" />
+              Folder="C:\Users\PRV\Documents\GitHub\try-it\dotnet\SSBI\Data" />
             <FEFEProperty
               FileSpec="*.txt" />
             <FEFEProperty
@@ -567,17 +586,17 @@
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Foreach Loop Container\Load CSV\Flat File Destination"
+                  refId="Package\Foreach Loop Container\Load CSV\Log conversion failure"
                   componentClassID="Microsoft.FlatFileDestination"
                   contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Flat File Destination"
                   localeId="1033"
-                  name="Flat File Destination">
+                  name="Log conversion failure">
                   <properties>
                     <property
                       dataType="System.Boolean"
                       description="Specifies whether the data will overwrite or append to the destination file."
-                      name="Overwrite">true</property>
+                      name="Overwrite">false</property>
                     <property
                       dataType="System.Null"
                       description="Specifies the text to write to the destination file before any data is written."
@@ -590,198 +609,192 @@
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Connections[FlatFileConnection]"
-                      connectionManagerID="Package.ConnectionManagers[ErrorConnection]"
-                      connectionManagerRefId="Package.ConnectionManagers[ErrorConnection]"
-                      name="FlatFileConnection" />
-                  </connections>
-                  <inputs>
-                    <input
-                      refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input]"
-                      hasSideEffects="true"
-                      name="Flat File Destination Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].Columns[CustomerCode]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="CustomerCode"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
-                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerCode]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].Columns[CustomerName]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="CustomerName"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
-                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerName]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].Columns[CustomerAmount]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="CustomerAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
-                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerAmount]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].Columns[SalesDate]"
-                          cachedDataType="date"
-                          cachedName="SalesDate"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
-                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[SalesDate]" />
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].Columns[CustomerAmountCY]"
-                          cachedDataType="cy"
-                          cachedName="CustomerAmountCY"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmountCY]"
-                          lineageId="Package\Foreach Loop Container\Load CSV\Convert CustomerAmmount.Outputs[Data Conversion Output].Columns[CustomerAmountCY]" />
-                      </inputColumns>
-                      <externalMetadataColumns
-                        isUsed="True">
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="CustomerCode" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="CustomerName" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="CustomerAmount" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="SalesDate" />
-                        <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmountCY]"
-                          dataType="cy"
-                          name="CustomerAmountCY" />
-                      </externalMetadataColumns>
-                    </input>
-                  </inputs>
-                </component>
-                <component
-                  refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1"
-                  componentClassID="Microsoft.FlatFileDestination"
-                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-                  description="Flat File Destination"
-                  localeId="1033"
-                  name="Flat File Destination 1">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      description="Specifies whether the data will overwrite or append to the destination file."
-                      name="Overwrite">true</property>
-                    <property
-                      dataType="System.Null"
-                      description="Specifies the text to write to the destination file before any data is written."
-                      expressionType="Notify"
-                      name="Header" />
-                    <property
-                      dataType="System.Boolean"
-                      description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
-                      name="EscapeQualifier">false</property>
-                  </properties>
-                  <connections>
-                    <connection
-                      refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Connections[FlatFileConnection]"
+                      refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Connections[FlatFileConnection]"
                       connectionManagerID="Package.ConnectionManagers[Conversion Error]"
                       connectionManagerRefId="Package.ConnectionManagers[Conversion Error]"
                       name="FlatFileConnection" />
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input]"
+                      refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input]"
                       hasSideEffects="true"
                       name="Flat File Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[CustomerCode]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].Columns[CustomerCode]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="CustomerCode"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
                           lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerCode]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[CustomerName]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].Columns[CustomerName]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="CustomerName"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
                           lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerName]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[CustomerAmount]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].Columns[CustomerAmount]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="CustomerAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
                           lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[SalesDate]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].Columns[SalesDate]"
                           cachedDataType="date"
                           cachedName="SalesDate"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
                           lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[SalesDate]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[ErrorCode]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].Columns[ErrorCode]"
                           cachedDataType="i4"
                           cachedName="ErrorCode"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
                           lineageId="Package\Foreach Loop Container\Load CSV\Convert CustomerAmmount.Outputs[Data Conversion Error Output].Columns[ErrorCode]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].Columns[ErrorColumn]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].Columns[ErrorColumn]"
                           cachedDataType="i4"
                           cachedName="ErrorColumn"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
                           lineageId="Package\Foreach Loop Container\Load CSV\Convert CustomerAmmount.Outputs[Data Conversion Error Output].Columns[ErrorColumn]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="CustomerCode" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="CustomerName" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
                           codePage="1252"
                           dataType="str"
                           length="50"
                           name="CustomerAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
+                          dataType="date"
                           name="SalesDate" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
                           dataType="i4"
                           name="ErrorCode" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          refId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load CSV\Log failure"
+                  componentClassID="Microsoft.FlatFileDestination"
+                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Flat File Destination"
+                  localeId="1033"
+                  name="Log failure">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the data will overwrite or append to the destination file."
+                      name="Overwrite">false</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the text to write to the destination file before any data is written."
+                      expressionType="Notify"
+                      name="Header" />
+                    <property
+                      dataType="System.Boolean"
+                      description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                      name="EscapeQualifier">false</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load CSV\Log failure.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ErrorConnection]"
+                      connectionManagerRefId="Package.ConnectionManagers[ErrorConnection]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input]"
+                      hasSideEffects="true"
+                      name="Flat File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].Columns[CustomerCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CustomerCode"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
+                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerCode]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].Columns[CustomerName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CustomerName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
+                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].Columns[CustomerAmount]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="CustomerAmount"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
+                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[CustomerAmount]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].Columns[SalesDate]"
+                          cachedDataType="date"
+                          cachedName="SalesDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
+                          lineageId="Package\Foreach Loop Container\Load CSV\Read From CSV.Outputs[Flat File Source Output].Columns[SalesDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CustomerCode" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[CustomerAmount]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="CustomerAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[SalesDate]"
+                          dataType="date"
+                          name="SalesDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
                           dataType="i4"
                           name="ErrorColumn" />
                       </externalMetadataColumns>
@@ -1046,7 +1059,7 @@
                   startId="Package\Foreach Loop Container\Load CSV\Conditional Split.Outputs[Conditional Split Default Output]" />
                 <path
                   refId="Package\Foreach Loop Container\Load CSV.Paths[Data Conversion Error Output]"
-                  endId="Package\Foreach Loop Container\Load CSV\Flat File Destination 1.Inputs[Flat File Destination Input]"
+                  endId="Package\Foreach Loop Container\Load CSV\Log conversion failure.Inputs[Flat File Destination Input]"
                   name="Data Conversion Error Output"
                   startId="Package\Foreach Loop Container\Load CSV\Convert CustomerAmmount.Outputs[Data Conversion Error Output]" />
                 <path
@@ -1061,7 +1074,7 @@
                   startId="Package\Foreach Loop Container\Load CSV\Upper Case Customer Name.Outputs[Derived Column Output]" />
                 <path
                   refId="Package\Foreach Loop Container\Load CSV.Paths[Error]"
-                  endId="Package\Foreach Loop Container\Load CSV\Flat File Destination.Inputs[Flat File Destination Input]"
+                  endId="Package\Foreach Loop Container\Load CSV\Log failure.Inputs[Flat File Destination Input]"
                   name="Error"
                   startId="Package\Foreach Loop Container\Load CSV\Conditional Split.Outputs[Error]" />
                 <path
@@ -1077,8 +1090,8 @@
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{51666946-E241-44C9-B03A-C28F475F8D43}"
-          DTS:ObjectName="{51666946-E241-44C9-B03A-C28F475F8D43}"
+          DTS:DTSID="{556C541C-3812-429D-9899-3D1333986DA4}"
+          DTS:ObjectName="{556C541C-3812-429D-9899-3D1333986DA4}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::FullFilePath" />
       </DTS:ForEachVariableMappings>
@@ -1116,33 +1129,33 @@
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="152,42"
-          Id="Package\Foreach Loop Container\Load CSV\Read From CSV"
-          TopLeft="403,10" />
-        <NodeLayout
           Size="209,42"
           Id="Package\Foreach Loop Container\Load CSV\Convert CustomerAmmount"
           TopLeft="378,181" />
         <NodeLayout
-          Size="181,42"
-          Id="Package\Foreach Loop Container\Load CSV\Flat File Destination 1"
-          TopLeft="723,213" />
+          Size="152,42"
+          Id="Package\Foreach Loop Container\Load CSV\Read From CSV"
+          TopLeft="403,10" />
         <NodeLayout
-          Size="172,42"
-          Id="Package\Foreach Loop Container\Load CSV\Flat File Destination"
+          Size="130,42"
+          Id="Package\Foreach Loop Container\Load CSV\Log failure"
           TopLeft="567,389" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Foreach Loop Container\Load CSV\Log conversion failure"
+          TopLeft="723,213" />
         <NodeLayout
           Size="210,42"
           Id="Package\Foreach Loop Container\Load CSV\Customer Data Ware House"
           TopLeft="278,400" />
         <NodeLayout
-          Size="212,42"
-          Id="Package\Foreach Loop Container\Load CSV\Upper Case Customer Name"
-          TopLeft="387,82" />
-        <NodeLayout
           Size="155,42"
           Id="Package\Foreach Loop Container\Load CSV\Conditional Split"
           TopLeft="407,280" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\Foreach Loop Container\Load CSV\Upper Case Customer Name"
+          TopLeft="387,82" />
         <EdgeLayout
           Id="Package\Foreach Loop Container\Load CSV.Paths[Flat File Source Output]"
           TopLeft="479,52">
@@ -1183,9 +1196,9 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="144,67"
+              EndConnector="123,67"
               Start="0,0"
-              End="144,59.5">
+              End="123,59.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -1196,20 +1209,20 @@
                     Point2="0,27.2107279693487"
                     Point3="4,27.2107279693487" />
                   <mssgle:LineSegment
-                    End="140,27.2107279693487" />
+                    End="119,27.2107279693487" />
                   <mssgle:CubicBezierSegment
-                    Point1="140,27.2107279693487"
-                    Point2="144,27.2107279693487"
-                    Point3="144,31.2107279693487" />
+                    Point1="119,27.2107279693487"
+                    Point2="123,27.2107279693487"
+                    Point3="123,31.2107279693487" />
                   <mssgle:LineSegment
-                    End="144,59.5" />
+                    End="123,59.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="60.47130859375,32.2107279693487,23.0573828125,9.421875"
+              BoundingBox="49.97130859375,32.2107279693487,23.0573828125,9.421875"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
