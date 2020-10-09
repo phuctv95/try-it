@@ -1,0 +1,5 @@
+StatesId,StatesName
+1,Maharastra
+2,Punjab
+3,NewYork
+4,Kathmandu
