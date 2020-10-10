@@ -5,21 +5,21 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="PC19843"
   DTS:CreatorName="ELCANET\prv"
-  DTS:DTSID="{AED81F1B-A794-4F3E-A83E-FBA3000F4E34}"
+  DTS:DTSID="{DD5B33A9-61FE-48D3-8555-8066BDD58444}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="15.0.2000.132"
   DTS:LocaleID="1033"
   DTS:ObjectName="DimSalesPerson"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{27205D94-02D1-4C7D-9570-43DD99276745}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{66CC0EDA-9C16-4843-B3CC-8C2CD567F981}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[SalesPerson Connection Manager]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{0BC3CC77-3BE4-4C5A-B650-D58693726518}"
+      DTS:DTSID="{7DB44118-59FE-428C-B7DA-450701360177}"
       DTS:ObjectName="SalesPerson Connection Manager">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -30,7 +30,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\PRV\Documents\GitHub\try-it\dotnet\SSBI\Data\SalesPerson\SalesPerson.txt">
+          DTS:ConnectionString="C:\Users\puyed\Projects\try-it\dotnet\SSBI\Data\SalesPerson\SalesPerson.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PersonId"
-              DTS:DTSID="{8B9B25AE-F805-4E28-BD87-9CA85063CF44}"
+              DTS:DTSID="{C8E02BB6-76BD-4AF3-962E-209FF354DB23}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="PersonName"
-              DTS:DTSID="{9B6A89D4-4F6C-401F-A666-89B82A8DEBAA}"
+              DTS:DTSID="{595E7D4F-9123-420C-9F83-68F485957D1C}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -61,7 +61,7 @@
       DTS:refId="Package\Load SalesPerson"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{4B766231-DB98-4B65-AE0F-B7B53EBAA0BD}"
+      DTS:DTSID="{E2A1C286-6CF2-42A6-A537-02CB0B29BFFB}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Load SalesPerson"
@@ -121,33 +121,33 @@
                   name="ADO NET Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[PersonId]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="PersonId"
-                      externalMetadataColumnId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesPersonId]"
-                      lineageId="Package\Load SalesPerson\Flat File Source.Outputs[Flat File Source Output].Columns[PersonId]" />
-                    <inputColumn
                       refId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[PersonName]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="PersonName"
-                      externalMetadataColumnId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesPersonName]"
+                      externalMetadataColumnId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[PersonName]"
                       lineageId="Package\Load SalesPerson\Flat File Source.Outputs[Flat File Source Output].Columns[PersonName]" />
+                    <inputColumn
+                      refId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[PersonId]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PersonId"
+                      externalMetadataColumnId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[PersonId]"
+                      lineageId="Package\Load SalesPerson\Flat File Source.Outputs[Flat File Source Output].Columns[PersonId]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesPersonId]"
+                      refId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[PersonId]"
                       dataType="i4"
-                      name="SalesPersonId" />
+                      name="PersonId" />
                     <externalMetadataColumn
-                      refId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[SalesPersonName]"
+                      refId="Package\Load SalesPerson\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[PersonName]"
                       dataType="wstr"
                       length="50"
-                      name="SalesPersonName" />
+                      name="PersonName" />
                   </externalMetadataColumns>
                 </input>
               </inputs>

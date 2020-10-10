@@ -5,21 +5,21 @@
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="PC19843"
   DTS:CreatorName="ELCANET\prv"
-  DTS:DTSID="{09A93091-D532-441A-8CE3-FC83C5F31733}"
+  DTS:DTSID="{DD7B99FE-D194-4059-BEA9-D03F0DB7464D}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="15.0.2000.132"
   DTS:LocaleID="1033"
   DTS:ObjectName="DimStates"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{6339B01B-55F8-4448-BECF-E92C9A03BC3D}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{B5202B34-21F0-41E7-8563-4A5022C2F1D9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[States Connection Manager]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{400932AE-FB6C-4B9C-9831-0334A8B30893}"
+      DTS:DTSID="{F2484847-B073-4FD5-88EA-F374902ABC82}"
       DTS:ObjectName="States Connection Manager">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -30,7 +30,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\PRV\Documents\GitHub\try-it\dotnet\SSBI\Data\States\StatesId.txt">
+          DTS:ConnectionString="C:\Users\puyed\Projects\try-it\dotnet\SSBI\Data\States\StatesId.txt">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="StatesId"
-              DTS:DTSID="{D3CE2A47-021A-4E17-B991-96656107DED6}"
+              DTS:DTSID="{F7125D39-1E14-4E1E-BCFB-A2E8C012BCC1}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="StatesName"
-              DTS:DTSID="{B27DA842-26E5-44B8-8069-82B7859748DF}"
+              DTS:DTSID="{6179539E-1D2E-469B-AE64-CF91D62A750E}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -61,7 +61,7 @@
       DTS:refId="Package\Load States"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{00FA41F9-FDE8-418C-9CC1-6D741F084EF6}"
+      DTS:DTSID="{7311867D-3995-4C14-8F87-116EB2860115}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Load States"
