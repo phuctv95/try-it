@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{C2F56F69-63E4-45A4-B5AE-DDB824A06C0E}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{B938D75C-F53F-4891-A08D-CEEDE9808DFD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -38,7 +38,6 @@
       DTS:refId="Package\Fact Customer"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{415C2D26-A119-4799-9C18-A261EB6149A5}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
@@ -73,7 +72,6 @@
       DTS:refId="Package\SalesPerson"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{4bd490bc-87f6-4e1c-9981-b86ef0fa627a}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"
@@ -91,7 +89,6 @@
       DTS:refId="Package\States"
       DTS:CreationName="Microsoft.ExecutePackageTask"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{013cdc4e-bdee-467a-b8fb-608a5454e2f9}"
       DTS:ExecutableType="Microsoft.ExecutePackageTask"
       DTS:LocaleID="-1"

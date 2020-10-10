@@ -1,0 +1,6 @@
+Name,Amount
+Khadak,100
+Hari,200
+Shiv,100
+Raju,200
+Shaam,200

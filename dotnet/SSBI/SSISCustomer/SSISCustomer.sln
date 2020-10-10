@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSISCustomer", "SSISCustomer\SSISCustomer.dtproj", "{CC6E31A8-E24D-4B8F-BA17-B53BED182411}"
 EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CombineData", "CombineData\CombineData.dtproj", "{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
@@ -12,6 +14,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Development|Default.ActiveCfg = Development
 		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Development|Default.Build.0 = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Development|Default.ActiveCfg = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Development|Default.Build.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
