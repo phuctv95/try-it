@@ -50,7 +50,10 @@
     <Reports>@(Report)</Reports>
   </PropertyGroup>
   <ItemGroup>
+    <Report Include="ChildReport.rdl" />
+    <Report Include="DrillDown.rdl" />
     <Report Include="ManualReport.rdl" />
+    <Report Include="ParentReport.rdl" />
     <Report Include="WizardReport.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
