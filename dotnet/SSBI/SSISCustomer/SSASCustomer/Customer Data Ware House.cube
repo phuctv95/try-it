@@ -228,6 +228,9 @@
         <Attribute dwd:design-time-name="aa651a82-2f8c-410d-81b7-89f6b32bd662">
           <AttributeID>States Id</AttributeID>
         </Attribute>
+        <Attribute dwd:design-time-name="736b26ef-13b9-4502-b4e2-2fb438ee7563">
+          <AttributeID>States Name</AttributeID>
+        </Attribute>
       </Attributes>
     </Dimension>
     <Dimension dwd:design-time-name="7f52b9fb-25e4-42c4-9e64-d6231dad9b8a">
@@ -251,6 +254,9 @@
         <Attribute dwd:design-time-name="658fce73-d19e-4d8a-8df4-a75b03ddf4e7">
           <AttributeID>Product Id</AttributeID>
         </Attribute>
+        <Attribute dwd:design-time-name="205d2881-89d3-401d-92b0-473290dcfb51">
+          <AttributeID>Product Name</AttributeID>
+        </Attribute>
       </Attributes>
     </Dimension>
     <Dimension dwd:design-time-name="ac0c6402-3c81-479d-9af5-0da6afdb699a">
@@ -260,6 +266,9 @@
       <Attributes>
         <Attribute dwd:design-time-name="848fc11b-0ab1-4966-9805-81d0a2cfddb2">
           <AttributeID>Person Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d188dd40-371c-4dc8-93fb-8244b8c45541">
+          <AttributeID>Person Name</AttributeID>
         </Attribute>
       </Attributes>
     </Dimension>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30523.141
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1259
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSISCustomer", "SSISCustomer\SSISCustomer.dtproj", "{CC6E31A8-E24D-4B8F-BA17-B53BED182411}"
 EndProject
@@ -9,18 +9,54 @@ Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CombineData", "CombineData\
 EndProject
 Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SSASCustomer", "SSASCustomer\SSASCustomer.dwproj", "{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "SSRSCustomer", "SSRSCustomer\SSRSCustomer.rptproj", "{10666F31-FA95-4329-AA52-A7C59E35EDC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
 		Development|Default = Development|Default
+		Release|Default = Release|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Debug|Default.ActiveCfg = Development
+		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Debug|Default.Build.0 = Development
+		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.DebugLocal|Default.ActiveCfg = Development
+		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.DebugLocal|Default.Build.0 = Development
 		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Development|Default.ActiveCfg = Development
 		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Development|Default.Build.0 = Development
+		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Release|Default.ActiveCfg = Development
+		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Release|Default.Build.0 = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Debug|Default.ActiveCfg = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Debug|Default.Build.0 = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.DebugLocal|Default.ActiveCfg = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.DebugLocal|Default.Build.0 = Development
 		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Development|Default.ActiveCfg = Development
 		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Development|Default.Build.0 = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Release|Default.ActiveCfg = Development
+		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Release|Default.Build.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Debug|Default.ActiveCfg = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Debug|Default.Build.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Debug|Default.Deploy.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.DebugLocal|Default.ActiveCfg = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.DebugLocal|Default.Build.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.DebugLocal|Default.Deploy.0 = Development
 		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Development|Default.ActiveCfg = Development
 		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Development|Default.Build.0 = Development
 		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Development|Default.Deploy.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Release|Default.ActiveCfg = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Release|Default.Build.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Release|Default.Deploy.0 = Development
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Debug|Default.ActiveCfg = Debug
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Debug|Default.Build.0 = Debug
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Debug|Default.Deploy.0 = Debug
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.DebugLocal|Default.Build.0 = DebugLocal
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Development|Default.ActiveCfg = DebugLocal
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Development|Default.Build.0 = DebugLocal
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Release|Default.ActiveCfg = Release
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Release|Default.Build.0 = Release
+		{10666F31-FA95-4329-AA52-A7C59E35EDC6}.Release|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
