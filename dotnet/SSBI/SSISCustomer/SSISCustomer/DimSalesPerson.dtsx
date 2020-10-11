@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimSalesPerson"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{5511B782-3B75-46D8-B543-7BCBE18A7387}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{FEC9DA53-4BC2-47AB-ACE0-8F6A3C04BF14}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,7 +23,7 @@
       DTS:ObjectName="LocalHost.CustomerDataWareHouse 1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=.;Initial Catalog=CustomerDataWareHouse;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=.\SQL2017INSTANCE;Initial Catalog=CustomerDataWareHouse;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -755,13 +755,57 @@
           Id="Package\Load SalesPerson\Flat File Source"
           TopLeft="240,5.5" />
         <NodeLayout
-          Size="216,42"
-          Id="Package\Load SalesPerson\Slowly Changing Dimension"
-          TopLeft="210,209.5" />
+          Size="165,42"
+          Id="Package\Load SalesPerson\Insert Destination"
+          TopLeft="5.50000000000006,311.5" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Load SalesPerson\OLE DB Command"
+          TopLeft="231.5,311.5" />
         <NodeLayout
           Size="161,42"
           Id="Package\Load SalesPerson\Data Conversion"
           TopLeft="237.5,107.5" />
+        <NodeLayout
+          Size="216,42"
+          Id="Package\Load SalesPerson\Slowly Changing Dimension"
+          TopLeft="210,209.5" />
+        <EdgeLayout
+          Id="Package\Load SalesPerson.Paths[New Output]"
+          TopLeft="283.333333333333,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-195.333333333333,60"
+              Start="0,0"
+              End="-195.333333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2647058823529" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2647058823529"
+                    Point2="0,24.2647058823529"
+                    Point3="-4,24.2647058823529" />
+                  <mssgle:LineSegment
+                    End="-191.333333333333,24.2647058823529" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-191.333333333333,24.2647058823529"
+                    Point2="-195.333333333333,24.2647058823529"
+                    Point3="-195.333333333333,28.2647058823529" />
+                  <mssgle:LineSegment
+                    End="-195.333333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-124.758053385417,29.2647058823529,54.1827734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Load SalesPerson.Paths[Flat File Source Output]"
           TopLeft="318,47.5">
@@ -806,50 +850,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="165,42"
-          Id="Package\Load SalesPerson\Insert Destination"
-          TopLeft="5.50000000000006,311.5" />
-        <EdgeLayout
-          Id="Package\Load SalesPerson.Paths[New Output]"
-          TopLeft="283.333333333333,251.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-195.333333333333,60"
-              Start="0,0"
-              End="-195.333333333333,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.2647058823529" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.2647058823529"
-                    Point2="0,24.2647058823529"
-                    Point3="-4,24.2647058823529" />
-                  <mssgle:LineSegment
-                    End="-191.333333333333,24.2647058823529" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-191.333333333333,24.2647058823529"
-                    Point2="-195.333333333333,24.2647058823529"
-                    Point3="-195.333333333333,28.2647058823529" />
-                  <mssgle:LineSegment
-                    End="-195.333333333333,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-124.758053385417,29.2647058823529,54.1827734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Load SalesPerson\OLE DB Command"
-          TopLeft="231.5,311.5" />
         <EdgeLayout
           Id="Package\Load SalesPerson.Paths[Changing Attribute Updates Output]"
           TopLeft="352.666666666667,251.5">

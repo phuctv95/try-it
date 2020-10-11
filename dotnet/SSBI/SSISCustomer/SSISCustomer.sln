@@ -7,6 +7,8 @@ Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSISCustomer", "SSISCustome
 EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CombineData", "CombineData\CombineData.dtproj", "{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}"
 EndProject
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SSASCustomer", "SSASCustomer\SSASCustomer.dwproj", "{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
@@ -16,6 +18,9 @@ Global
 		{CC6E31A8-E24D-4B8F-BA17-B53BED182411}.Development|Default.Build.0 = Development
 		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Development|Default.ActiveCfg = Development
 		{73F57F24-17E9-42B2-A4E8-4AF7A9D0C202}.Development|Default.Build.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Development|Default.ActiveCfg = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Development|Default.Build.0 = Development
+		{29ED6BB0-6E53-43CC-B1B0-465B49A55E3C}.Development|Default.Deploy.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
