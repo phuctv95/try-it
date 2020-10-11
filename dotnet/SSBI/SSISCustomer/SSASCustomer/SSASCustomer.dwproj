@@ -24,20 +24,20 @@
       <FullPath>Dim States.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Dim Sales Person.dim</Name>
-      <FullPath>Dim Sales Person.dim</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Dim Country.dim</Name>
       <FullPath>Dim Country.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Dim Product.dim</Name>
-      <FullPath>Dim Product.dim</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>Time.dim</Name>
       <FullPath>Time.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Dim Sales Person.dim</Name>
+      <FullPath>Dim Sales Person.dim</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Dim Product.dim</Name>
+      <FullPath>Dim Product.dim</FullPath>
     </ProjectItem>
   </Dimensions>
   <DataSources>
