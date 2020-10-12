@@ -7,34 +7,27 @@ namespace QuickStart
     {
         static void Main(string[] args)
         {
-            var session = NHibernateHelper.OpenSession();
-            try
+            using (var session = NHibernateHelper.OpenSession())
+            using (var tx = session.BeginTransaction())
             {
-                using (var tx = session.BeginTransaction())
+                //var princess = new Cat
+                //{
+                //    Name = "Princess",
+                //    Sex = 'F',
+                //    Weight = 7.4f
+                //};
+
+                //session.Save(princess);
+                //tx.Commit();
+
+                var females = session
+                    .Query<Cat>()
+                    .Where(c => c.Sex == 'F')
+                    .ToList();
+                foreach (var cat in females)
                 {
-                    //var princess = new Cat
-                    //{
-                    //    Name = "Princess",
-                    //    Sex = 'F',
-                    //    Weight = 7.4f
-                    //};
-
-                    //session.Save(princess);
-                    //tx.Commit();
-
-                    var females = session
-                        .Query<Cat>()
-                        .Where(c => c.Sex == 'F')
-                        .ToList();
-                    foreach (var cat in females)
-                    {
-                        Console.WriteLine($"Female Cat: {cat.Name} ({cat.Id})");
-                    }
+                    Console.WriteLine($"Female Cat: {cat.Name} ({cat.Id})");
                 }
-            }
-            finally
-            {
-                NHibernateHelper.CloseSession();
             }
         }
     }

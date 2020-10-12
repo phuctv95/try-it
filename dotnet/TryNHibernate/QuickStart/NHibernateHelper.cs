@@ -23,10 +23,5 @@ namespace QuickStart
         {
             return SessionFactory.OpenSession();
         }
-
-        public static void CloseSession()
-        {
-            SessionFactory.Close();
-        }
     }
 }
