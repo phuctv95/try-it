@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuickStart.Domain;
+using QuickStart.Repository;
+using System;
 using System.Linq;
 
 namespace QuickStart
@@ -7,28 +9,31 @@ namespace QuickStart
     {
         static void Main(string[] args)
         {
-            using (var session = NHibernateHelper.OpenSession())
-            using (var tx = session.BeginTransaction())
+            //using (var session = NHibernateHelper.OpenSession())
+            //using (var tr = session.BeginTransaction())
+            //{
+
+            //    tr.Commit();
+            //}
+
+            var blog = new Blog
             {
-                //var princess = new Cat
-                //{
-                //    Name = "Princess",
-                //    Sex = 'F',
-                //    Weight = 7.4f
-                //};
+                Name = "My Blog",
+                CreationDate = DateTime.Now,
+            };
+            var post1 = new Post
+            {
+                Title = "Abc",
+                Timestamp = DateTime.Now,
+                Blog = blog,
+            };
+            post1.Tags.Add("C#");
+            post1.Tags.Add("NHibernate");
+            blog.Posts.Add(post1);
 
-                //session.Save(princess);
-                //tx.Commit();
+            var repo = new Repository<Blog>();
+            repo.Add(blog);
 
-                var females = session
-                    .Query<Cat>()
-                    .Where(c => c.Sex == 'F')
-                    .ToList();
-                foreach (var cat in females)
-                {
-                    Console.WriteLine($"Female Cat: {cat.Name} ({cat.Id})");
-                }
-            }
         }
     }
 }

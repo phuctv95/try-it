@@ -1,5 +1,8 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Cfg.MappingSchema;
+using NHibernate.Mapping.ByCode;
+using QuickStart.Domain;
 
 namespace QuickStart
 {
@@ -13,10 +16,27 @@ namespace QuickStart
             {
                 if (_sessionFactory == null)
                 {
-                    _sessionFactory = new Configuration().Configure().BuildSessionFactory();
+
+                    var cfg = new Configuration();
+                    cfg.Configure();
+                    cfg.DataBaseIntegration(db => db.SchemaAction = SchemaAutoAction.Create);
+                    cfg.AddMapping(GetMappings());
+                    _sessionFactory = cfg.BuildSessionFactory();
                 }
                 return _sessionFactory;
             }
+        }
+
+        private static HbmMapping GetMappings()
+        {
+            var mapper = new ModelMapper();
+            mapper.AddMapping<CatMapping>();
+            mapper.AddMapping<BlogMapping>();
+            mapper.AddMapping<PostMapping>();
+            return mapper.CompileMappingFor(new[] 
+            { 
+                typeof(Cat), typeof(Blog), typeof(Post)
+            });
         }
 
         public static ISession OpenSession()
