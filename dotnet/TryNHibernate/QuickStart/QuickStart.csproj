@@ -63,6 +63,8 @@
   <ItemGroup>
     <Compile Include="Domain\Blog.cs" />
     <Compile Include="Domain\Cat.cs" />
+    <Compile Include="Domain\Person.cs" />
+    <Compile Include="Domain\Sport.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Domain\Post.cs" />
     <Compile Include="NHibernateHelper.cs" />

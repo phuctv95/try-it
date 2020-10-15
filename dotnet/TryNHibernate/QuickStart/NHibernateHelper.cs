@@ -33,9 +33,17 @@ namespace QuickStart
             mapper.AddMapping<CatMapping>();
             mapper.AddMapping<BlogMapping>();
             mapper.AddMapping<PostMapping>();
+            mapper.AddMapping<PersonMapping>();
+            mapper.AddMapping<NationalCitizenMapping>();
+            mapper.AddMapping<ForeignCitizenMapping>();
+            mapper.AddMapping<SportMapping>();
+            mapper.AddMapping<SportFootballMapping>();
+            mapper.AddMapping<SportChessMapping>();
             return mapper.CompileMappingFor(new[] 
             { 
-                typeof(Cat), typeof(Blog), typeof(Post)
+                typeof(Cat), typeof(Blog), typeof(Post), typeof(Person),
+                typeof(NationalCitizen), typeof(ForeignCitizen),
+                typeof(Sport), typeof(SportFootball), typeof(SportChess),
             });
         }
 

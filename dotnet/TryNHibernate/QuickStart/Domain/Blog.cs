@@ -39,7 +39,7 @@ namespace QuickStart.Domain
             {
                 x.Formula("(SELECT COUNT(1) FROM Post WHERE Post.BlogId = BlogId)");
             });
-            List(
+            Bag(
                 x => x.Posts, 
                 x =>
                 {
