@@ -65,5 +65,11 @@ namespace TryWpf
             var win = new TestNestedLayout();
             win.ShowDialog();
         }
+
+        private void button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var win = new TestBinding();
+            win.ShowDialog();
+        }
     }
 }
