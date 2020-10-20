@@ -59,5 +59,11 @@ namespace TryWpf
         {
             System.Diagnostics.Debug.WriteLine("MyCustomControl_Click");
         }
+
+        private void button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var win = new TestNestedLayout();
+            win.ShowDialog();
+        }
     }
 }
