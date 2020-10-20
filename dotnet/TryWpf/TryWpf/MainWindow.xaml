@@ -14,5 +14,6 @@
             <TextBlock Text="{Binding ElementName=MyWindow, Path=Counter}"/>
         </Border>
         <Button Content="Click" Width="200" Height="50" Margin="300,120,300,264" Click="Button_Click"/>
+        <local:MyCustomControl Click="MyCustomControl_Click" Width="200" Height="50" Margin="300,10,300,264" />
     </Grid>
 </Window>

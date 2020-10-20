@@ -54,5 +54,10 @@ namespace TryWpf
         {
             System.Diagnostics.Debug.WriteLine("MyWindow_Click");
         }
+
+        private void MyCustomControl_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("MyCustomControl_Click");
+        }
     }
 }
