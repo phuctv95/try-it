@@ -39,5 +39,20 @@ namespace TryWpf
             timer.Tick += (_, __) => Counter++;
             timer.Start();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Button_Click");
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Grid_Click");
+        }
+
+        private void MyWindow_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("MyWindow_Click");
+        }
     }
 }

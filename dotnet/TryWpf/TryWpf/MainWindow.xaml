@@ -7,8 +7,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TryWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="{Binding ElementName=MyWindow, Path=Counter}"/>
+        Title="MainWindow" Height="450" Width="800"
+        ButtonBase.Click="MyWindow_Click">
+    <Grid ButtonBase.Click="Grid_Click">
+        <Border Background="Beige" Width="200" Height="50">
+            <TextBlock Text="{Binding ElementName=MyWindow, Path=Counter}"/>
+        </Border>
+        <Button Content="Click" Width="200" Height="50" Margin="300,120,300,264" Click="Button_Click"/>
     </Grid>
 </Window>
