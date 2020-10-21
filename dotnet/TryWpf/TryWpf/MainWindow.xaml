@@ -18,5 +18,6 @@
         <Button x:Name="button" Content="Test Nested Layout" HorizontalAlignment="Center" Margin="0,255,0,0" VerticalAlignment="Top" Click="button_Click_1"/>
         <Button x:Name="button2" Content="Test Data Binding" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Click="button_Click_2"/>
         <Button x:Name="button3" Content="Test Resources" HorizontalAlignment="Center" Margin="0,305,0,0" VerticalAlignment="Top" Click="button_Click_3"/>
+        <Button x:Name="button4" Content="Test Template" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Click="button_Click_4"/>
     </Grid>
 </Window>
