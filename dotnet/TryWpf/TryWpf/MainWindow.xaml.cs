@@ -81,5 +81,15 @@ namespace TryWpf
         {
             new TestTemplate().ShowDialog();
         }
+
+        private void button_Click_5(object sender, RoutedEventArgs e)
+        {
+            new TestStyle().ShowDialog();
+        }
+
+        private void button_Click_6(object sender, RoutedEventArgs e)
+        {
+            new TestTriggers().ShowDialog();
+        }
     }
 }
