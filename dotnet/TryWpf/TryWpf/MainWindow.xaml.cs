@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TryWpf.CustomControls;
 
 namespace TryWpf
 {
@@ -90,6 +91,11 @@ namespace TryWpf
         private void button_Click_6(object sender, RoutedEventArgs e)
         {
             new TestTriggers().ShowDialog();
+        }
+
+        private void button_Click_7(object sender, RoutedEventArgs e)
+        {
+            new CustomControls.CustomControls().ShowDialog();
         }
     }
 }

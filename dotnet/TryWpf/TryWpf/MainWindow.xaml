@@ -10,16 +10,17 @@
         Title="MainWindow" Height="450" Width="800"
         ButtonBase.Click="MyWindow_Click">
     <Grid ButtonBase.Click="Grid_Click">
-        <Border Background="Beige" Width="200" Height="50">
+        <Border Background="Beige" Width="200" Height="50" Margin="300,145,300,239">
             <TextBlock Text="{Binding ElementName=MyWindow, Path=Counter}"/>
         </Border>
-        <Button Content="Click" Width="200" Height="50" Margin="300,120,300,264" Click="Button_Click"/>
-        <local:MyCustomControl Click="MyCustomControl_Click" Width="200" Height="50" Margin="300,10,300,264" />
-        <Button x:Name="button" Content="Test Nested Layout" HorizontalAlignment="Center" Margin="0,255,0,0" VerticalAlignment="Top" Click="button_Click_1"/>
-        <Button x:Name="button2" Content="Test Data Binding" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Click="button_Click_2"/>
-        <Button x:Name="button3" Content="Test Resources" HorizontalAlignment="Center" Margin="0,305,0,0" VerticalAlignment="Top" Click="button_Click_3"/>
-        <Button x:Name="button4" Content="Test Template" HorizontalAlignment="Center" Margin="0,330,0,0" VerticalAlignment="Top" Click="button_Click_4"/>
-        <Button x:Name="button5" Content="Test Style" HorizontalAlignment="Center" Margin="0,355,0,0" VerticalAlignment="Top" Click="button_Click_5"/>
-        <Button x:Name="button6" Content="Test Triggers" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Click="button_Click_6"/>
+        <Button Content="Click" Width="200" Height="50" Margin="300,73,300,311" Click="Button_Click"/>
+        <local:MyCustomControl Click="MyCustomControl_Click" Width="200" Height="50" Margin="300,18,300,366" />
+        <Button x:Name="button" Content="Test Nested Layout" HorizontalAlignment="Center" VerticalAlignment="Center" Click="button_Click_1"/>
+        <Button x:Name="button2" Content="Test Data Binding" HorizontalAlignment="Center" Margin="0,233,0,0" VerticalAlignment="Top" Click="button_Click_2"/>
+        <Button x:Name="button3" Content="Test Resources" HorizontalAlignment="Center" Margin="0,258,0,0" VerticalAlignment="Top" Click="button_Click_3"/>
+        <Button x:Name="button4" Content="Test Template" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Click="button_Click_4"/>
+        <Button x:Name="button5" Content="Test Style" HorizontalAlignment="Center" Margin="0,308,0,0" VerticalAlignment="Top" Click="button_Click_5"/>
+        <Button x:Name="button6" Content="Test Triggers" HorizontalAlignment="Center" Margin="0,333,0,0" VerticalAlignment="Top" Click="button_Click_6"/>
+        <Button x:Name="button7" Content="Test Custom Controls" HorizontalAlignment="Center" Margin="0,358,0,0" VerticalAlignment="Top" Click="button_Click_7"/>
     </Grid>
 </Window>
