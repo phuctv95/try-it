@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,13 +19,15 @@ namespace TryWpf
     /// </summary>
     public partial class TestCollectionView : Window
     {
+        public ICollectionView ContactFilterView { get; set; }
         public TestCollectionView()
         {
             InitializeComponent();
 
-            DgData.ItemsSource = GetContacts();
-            var ContactFilterView = (CollectionView)CollectionViewSource.GetDefaultView(DgData.ItemsSource);
+            var contacts = GetContacts();
+            ContactFilterView = CollectionViewSource.GetDefaultView(contacts);
             ContactFilterView.Filter = OnFilterTriggered;
+            DgData.ItemsSource = ContactFilterView;
         }
         private List<Contact> GetContacts()
         {
@@ -51,7 +54,7 @@ namespace TryWpf
 
         private void Filter_Click(object sender, RoutedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(DgData.ItemsSource).Refresh();
+            ContactFilterView.Refresh();
         }
     }
     public class Contact
