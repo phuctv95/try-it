@@ -17,5 +17,6 @@
         <local:MyCustomControl Click="MyCustomControl_Click" Width="200" Height="50" Margin="300,10,300,264" />
         <Button x:Name="button" Content="Test Nested Layout" HorizontalAlignment="Center" Margin="0,255,0,0" VerticalAlignment="Top" Click="button_Click_1"/>
         <Button x:Name="button2" Content="Test Data Binding" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Click="button_Click_2"/>
+        <Button x:Name="button3" Content="Test Resources" HorizontalAlignment="Center" Margin="0,305,0,0" VerticalAlignment="Top" Click="button_Click_3"/>
     </Grid>
 </Window>

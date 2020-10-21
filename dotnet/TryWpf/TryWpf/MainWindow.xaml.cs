@@ -71,5 +71,10 @@ namespace TryWpf
             var win = new TestBinding();
             win.ShowDialog();
         }
+
+        private void button_Click_3(object sender, RoutedEventArgs e)
+        {
+            new TestResource().ShowDialog();
+        }
     }
 }
