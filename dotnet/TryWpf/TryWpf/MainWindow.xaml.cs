@@ -97,5 +97,10 @@ namespace TryWpf
         {
             new CustomControls.CustomControls().ShowDialog();
         }
+
+        private void button_Click_8(object sender, RoutedEventArgs e)
+        {
+            new TestValidaion().ShowDialog();
+        }
     }
 }
