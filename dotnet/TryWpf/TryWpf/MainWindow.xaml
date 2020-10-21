@@ -23,5 +23,6 @@
         <Button x:Name="button6" Content="Test Triggers" HorizontalAlignment="Center" Margin="0,333,0,0" VerticalAlignment="Top" Click="button_Click_6"/>
         <Button x:Name="button7" Content="Test Custom Controls" HorizontalAlignment="Center" Margin="0,358,0,0" VerticalAlignment="Top" Click="button_Click_7"/>
         <Button x:Name="button8" Content="Test Validation" HorizontalAlignment="Left" Margin="362,383,0,0" VerticalAlignment="Top" Click="button_Click_8"/>
+        <Button x:Name="button9" Content="Test Collection View" HorizontalAlignment="Left" Margin="531,233,0,0" VerticalAlignment="Top" Click="button_Click_9"/>
     </Grid>
 </Window>

@@ -102,5 +102,10 @@ namespace TryWpf
         {
             new TestValidaion().ShowDialog();
         }
+
+        private void button_Click_9(object sender, RoutedEventArgs e)
+        {
+            new TestCollectionView().ShowDialog();
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿<Window x:Class="TryWpf.TestCollectionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TryWpf"
+        mc:Ignorable="d"
+        Title="TestCollectionView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Margin="8" Name="DgData" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="8, 0, 8, 8" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Center" Text="From:"/>
+            <TextBox x:Name="TBFrom" Width="100" Height="28" Margin="8"/>
+            <TextBlock Height="28" HorizontalAlignment="Left" VerticalAlignment="Center" Text="To:"/>
+            <TextBox x:Name="TBTo" Width="100" Height="28" Margin="8"/>
+            <Button x:Name="Filter" Content="Filter" Width="100" Height="28" Margin="8" Click="Filter_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
