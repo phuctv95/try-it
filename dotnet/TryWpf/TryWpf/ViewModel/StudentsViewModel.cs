@@ -46,6 +46,6 @@ namespace TryWpf.ViewModel
             Students = students;
         }
         private void Delete() => Students.Remove(SelectedStudent);
-        private bool CanDelete() => SelectedStudent != null;
+        private bool CanDelete() => SelectedStudent != null && !SelectedStudent.HasErrors;
     }
 }

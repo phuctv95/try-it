@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
 namespace TryWpf.Model
 {
-    public class Student : INotifyPropertyChanged
+    public class Student : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private string firstName;
         private string lastName;
@@ -51,7 +52,15 @@ namespace TryWpf.Model
             }
         }
 
+        public bool HasErrors => string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName);
+
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return new List<string> { "Some error message..." };
+        }
 
         private void RaisePropertyChanged(string property)
         {
