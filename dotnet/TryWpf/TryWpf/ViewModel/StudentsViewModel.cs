@@ -6,9 +6,9 @@ using TryWpf.Model;
 
 namespace TryWpf.ViewModel
 {
-    public class StudentViewModel
+    public class StudentsViewModel
     {
-        public StudentViewModel()
+        public StudentsViewModel()
         {
             LoadStudents();
         }

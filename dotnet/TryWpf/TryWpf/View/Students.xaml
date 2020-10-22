@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TryWpf.View"
         xmlns:vm="clr-namespace:TryWpf.ViewModel"
+        xmlns:vml="clr-namespace:TryWpf.VML"
+        vml:ViewModelLocator.AutoHookedUpViewModel="True"
         mc:Ignorable="d"
         Title="Students" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:StudentViewModel/>
-    </Window.DataContext>
     <Grid>
         <StackPanel HorizontalAlignment = "Left">
             <ItemsControl ItemsSource = "{Binding Path = Students}">
