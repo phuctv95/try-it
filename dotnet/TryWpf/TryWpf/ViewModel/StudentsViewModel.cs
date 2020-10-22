@@ -11,12 +11,28 @@ namespace TryWpf.ViewModel
         public StudentsViewModel()
         {
             LoadStudents();
+            DeleteCommand = new MyCommand(Delete, CanDelete);
         }
 
+        public MyCommand DeleteCommand { get; set; }
         public ObservableCollection<Student> Students
         {
             get;
             set;
+        }
+        private Student _selectedStudent;
+        public Student SelectedStudent
+        {
+            get
+            {
+                return _selectedStudent;
+            }
+
+            set
+            {
+                _selectedStudent = value;
+                DeleteCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public void LoadStudents()
@@ -29,5 +45,7 @@ namespace TryWpf.ViewModel
 
             Students = students;
         }
+        private void Delete() => Students.Remove(SelectedStudent);
+        private bool CanDelete() => SelectedStudent != null;
     }
 }

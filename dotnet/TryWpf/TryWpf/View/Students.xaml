@@ -19,7 +19,13 @@
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Path=DeleteCommand}"  Key="D"  Modifiers="Control"/>
+    </Window.InputBindings>
     <Grid>
-        <ListBox ItemsSource="{Binding Students}"/>
+        <StackPanel Orientation="Horizontal">
+            <ListBox ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedStudent}"/>
+            <Button Content="Delete" Command="{Binding DeleteCommand}" Width="100" Height="50" VerticalAlignment="Top"/>
+        </StackPanel>
     </Grid>
 </Window>
