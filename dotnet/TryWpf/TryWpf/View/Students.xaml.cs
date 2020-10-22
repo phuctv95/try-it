@@ -21,7 +21,6 @@ namespace TryWpf.View
         public Students()
         {
             InitializeComponent();
-            DataContext = new StudentViewModel();
         }
     }
 }
