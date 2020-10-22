@@ -5,23 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TryWpf.View"
         xmlns:vm="clr-namespace:TryWpf.ViewModel"
+        xmlns:model="clr-namespace:TryWpf.Model"
         xmlns:vml="clr-namespace:TryWpf.VML"
         vml:ViewModelLocator.AutoHookedUpViewModel="True"
         mc:Ignorable="d"
         Title="Students" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type model:Student}">
+            <StackPanel Orientation = "Horizontal">
+                <TextBox Text = "{Binding Path = FirstName, Mode = TwoWay}" Width = "100" Margin = "3 5 3 5"/>
+                <TextBox Text = "{Binding Path = LastName, Mode = TwoWay}" Width = "100" Margin = "0 5 3 5"/>
+                <TextBlock Text = "{Binding Path = FullName, Mode = OneWay}" Margin = "0 5 3 5"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <StackPanel HorizontalAlignment = "Left">
-            <ItemsControl ItemsSource = "{Binding Path = Students}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation = "Horizontal">
-                            <TextBox Text = "{Binding Path = FirstName, Mode = TwoWay}" Width = "100" Margin = "3 5 3 5"/>
-                            <TextBox Text = "{Binding Path = LastName, Mode = TwoWay}" Width = "100" Margin = "0 5 3 5"/>
-                            <TextBlock Text = "{Binding Path = FullName, Mode = OneWay}" Margin = "0 5 3 5"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+        <ListBox ItemsSource="{Binding Students}"/>
     </Grid>
 </Window>
