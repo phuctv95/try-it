@@ -51,7 +51,7 @@ namespace QuickStart
             //Console.WriteLine(blog.BlogId);
             //Console.WriteLine(blog.Posts.Count);
 
-            SportDemo.Demo();
+            NHibernateHelper.Demo4();
 
             Console.ReadLine();
         }
