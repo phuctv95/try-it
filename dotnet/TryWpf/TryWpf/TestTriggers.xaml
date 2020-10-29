@@ -57,5 +57,46 @@
                 </EventTrigger>
             </Button.Triggers>
         </Button>
+
+        <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Text="Demo multi trigger" Width="150" Margin="50,173,0,0">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsKeyboardFocused" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="LightGreen" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="296,170,0,0" Width="199">
+            <CheckBox Name="cbSampleYes" Content="Yes" />
+            <CheckBox Name="cbSampleSure" Content="I'm sure" />
+            <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="12">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="(Demo multi data trigger) Unverified" />
+                        <Setter Property="Foreground" Value="Red" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=cbSampleYes, Path=IsChecked}" Value="True" />
+                                    <Condition Binding="{Binding ElementName=cbSampleSure, Path=IsChecked}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Text" Value="(Demo multi data trigger) Verified" />
+                                <Setter Property="Foreground" Value="Green" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Window>
