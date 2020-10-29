@@ -113,5 +113,10 @@ namespace TryWpf
             //new View.Users().ShowDialog();
             new View.Students().ShowDialog();
         }
+
+        private void button_Click_11(object sender, RoutedEventArgs e)
+        {
+            new TestValueConverter().ShowDialog();
+        }
     }
 }

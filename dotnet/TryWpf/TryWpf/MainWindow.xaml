@@ -25,5 +25,6 @@
         <Button x:Name="button8" Content="Test Validation" HorizontalAlignment="Left" Margin="362,383,0,0" VerticalAlignment="Top" Click="button_Click_8"/>
         <Button x:Name="button9" Content="Test Collection View" HorizontalAlignment="Left" Margin="531,233,0,0" VerticalAlignment="Top" Click="button_Click_9"/>
         <Button x:Name="button10" Content="Test MVVM" HorizontalAlignment="Left" Margin="554,258,0,0" VerticalAlignment="Top" Click="button_Click_10"/>
+        <Button x:Name="button11" Content="Test Converter" HorizontalAlignment="Left" Margin="546,288,0,0" VerticalAlignment="Top" Click="button_Click_11"/>
     </Grid>
 </Window>
