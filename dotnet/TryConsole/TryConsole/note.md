@@ -15,3 +15,22 @@ The classes in the `System.Reflection` namespace, together with `System.Type`, e
 ## Pattern matching
 
 Patterns test that a value has a certain **shape**, and can **extract** information from the value when it has the matching shape.
+
+
+## Asynchronous streams
+
+Starting with C# 8.0, you can create and consume streams asynchronously. A method that returns an asynchronous stream has three properties:
+
+	1. It's declared with the `async` modifier.
+	2. It returns an `IAsyncEnumerable<T>`.
+	3. The method contains `yield return` statements to return successive elements in the asynchronous stream.
+
+Consuming an asynchronous stream requires you to add the `await` keyword before the `foreach` keyword when you enumerate the elements of the stream.
+
+A method can both consume and produce an asynchronous stream.
+
+## Asynchronous disposable
+
+Starting with C# 8.0, the language supports asynchronous disposable types that implement the `System.IAsyncDisposable` interface.
+
+You use the `await using` statement to work with an asynchronously disposable object.

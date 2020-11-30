@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace TryConsole
 {
@@ -74,6 +75,15 @@ namespace TryConsole
             using (var writer = new StreamWriter(filePath, false))
             {
                 writer.WriteLine(content);
+            }
+        }
+
+        public static async IAsyncEnumerable<int> GenerateSequence(int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                await Task.Delay(100);
+                yield return i;
             }
         }
     }

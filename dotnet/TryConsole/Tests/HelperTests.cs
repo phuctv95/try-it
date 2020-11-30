@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace TryConsole.Tests
 {
@@ -57,6 +58,7 @@ namespace TryConsole.Tests
         }
 
         [TestMethod]
+        #region Test cases
         [DataRow(1, 1)]
         [DataRow(2, 1)]
         [DataRow(3, 2)]
@@ -67,6 +69,7 @@ namespace TryConsole.Tests
         [DataRow(8, 21)]
         [DataRow(9, 34)]
         [DataRow(10, 55)]
+        #endregion
         public void Fibonacci(int n, int expected)
         {
             Assert.AreEqual(expected, Helper.Fibonacci(n));
@@ -125,6 +128,26 @@ namespace TryConsole.Tests
             {
                 Assert.Fail();
             }
+        }
+
+        [TestMethod]
+        public async Task AsynchronousStream()
+        {
+            var counter = 0;
+            // Continue on next statement on caller after this await.
+            await foreach (var item in Helper.GenerateSequence(10))
+            {
+                counter++;
+                Console.WriteLine($"Report received item: {item}.");
+            }
+            Assert.AreEqual(10, counter);
+        }
+
+
+        [TestMethod]
+        public void AsynchronousDispose()
+        {
+
         }
     }
 
