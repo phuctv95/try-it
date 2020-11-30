@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 
@@ -70,6 +71,61 @@ namespace TryConsole.Tests
         {
             Assert.AreEqual(expected, Helper.Fibonacci(n));
         }
+
+        [TestMethod]
+        public void PatternMatching()
+        {
+            // Switch expression.
+            Func<MyColor, Color> GetColor = color => color switch
+            {
+                MyColor.Red => Color.Red,
+                MyColor.Green => Color.Green,
+                MyColor.Blue => Color.Blue,
+                _ => throw new ArgumentException(message: "Invalid param.", paramName: nameof(color)),
+            };
+
+            Assert.AreEqual(Color.Red, GetColor(MyColor.Red));
+            Assert.AreEqual(Color.Green, GetColor(MyColor.Green));
+            Assert.AreEqual(Color.Blue, GetColor(MyColor.Blue));
+            Assert.ThrowsException<ArgumentException>(() => GetColor((MyColor)100));
+
+            // Property pattern.
+            Func<TestClass, int> ParseY = instance => instance switch
+            {
+                { Y: "1" } => 1,
+                { Y: "2" } => 2,
+                { Y: "3" } => 3,
+                _ => throw new NotSupportedException(),
+            };
+
+            Assert.AreEqual(1, ParseY(new TestClass { Y = "1" }));
+            Assert.AreEqual(2, ParseY(new TestClass { Y = "2" }));
+            Assert.AreEqual(3, ParseY(new TestClass { Y = "3" }));
+
+            // Tuple pattern.
+            Func<MyColor, MyColor, Color> MixColor = (c1, c2) => (c1, c2) switch
+            {
+                (MyColor.Red, MyColor.Green) => Color.Yellow,
+                (MyColor.Red, MyColor.Blue) => Color.Magenta,
+                (MyColor.Green, MyColor.Blue) => Color.Cyan,
+                (_, _) => throw new NotSupportedException(),
+            };
+            Assert.AreEqual(Color.Yellow, MixColor(MyColor.Red, MyColor.Green));
+            Assert.AreEqual(Color.Magenta, MixColor(MyColor.Red, MyColor.Blue));
+            Assert.AreEqual(Color.Cyan, MixColor(MyColor.Green, MyColor.Blue));
+
+            // Positional pattern.
+            var myTestClass = new TestClass { X = 1, Y = "2" };
+            if (myTestClass is TestClass(int x, string y))
+            {
+                Assert.AreEqual(myTestClass.X, x);
+                Assert.AreEqual(myTestClass.Y, y);
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
     }
 
     class TestClass
@@ -77,11 +133,16 @@ namespace TryConsole.Tests
         public int X { get; set; }
         public string Y { get; set; } = string.Empty;
         private string Z { get; set; } = string.Empty;
+        public TestClass() { }
         public TestClass(int x)
         {
             X = x;
         }
 
         public string GetValue() => $"{X} {Y} {Z}";
+
+        public void Deconstruct(out int x, out string y) => (x, y) = (X, Y);
     }
+
+    enum MyColor { Red, Green, Blue }
 }

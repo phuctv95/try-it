@@ -11,3 +11,7 @@ When to use:
 ## Reflection
 
 The classes in the `System.Reflection` namespace, together with `System.Type`, enable you to obtain information about loaded assemblies and the types defined within them, such as classes, interfaces, and value types.
+
+## Pattern matching
+
+Patterns test that a value has a certain **shape**, and can **extract** information from the value when it has the matching shape.
