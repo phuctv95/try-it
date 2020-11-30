@@ -40,3 +40,7 @@ You use the `await using` statement to work with an asynchronously disposable ob
 Indices and ranges provide a succinct syntax for accessing *single* elements or *ranges* in a sequence.
 - The index from end operator `^`, which specifies that an index is relative to the end of the sequence (start from 1).
 - The range operator `..`, which specifies the start and end of a range as its operands (the start of the range is inclusive, but the end of the range is exclusive).
+
+## Null-coalescing assignment
+
+You can use the `??=` operator to assign the value of its right-hand operand to its left-hand operand only if the left-hand operand evaluates to `null`.

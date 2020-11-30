@@ -172,6 +172,18 @@ namespace TryConsole.Tests
             var range = ^2..;
             Assert.IsTrue(arr[range].SequenceEqual(new string[] { "d", "e" }));
         }
+
+        [TestMethod]
+        public void NullCoalescingAssignment()
+        {
+            int? x = 1;
+            x ??= 2;
+            Assert.AreEqual(1, x);
+
+            x = null;
+            x ??= 2;
+            Assert.AreEqual(2, x);
+        }
     }
 
     class TestClass
