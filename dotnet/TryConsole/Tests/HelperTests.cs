@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -148,6 +149,28 @@ namespace TryConsole.Tests
         public void AsynchronousDispose()
         {
 
+        }
+
+        [TestMethod]
+        public void IndicesAndRange()
+        {
+            var arr = new string[] { "a", "b", "c", "d", "e" };
+
+            Assert.AreEqual("a", arr[0]);
+            Assert.AreEqual("b", arr[1]);
+            Assert.AreEqual("e", arr[^1]);
+            Assert.AreEqual("d", arr[^2]);
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => arr[^0]);
+            Assert.ThrowsException<IndexOutOfRangeException>(() => arr[^(arr.Length + 1)]);
+
+            Assert.IsTrue(arr[0..2].SequenceEqual(new string[] { "a", "b" }));
+            Assert.IsTrue(arr[..2].SequenceEqual(new string[] { "a", "b" }));
+            Assert.IsTrue(arr[3..].SequenceEqual(new string[] { "d", "e" }));
+            Assert.IsTrue(arr[^2..].SequenceEqual(new string[] { "d", "e" }));
+
+            var range = ^2..;
+            Assert.IsTrue(arr[range].SequenceEqual(new string[] { "d", "e" }));
         }
     }
 
