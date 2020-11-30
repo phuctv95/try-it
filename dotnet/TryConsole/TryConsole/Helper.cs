@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.IO;
 
 namespace TryConsole
 {
@@ -49,6 +50,14 @@ namespace TryConsole
             }
 
             return result;
+        }
+
+        public static void Overwrite(string filePath, string content)
+        {
+            using (var writer = new StreamWriter(filePath, false))
+            {
+                writer.WriteLine(content);
+            }
         }
     }
 }
