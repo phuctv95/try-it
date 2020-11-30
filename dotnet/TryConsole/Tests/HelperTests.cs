@@ -6,10 +6,10 @@ using System.Reflection;
 
 namespace TryConsole.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class HelperTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void Expression100Test()
         {
             var computer = new DataTable();
@@ -53,6 +53,22 @@ namespace TryConsole.Tests
 
             var assembly = Assembly.Load("System");
             Assert.AreEqual("System.dll", assembly.ManifestModule.Name);
+        }
+
+        [TestMethod]
+        [DataRow(1, 1)]
+        [DataRow(2, 1)]
+        [DataRow(3, 2)]
+        [DataRow(4, 3)]
+        [DataRow(5, 5)]
+        [DataRow(6, 8)]
+        [DataRow(7, 13)]
+        [DataRow(8, 21)]
+        [DataRow(9, 34)]
+        [DataRow(10, 55)]
+        public void Fibonacci(int n, int expected)
+        {
+            Assert.AreEqual(expected, Helper.Fibonacci(n));
         }
     }
 

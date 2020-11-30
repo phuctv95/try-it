@@ -6,6 +6,8 @@ namespace TryConsole
 {
     public static class Helper
     {
+        private static readonly Dictionary<int, int> FibonacciMemo = new Dictionary<int, int>();
+
         /// <summary>
         /// Requirement:
         ///     Write a program that outputs all possibilities to put + or - or nothing
@@ -49,6 +51,21 @@ namespace TryConsole
                 }
             }
 
+            return result;
+        }
+
+        public static int Fibonacci(int n)
+        {
+            if (FibonacciMemo.ContainsKey(n))
+            {
+                return FibonacciMemo[n];
+            }
+
+            var result = n <= 2
+                ? 1
+                : Fibonacci(n - 1) + Fibonacci(n - 2);
+
+            FibonacciMemo.Add(n, result);
             return result;
         }
 
