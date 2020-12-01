@@ -7,15 +7,21 @@ namespace Tests.Services
     class GreeterServiceTests
     {
         private const string Address = "https://localhost:5001";
+        private Greeter.GreeterClient _client;
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            var channel = GrpcChannel.ForAddress(Address);
+            _client = new Greeter.GreeterClient(channel);
+        }
 
         [Test]
-        public void Test1()
+        public void SayHelloTest()
         {
             const string Name = "World";
-            var channel = GrpcChannel.ForAddress(Address);
-            var client = new Greeter.GreeterClient(channel);
 
-            var response = client.SayHello(new HelloRequest { Name = Name });
+            var response = _client.SayHello(new HelloRequest { Name = Name });
 
             Assert.AreEqual($"Hello {Name}", response.Message);
         }
