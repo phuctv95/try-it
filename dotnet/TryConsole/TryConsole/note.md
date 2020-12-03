@@ -44,3 +44,34 @@ Indices and ranges provide a succinct syntax for accessing *single* elements or 
 ## Null-coalescing assignment
 
 You can use the `??=` operator to assign the value of its right-hand operand to its left-hand operand only if the left-hand operand evaluates to `null`.
+
+## .NET Core SDK
+
+- .NET Core SDK is a set of libraries and tools that allow developers to create .NET Core applications and libraries.
+- It contains:
+	+ .NET Core CLI
+	+ .NET Core libraries and runtime
+	+ The `dotnet` driver
+
+## .NET CLI
+
+- .NET CLI is a cross-platform toolchain for developing, building, running, and publishing .NET applications.
+
+## .NET Core run-time configuration
+
+.NET Core supports the use of configuration files and environment variables to configure the behavior of .NET Core applications at run time.
+
+runtimeconfig.json:
+- Applies to current application.
+- When a project is built, an `[appname].runtimeconfig.json` file is generated in the output directory.
+- If a `runtimeconfig.template.json` file exists in the same folder as the project file, any configuration options it contains are merged into the `[appname].runtimeconfig.json` file.
+
+MSBuild properties:
+- Applies to current application.
+- Are in the `.csproj`.
+- MSBuild properties take precedence over options set in the `runtimeconfig.template.json` file.
+- They also overwrite any options you set in the `[appname].runtimeconfig.json`.
+
+Environment variables:
+- Apply to all .NET Core apps.
+- Set environment variables from the Windows Control Panel, or by command line, or by calling `Environment.SetEnvironmentVariable(String, String)`.
