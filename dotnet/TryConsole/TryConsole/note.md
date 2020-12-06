@@ -45,6 +45,12 @@ Indices and ranges provide a succinct syntax for accessing *single* elements or 
 
 You can use the `??=` operator to assign the value of its right-hand operand to its left-hand operand only if the left-hand operand evaluates to `null`.
 
+## .NET Core
+
+.NET is a free, open-source development platform for building many kinds of apps.
+
+Some characteristics: cross platform, open source, multiple languages (C#, F# and Visual Basic), can be used with various continuous integration tools and environments, .NET Interactive
+
 ## .NET Core SDK
 
 - .NET Core SDK is a set of libraries and tools that allow developers to create .NET Core applications and libraries.
@@ -75,3 +81,18 @@ MSBuild properties:
 Environment variables:
 - Apply to all .NET Core apps.
 - Set environment variables from the Windows Control Panel, or by command line, or by calling `Environment.SetEnvironmentVariable(String, String)`.
+
+
+## .NET Standard
+
+.NET Standard is a specification that represents a set of APIs that all .NET platforms have to implement. This unifies the .NET platforms and prevents future fragmentation.
+
+.NET Core is a concrete .NET platform and implements the .NET Standard.
+
+## ASP.NET Core
+
+Middleware is software that's assembled into an app pipeline to handle requests and responses. Each component:
+- Chooses whether to pass the request to the next component in the pipeline.
+- Can perform work before and after the next component in the pipeline.
+
+The `Startup` class configures services and the app's request pipeline.
