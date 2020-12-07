@@ -96,3 +96,8 @@ Middleware is software that's assembled into an app pipeline to handle requests 
 - Can perform work before and after the next component in the pipeline.
 
 The `Startup` class configures services and the app's request pipeline.
+
+## Dependency Injection
+
+- ASP.NET Core includes a built-in dependency injection (DI) framework that makes configured services available throughout an app.
+- Code to configure (or register) services is added to the `Startup.ConfigureServices()` method.
