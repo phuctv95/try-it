@@ -46,3 +46,15 @@
 
 - .NET Core supports a logging API that works with a variety of built-in and third-party logging providers.
 - Call `CreateDefaultBuilder`, which adds the following logging providers: Console, Debug, EventSource, EventLog (in Windows).
+
+## Swagger & OpenAPI
+
+- Swagger (OpenAPI) is a language-agnostic specification for describing REST APIs.
+- It allows both computers and humans to understand the capabilities of a REST API without direct access to the source code.
+- The two main OpenAPI implementations for .NET are *Swashbuckle* and *NSwag*.
+- OpenAPI is a specification. Swagger is tooling that uses the OpenAPI specification. For example, OpenAPIGenerator and SwaggerUI.
+
+Using Swashbuckle:
+- Install package `Swashbuckle.AspNetCore`.
+- Use service: `services.AddSwaggerGen();`.
+- Middleware: `app.UseSwagger();` and `app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));`.
