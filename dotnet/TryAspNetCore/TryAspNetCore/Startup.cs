@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TryAspNetCore.Services;
 
 namespace TryAspNetCore
 {
@@ -26,6 +27,8 @@ namespace TryAspNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IMyDependency, MyDependency>();
+
             services.AddControllers();
             services.AddSwaggerGen();
         }
@@ -33,7 +36,6 @@ namespace TryAspNetCore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseExceptionHandler();
             app.Use(async (context, next) =>
             {
                 // Do work that doesn't write to the Response.
@@ -46,10 +48,10 @@ namespace TryAspNetCore
                 await next.Invoke();
                 // Do logging or other work that doesn't write to the Response.
             });
-            app.Run(async context =>
-            {
-                await context.Response.WriteAsync("Hello, World!");
-            });
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("Hello, World!");
+            //});
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

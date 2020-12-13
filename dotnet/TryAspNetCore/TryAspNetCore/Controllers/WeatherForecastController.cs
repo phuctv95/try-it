@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TryAspNetCore.Services;
 
 namespace TryAspNetCore.Controllers
 {
@@ -17,10 +18,13 @@ namespace TryAspNetCore.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IMyDependency _myDependency;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,
+            IMyDependency myDependency)
         {
             _logger = logger;
+            _myDependency = myDependency;
         }
 
         [HttpGet]
