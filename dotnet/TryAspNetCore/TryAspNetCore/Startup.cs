@@ -60,7 +60,8 @@ namespace TryAspNetCore
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/error");
             }
 
             app.UseHttpsRedirection();

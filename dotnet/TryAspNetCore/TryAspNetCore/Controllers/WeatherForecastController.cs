@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TryAspNetCore.Services;
@@ -27,9 +28,19 @@ namespace TryAspNetCore.Controllers
             _myDependency = myDependency;
         }
 
+        [Route("/error")]
+        public IActionResult Error()
+        {
+            var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
+            var exception = context?.Error;
+
+            return Problem();
+        }
+
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            throw new ArgumentException();
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
