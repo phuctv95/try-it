@@ -184,6 +184,54 @@ namespace TryConsole.Tests
             x ??= 2;
             Assert.AreEqual(2, x);
         }
+
+        [TestMethod]
+        public void TryLinq1()
+        {
+            var cities = new []
+            {
+                new City { Name = "Abc", IsBig = true, },
+                new City { Name = "Def", IsBig = false, },
+            };
+            
+            var result = cities
+                .Where(c =>
+                    {
+                        var temp = c.IsBig;
+                        c.IsBig = true;
+                        return temp;
+                    })
+                .Take(1)
+                .ToList();
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(cities.First(), result.First());
+            Assert.IsTrue(cities.Select(x => x.IsBig).SequenceEqual(new bool[] { true, false }));
+        }
+
+        [TestMethod]
+        public void TryLinq2()
+        {
+            var cities = new[]
+            {
+                new City { Name = "Abc", IsBig = false, },
+                new City { Name = "Def", IsBig = true, },
+            };
+
+            var result = cities
+                .Where(c =>
+                {
+                    var temp = c.IsBig;
+                    c.IsBig = true;
+                    return temp;
+                })
+                .Take(1)
+                .ToList();
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(cities.Skip(1).First(), result.First());
+            Assert.IsTrue(cities.Select(x => x.IsBig).SequenceEqual(new bool[] { true, true }));
+        }
     }
 
     class TestClass
@@ -200,6 +248,12 @@ namespace TryConsole.Tests
         public string GetValue() => $"{X} {Y} {Z}";
 
         public void Deconstruct(out int x, out string y) => (x, y) = (X, Y);
+    }
+
+    class City
+    {
+        public string Name { get; set; }
+        public bool IsBig { get; set; }
     }
 
     enum MyColor { Red, Green, Blue }
