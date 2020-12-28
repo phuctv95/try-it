@@ -1,4 +1,5 @@
 ﻿using Crawler.Crawler;
+using System;
 
 namespace Crawler
 {
@@ -6,7 +7,7 @@ namespace Crawler
     {
         static void Main(string[] args)
         {
-            new ZingCrawler().StartCrawlingArticles(@"C:\src\zing.csv");
+            new ZingCrawler().StartCrawlingArticlesRepeatedly(@"C:\src\zing.csv", TimeSpan.FromMinutes(30));
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace Crawler.Tool
 {
@@ -11,8 +12,20 @@ namespace Crawler.Tool
         {
             using var writer = new StreamWriter(csvFilePath, true);
             using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-            csv.Configuration.HasHeaderRecord = false;
+            csv.Configuration.HasHeaderRecord = FileIsEmpty(csvFilePath);
             csv.WriteRecords(new List<T> { entity });
+        }
+
+        public IList<T> Read<T>(string csvFilePath)
+        {
+            using var reader = new StreamReader(csvFilePath);
+            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+            return csv.GetRecords<T>().ToList();
+        }
+
+        private bool FileIsEmpty(string csvFilePath)
+        {
+            return new FileInfo(csvFilePath).Length == 0;
         }
     }
 }

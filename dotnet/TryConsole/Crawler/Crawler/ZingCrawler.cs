@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Crawler.Model;
 using Crawler.Tool;
 using OpenQA.Selenium;
@@ -12,12 +14,23 @@ namespace Crawler.Crawler
 
         private Crawler Crawler { get; } = new Crawler();
         private Csv Csv { get; } = new Csv();
+        private IList<Article> CrawledArticles { get; set; } = new List<Article>();
         private IWebDriver WebDriver => Crawler.WebDriver;
 
-        public void StartCrawlingArticlesRepeatedly(string csvFilePath)
+        public void StartCrawlingArticlesRepeatedly(string csvFilePath, TimeSpan waitTime)
         {
-            // For each amount of time (maybe 1 hour), try to crawling.
-            // If article already crawled, base on link, update it.
+            Console.CancelKeyPress += (sender, e) =>
+            {
+                Console.WriteLine("Exiting...");
+                WebDriver.Quit();
+            };
+
+            CrawledArticles = Csv.Read<Article>(csvFilePath);
+            while (true)
+            {
+                StartCrawlingArticles(csvFilePath);
+                Thread.Sleep(waitTime);
+            }
         }
 
         public void StartCrawlingArticles(string csvFilePath)
@@ -25,10 +38,23 @@ namespace Crawler.Crawler
             var topArticleLinks = GetTopArticleLinks();
             foreach (var articleLink in topArticleLinks)
             {
-                var article = CrawlArticle(articleLink);
-                Csv.WriteAppend(article, csvFilePath);
+                if (!ArticleIsExist(articleLink))
+                {
+                    var article = CrawlArticle(articleLink);
+                    StoreArticle(article, csvFilePath);
+                }
             }
-            WebDriver.Quit();
+        }
+
+        private void StoreArticle(Article article, string csvFilePath)
+        {
+            CrawledArticles.Add(article);
+            Csv.WriteAppend(article, csvFilePath);
+        }
+
+        private bool ArticleIsExist(string articleLink)
+        {
+            return CrawledArticles.Any(x => x.Link == articleLink);
         }
 
         private IList<string> GetTopArticleLinks()
@@ -53,7 +79,7 @@ namespace Crawler.Crawler
                 Title = Crawler.FindElementByCss("article header h1.the-article-title").Text,
                 Category = Crawler.FindElementByCss("article header p.the-article-category a").Text,
                 PublishDateTime = Crawler.FindElementByCss("article header li.the-article-publish").Text,
-                Authors = Crawler.FindElementsByCss("article header li.the-article-author a").Select(x => x.Text).ToList(),
+                Author = Crawler.FindElementByCss("article header li.the-article-author").Text
             };
         }
     }
