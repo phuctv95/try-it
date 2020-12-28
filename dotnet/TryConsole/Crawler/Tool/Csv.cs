@@ -23,9 +23,9 @@ namespace Crawler.Tool
             return csv.GetRecords<T>().ToList();
         }
 
-        private bool FileIsEmpty(string csvFilePath)
+        private bool FileIsEmpty(string filePath)
         {
-            return new FileInfo(csvFilePath).Length == 0;
+            return new FileInfo(filePath).Length == 0;
         }
     }
 }
