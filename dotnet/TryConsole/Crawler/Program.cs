@@ -6,7 +6,7 @@ namespace Crawler
     {
         static void Main(string[] args)
         {
-            new ZingCrawler().StartCrawlingZingArticles(@"C:\src\zing.csv");
+            new ZingCrawler().StartCrawlingArticles(@"C:\src\zing.csv");
         }
     }
 }

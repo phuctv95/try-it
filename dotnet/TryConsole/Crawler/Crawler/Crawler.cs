@@ -1,18 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Crawler.Model;
+﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 
 namespace Crawler.Crawler
 {
     public class Crawler
     {
-        private const string DriverLocation = @"C:\src";
+        private const string ChromeDriverLocation = @"C:\src\chromedriver";
+        private const string EdgeDriverLocation = @"C:\src\edgedriver";
 
-        private IWebDriver? _webDriver;
-        public IWebDriver WebDriver => _webDriver ??= new ChromeDriver(DriverLocation);
+        public IWebDriver WebDriver { get; } = new EdgeDriver(EdgeDriverLocation);
 
         public IWebElement FindElementByCss(string css)
         {
