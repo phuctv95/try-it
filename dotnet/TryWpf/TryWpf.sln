@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TryWpf", "TryWpf\TryWpf.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseIt", "ExpenseIt\ExpenseIt.csproj", "{A7B7103F-C6EC-4C41-BF64-C8D96B60D252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryDevExpress", "TryDevExpress\TryDevExpress.csproj", "{399F03DB-8C9B-42BC-93F3-14FAEB25E8D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TryDevExpress", "TryDevExpress\TryDevExpress.csproj", "{399F03DB-8C9B-42BC-93F3-14FAEB25E8D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryMvvm", "TryMvvm\TryMvvm.csproj", "{A2723F6C-E7FF-4032-B6BA-022FF29763B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{399F03DB-8C9B-42BC-93F3-14FAEB25E8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399F03DB-8C9B-42BC-93F3-14FAEB25E8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399F03DB-8C9B-42BC-93F3-14FAEB25E8D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2723F6C-E7FF-4032-B6BA-022FF29763B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2723F6C-E7FF-4032-B6BA-022FF29763B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2723F6C-E7FF-4032-B6BA-022FF29763B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2723F6C-E7FF-4032-B6BA-022FF29763B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
