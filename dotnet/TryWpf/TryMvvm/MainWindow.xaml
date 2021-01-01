@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:TryMvvm"
         xmlns:view="clr-namespace:TryMvvm.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen">
     <Grid>
-        <view:HelloView/>
+        <view:TorrentDownloaderView/>
     </Grid>
 </Window>

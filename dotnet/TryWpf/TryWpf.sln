@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseIt", "ExpenseIt\Expe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TryDevExpress", "TryDevExpress\TryDevExpress.csproj", "{399F03DB-8C9B-42BC-93F3-14FAEB25E8D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryMvvm", "TryMvvm\TryMvvm.csproj", "{A2723F6C-E7FF-4032-B6BA-022FF29763B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TryMvvm", "TryMvvm\TryMvvm.csproj", "{A2723F6C-E7FF-4032-B6BA-022FF29763B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Torrent", "Torrent\Torrent.csproj", "{AB4A10BB-C465-4EA6-933D-7589F7D63B67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A2723F6C-E7FF-4032-B6BA-022FF29763B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2723F6C-E7FF-4032-B6BA-022FF29763B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2723F6C-E7FF-4032-B6BA-022FF29763B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4A10BB-C465-4EA6-933D-7589F7D63B67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4A10BB-C465-4EA6-933D-7589F7D63B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4A10BB-C465-4EA6-933D-7589F7D63B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4A10BB-C465-4EA6-933D-7589F7D63B67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
