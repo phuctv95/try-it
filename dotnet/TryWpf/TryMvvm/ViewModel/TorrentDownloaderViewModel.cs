@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ByteSizeLib;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -40,6 +41,51 @@ namespace TryMvvm.ViewModel
                 DownloadCommand?.RaiseCanExecuteChanged();
             }
         }
+        public int DownloadProgress
+        {
+            get => Get<int>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public string DownloadedBytes
+        {
+            get => Get<string>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public string TotalBytes
+        {
+            get => Get<string>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public string DownloadSpeed
+        {
+            get => Get<string>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public string MaxDownloadSpeed
+        {
+            get => Get<string>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public string ETA
+        {
+            get => Get<string>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public string AvgETA
+        {
+            get => Get<string>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public int ConnectedPeers
+        {
+            get => Get<int>();
+            set => SetAndRaiseChangedNotify(value);
+        }
+        public int TotalPeers
+        {
+            get => Get<int>();
+            set => SetAndRaiseChangedNotify(value);
+        }
         private TorrentDownloader TorrentDownloader { get; } = new TorrentDownloader();
 
         public TorrentDownloaderViewModel()
@@ -77,25 +123,36 @@ namespace TryMvvm.ViewModel
                     Files.Clear();
                     foreach (var file in listFiles)
                     {
-                        Files.Add(new FileModel { FileName = file, Selected = true});
+                        Files.Add(new FileModel { FileName = file, Selected = true });
                     }
                 }),
-                downloadStats => Application.Current.Dispatcher.Invoke(() =>
-                {
-                    foreach (var file in Files)
-                    {
-                        if (downloadStats.Files.TryGetValue(file.FileName, out FileStatus? fileStats))
-                        {
-                            var status = fileStats.DownloadStatus;
-                            file.Status = status switch
-                            {
-                                DownloadStatus.Finished => $"{status} ✔",
-                                _ => status.ToString()
-                            };
-                        }
-                    }
-                }),
+                downloadStats => Application.Current.Dispatcher.Invoke(() => UpdateStats(downloadStats)),
                 () => Application.Current.Dispatcher.Invoke(() => DownloadFinished = true));
+        }
+
+        private void UpdateStats(TorrentDownloadStats stats)
+        {
+            DownloadProgress = stats.Progress;
+            DownloadedBytes = ByteSize.FromBytes(stats.DownloadedBytes).ToString();
+            TotalBytes = ByteSize.FromBytes(stats.TotalBytes).ToString();
+            DownloadSpeed = $"{ByteSize.FromBytes(stats.DownloadSpeed)}/s";
+            MaxDownloadSpeed = $"{ByteSize.FromBytes(stats.MaxSpeed)}/s";
+            ETA = $"{stats.ETA:hh\\:mm\\:ss}s";
+            AvgETA = $"{stats.AvgETA:hh\\:mm\\:ss}s";
+            ConnectedPeers = stats.PeersConnected;
+            TotalPeers = stats.PeersTotal;
+            foreach (var file in Files)
+            {
+                if (stats.Files.TryGetValue(file.FileName, out FileStatus? fileStats))
+                {
+                    var status = fileStats.DownloadStatus;
+                    file.Status = status switch
+                    {
+                        DownloadStatus.Finished => $"{status} ✔",
+                        _ => status.ToString()
+                    };
+                }
+            }
         }
 
         private void OnCheckChanged()

@@ -46,43 +46,59 @@
         </Grid>
 
         <!--STATUS-->
-        <Grid Grid.Row="2" Margin="0 0 0 10">
-            <DataGrid ItemsSource="{Binding Files}" AutoGenerateColumns="False" CanUserAddRows="False" MaxHeight="500">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.Header>Download it</DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding Path=Selected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"
-                                          Command="{Binding DataContext.OnCheckChangedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
-                                    <CheckBox.Style>
-                                        <Style TargetType="{x:Type CheckBox}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Status}" Value="Finished ✔">
-                                                    <Setter Property="IsEnabled" Value="False"/>
-                                                    <Setter Property="IsChecked" Value="True"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </CheckBox.Style>
-                                </CheckBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="File name" Binding="{Binding FileName}" Width="*" IsReadOnly="True"/>
-                </DataGrid.Columns>
-                <DataGrid.Style>
-                    <Style TargetType="{x:Type DataGrid}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Files.Count}" Value="0">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.Style>
-            </DataGrid>
-        </Grid>
+        <StackPanel Grid.Row="2" Margin="{StaticResource DefaultMarginBottom}">
+            <StackPanel.Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Files.Count}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+            <Grid Margin="{StaticResource DefaultMarginBottom}">
+                <ProgressBar Value="{Binding DownloadProgress}" Height="15"/>
+                <TextBlock Text="{Binding DownloadProgress, StringFormat=' {0}% '}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <DockPanel>
+                <Border DockPanel.Dock="Right" BorderThickness="1" BorderBrush="Black" Padding="5">
+                    <StackPanel>
+                        <TextBlock>Downloaded: <TextBlock Text="{Binding DownloadedBytes}" FontWeight="Bold"/>/<TextBlock Text="{Binding TotalBytes}" FontWeight="Bold"/></TextBlock>
+                        <TextBlock>Speed: <TextBlock Text="{Binding DownloadSpeed}" FontWeight="Bold"/></TextBlock>
+                        <TextBlock>Max speed: <TextBlock Text="{Binding MaxDownloadSpeed}"/></TextBlock>
+                        <TextBlock>ETA: <TextBlock Text="{Binding ETA}"/></TextBlock>
+                        <TextBlock>AvgETA: <TextBlock Text="{Binding AvgETA}"/></TextBlock>
+                        <TextBlock>Connected to <TextBlock Text="{Binding ConnectedPeers}"/> peers from total <TextBlock Text="{Binding TotalPeers}"/> peers.</TextBlock>
+                    </StackPanel>
+                </Border>
+                <DataGrid ItemsSource="{Binding Files}" AutoGenerateColumns="False" CanUserAddRows="False" MaxHeight="500" Margin="{StaticResource DefaultMarginRight}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>Download it</DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=Selected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"
+                                        Command="{Binding DataContext.OnCheckChangedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                        <CheckBox.Style>
+                                            <Style TargetType="{x:Type CheckBox}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Finished ✔">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                        <Setter Property="IsChecked" Value="True"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </CheckBox.Style>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="File name" Binding="{Binding FileName}" Width="*" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </StackPanel>
 
         <Grid Grid.Row="3">
             <TextBox Text="{Binding LogContent}" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"

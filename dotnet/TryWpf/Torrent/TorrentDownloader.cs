@@ -32,7 +32,7 @@ namespace Torrent
 
             _bitSwarm.MetadataReceived += (source, e) => OnMetadataReceived(e, writeLog, onMetadataReceived);
             _bitSwarm.StatsUpdated += (source, e) => OnStatsUpdated(e, writeLog, onDownloadingProgress);
-            _bitSwarm.StatusChanged += (source, e) => OnStatusChanged(e, _bitSwarm, writeLog, onDownloadFinished);
+            _bitSwarm.StatusChanged += (source, e) => OnStatusChanged(e, writeLog, onDownloadFinished);
             _bitSwarm.OnFinishing += (source, e) => writeLog($"[OnFinishing] Finishing...");
 
             _bitSwarm.Open(magnetLinkOrTorrentFile);
@@ -88,7 +88,7 @@ namespace Torrent
             }
             writeLog($"[{EventType}] {ByteSize.FromBytes(stats.BytesDownloadedPrevSession + stats.BytesDownloaded)}/{ByteSize.FromBytes(stats.BytesIncluded)} ({stats.Progress}%)"
                 + $" | Download speed: {ByteSize.FromBytes(stats.DownRate)}/s (max: {ByteSize.FromBytes(stats.MaxRate)}/s)"
-                + $" | ETA: {TimeSpan.FromSeconds((stats.ETA + stats.AvgETA)/2):hh\\:mm\\:ss}"
+                + $" | ETA: {TimeSpan.FromSeconds(stats.ETA):hh\\:mm\\:ss} AvgETA: {TimeSpan.FromSeconds(stats.AvgETA):hh\\:mm\\:ss}"
                 + $" | Connected peers: {stats.PeersConnected}/{stats.PeersTotal}.");
 
             onDownloadingProgress.Invoke(new TorrentDownloadStats
@@ -101,18 +101,47 @@ namespace Torrent
                     : _torrent.data.filesIncludes.Contains(x)
                         ? DownloadStatus.Downloading
                         : DownloadStatus.Canceled
-                })
+                }),
+                Progress = stats.Progress,
+                TotalBytes = stats.BytesIncluded,
+                DownloadedBytes = stats.BytesDownloadedPrevSession + stats.BytesDownloaded,
+                DownloadSpeed = stats.DownRate,
+                MaxSpeed = stats.MaxRate,
+                ETA = TimeSpan.FromSeconds(stats.ETA),
+                AvgETA = TimeSpan.FromSeconds(stats.AvgETA),
+                PeersConnected = stats.PeersConnected,
+                PeersTotal = stats.PeersTotal,
             });
         }
 
-        private void OnStatusChanged(BitSwarm.StatusChangedArgs e, BitSwarm bitSwarm, Action<string> writeLog, Action onDownloadFinished)
+        private void OnStatusChanged(BitSwarm.StatusChangedArgs e, Action<string> writeLog, Action onDownloadFinished)
         {
             const string EventType = "StatusChanged";
             writeLog($"[{EventType}] Status code: {e.Status}.{(e.ErrorMsg != string.Empty ? $" Error message: {e.ErrorMsg}." : string.Empty)}.");
+
             writeLog($"[{EventType}] Disposing BitSwarm...");
-            bitSwarm.Dispose();
+            _bitSwarm.Dispose();
+            CleanUpFiles();
             onDownloadFinished.Invoke();
             writeLog($"[{EventType}] Done.");
+        }
+
+        private void CleanUpFiles()
+        {
+            if (_torrent == null && _bitSwarm == null)
+            {
+                return;
+            }
+            var sessionFile = Path.Combine(_bitSwarm.Options.FolderSessions, $"{_torrent.file.infoHash}.bsf");
+            var torrentFile = Path.Combine(_bitSwarm.Options.FolderTorrents, $"{_torrent.file.name}.torrent");
+            if (File.Exists(sessionFile))
+            {
+                File.Delete(sessionFile);
+            }
+            if (File.Exists(torrentFile))
+            {
+                File.Delete(torrentFile);
+            }
         }
     }
 }
