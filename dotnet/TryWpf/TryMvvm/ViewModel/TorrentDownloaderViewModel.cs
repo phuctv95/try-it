@@ -1,13 +1,21 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using Torrent;
+using Torrent.Model;
+using TryMvvm.Base;
+using TryMvvm.Model;
 
 namespace TryMvvm.ViewModel
 {
-    public class TorrentDownloaderViewModel : BaseViewModel
+    public class TorrentDownloaderViewModel : BaseNotifyPropertyChanged
     {
         public string MagnetLinkOrTorrentFile { get; set; } = string.Empty;
+        public ObservableCollection<FileModel> Files { get; set; } = new ObservableCollection<FileModel>();
         public CommandHandler DownloadCommand { get; }
         public CommandHandler SelectSavingLocationCommand { get; }
+        public CommandHandler OnCheckChangedCommand { get; }
         public string LogContent
         {
             get => Get<string>();
@@ -34,6 +42,7 @@ namespace TryMvvm.ViewModel
             DownloadFinished = true;
             SelectSavingLocationCommand = new CommandHandler(SelectSavingLocation);
             DownloadCommand = new CommandHandler(Download, () => DownloadFinished);
+            OnCheckChangedCommand = new CommandHandler(OnCheckChanged);
             SavingLocation = GetDefaultSavingLocation();
         }
 
@@ -56,7 +65,35 @@ namespace TryMvvm.ViewModel
             WriteLog($"Start getting {MagnetLinkOrTorrentFile}...");
             DownloadFinished = false;
             TorrentDownloader.StartDownloading(MagnetLinkOrTorrentFile, SavingLocation, WriteLog,
-                () => System.Windows.Application.Current.Dispatcher.Invoke(() => DownloadFinished = true));
+                listFiles => Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Files.Clear();
+                    foreach (var file in listFiles)
+                    {
+                        Files.Add(new FileModel { FileName = file, Selected = true});
+                    }
+                }),
+                downloadStats => Application.Current.Dispatcher.Invoke(() =>
+                {
+                    foreach (var file in Files)
+                    {
+                        if (downloadStats.Files.TryGetValue(file.FileName, out FileStatus? fileStats))
+                        {
+                            var status = fileStats.DownloadStatus;
+                            file.Status = status switch
+                            {
+                                DownloadStatus.Finished => $"{status} ✔",
+                                _ => status.ToString()
+                            };
+                        }
+                    }
+                }),
+                () => Application.Current.Dispatcher.Invoke(() => DownloadFinished = true));
+        }
+
+        private void OnCheckChanged()
+        {
+            TorrentDownloader.UpdateFilesToDownload(Files.Where(x => x.Selected).Select(x => x.FileName).ToList());
         }
 
         private void WriteLog(string msg)
