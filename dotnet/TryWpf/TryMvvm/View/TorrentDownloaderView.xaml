@@ -53,7 +53,18 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding Path=Selected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"
-                                          Command="{Binding DataContext.OnCheckChangedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                          Command="{Binding DataContext.OnCheckChangedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                    <CheckBox.Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Status}" Value="Finished ✔">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Setter Property="IsChecked" Value="True"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </CheckBox.Style>
+                                </CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
