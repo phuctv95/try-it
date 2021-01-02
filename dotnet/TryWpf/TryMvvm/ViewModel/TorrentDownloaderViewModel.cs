@@ -11,11 +11,16 @@ namespace TryMvvm.ViewModel
 {
     public class TorrentDownloaderViewModel : BaseNotifyPropertyChanged
     {
-        public string MagnetLinkOrTorrentFile { get; set; } = string.Empty;
         public ObservableCollection<FileModel> Files { get; set; } = new ObservableCollection<FileModel>();
         public CommandHandler DownloadCommand { get; }
         public CommandHandler SelectSavingLocationCommand { get; }
         public CommandHandler OnCheckChangedCommand { get; }
+        public CommandHandler SelectTorrentFileCommand { get; }
+        public string MagnetLinkOrTorrentFile
+        {
+            get => Get<string>();
+            set => SetAndRaiseChangedNotify(value);
+        }
         public string LogContent
         {
             get => Get<string>();
@@ -39,10 +44,12 @@ namespace TryMvvm.ViewModel
 
         public TorrentDownloaderViewModel()
         {
+            MagnetLinkOrTorrentFile = string.Empty;
             DownloadFinished = true;
             SelectSavingLocationCommand = new CommandHandler(SelectSavingLocation);
             DownloadCommand = new CommandHandler(Download, () => DownloadFinished);
             OnCheckChangedCommand = new CommandHandler(OnCheckChanged);
+            SelectTorrentFileCommand = new CommandHandler(SelectTorrentFile);
             SavingLocation = GetDefaultSavingLocation();
         }
 
@@ -94,6 +101,16 @@ namespace TryMvvm.ViewModel
         private void OnCheckChanged()
         {
             TorrentDownloader.UpdateFilesToDownload(Files.Where(x => x.Selected).Select(x => x.FileName).ToList());
+        }
+
+        private void SelectTorrentFile()
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "Torrent Files (*.torrent)|*.torrent|All files (*.*)|*.*";
+            if (dialog.ShowDialog() ?? false)
+            {
+                MagnetLinkOrTorrentFile = dialog.FileName;
+            }
         }
 
         private void WriteLog(string msg)

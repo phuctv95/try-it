@@ -13,16 +13,20 @@ namespace Torrent
         private BitSwarm _bitSwarm;
         private List<string> _downloadedFiles = new List<string>();
         private SuRGeoNix.BitSwarmLib.BEP.Torrent _torrent => _bitSwarm?.torrent;
+        private const string IncompleteFolderName = "Incomplete";
+        private const string TorrentsFolderName = "Torrents";
+        private const string SessionsFolderName = "Sessions";
 
         public void StartDownloading(string magnetLinkOrTorrentFile, string savingLocation, Action<string> writeLog,
             Action<IList<string>> onMetadataReceived, Action<TorrentDownloadStats> onDownloadingProgress, Action onDownloadFinished)
         {
+            CreateProcessingFoldersIfNotExist();
             var opt = new Options
             {
                 FolderComplete = savingLocation,
-                FolderIncomplete = savingLocation,
-                FolderTorrents = savingLocation,
-                FolderSessions = savingLocation,
+                FolderIncomplete = Path.Combine(Directory.GetCurrentDirectory(), IncompleteFolderName),
+                FolderTorrents = Path.Combine(Directory.GetCurrentDirectory(), TorrentsFolderName),
+                FolderSessions = Path.Combine(Directory.GetCurrentDirectory(), SessionsFolderName),
             };
             _bitSwarm = new BitSwarm(opt);
 
@@ -34,6 +38,23 @@ namespace Torrent
             _bitSwarm.Open(magnetLinkOrTorrentFile);
             _downloadedFiles.Clear();
             _bitSwarm.Start();
+        }
+
+        private void CreateProcessingFoldersIfNotExist()
+        {
+            var currentFolder = Directory.GetCurrentDirectory();
+            if (Directory.Exists(Path.Combine(currentFolder, IncompleteFolderName)))
+            {
+                Directory.CreateDirectory(Path.Combine(currentFolder, IncompleteFolderName));
+            }
+            if (Directory.Exists(Path.Combine(currentFolder, TorrentsFolderName)))
+            {
+                Directory.CreateDirectory(Path.Combine(currentFolder, TorrentsFolderName));
+            }
+            if (Directory.Exists(Path.Combine(currentFolder, SessionsFolderName)))
+            {
+                Directory.CreateDirectory(Path.Combine(currentFolder, SessionsFolderName));
+            }
         }
 
         public void UpdateFilesToDownload(List<string> filesToDownload)
@@ -58,7 +79,7 @@ namespace Torrent
             const string EventType = "StatsUpdated";
             var stats = e.Stats;
             var newDownloadedFiles = _torrent.data.filesIncludes
-                .Where(x => !_downloadedFiles.Contains(x) && File.Exists(Path.Combine(_torrent.data.folder, x)))
+                .Where(x => !_downloadedFiles.Contains(x) && File.Exists(Path.Combine(_torrent.data.folder ?? _bitSwarm.Options.FolderComplete, x)))
                 .ToList();
             foreach (var newDownloadedFile in newDownloadedFiles)
             {
