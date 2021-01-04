@@ -9,61 +9,51 @@ namespace DataAccess
     {
         private const string BookFileName = "books.csv";
         private const char CsvSeparator = ',';
-        private IList<Book> Books { get; }
+        private IList<Book> _books { get; }
 
         public BookCsvRepository()
         {
-            Books = ReadAllBooks();
+            _books = GetAllBooksFromCsv();
         }
 
         public void Remove(Book book)
         {
-            Books.RemoveAt(Books.IndexOf(Books.First(b => b.Id == book.Id)));
-
-            if (!File.Exists(BookFileName))
+            var bookToRemove = _books.FirstOrDefault(b => b.Id == book.Id);
+            if (bookToRemove == null)
             {
-                File.Delete(BookFileName);
+                return;
             }
-            using (var file = File.CreateText(BookFileName))
-            {
-                foreach (var bookToWrite in Books)
-                {
-                    file.WriteLine($"{bookToWrite.Id}{CsvSeparator}{bookToWrite.Title}{CsvSeparator}{bookToWrite.Available}");
-                }
-            }
+            _books.RemoveAt(_books.IndexOf(bookToRemove));
+            OverwriteCsvFile();
         }
 
         public IList<Book> GetAllBooks()
         {
-            return Books;
+            return _books;
         }
 
         public void Insert(Book book)
         {
             book.Id = Guid.NewGuid();
+            _books.Add(book);
             using (var file = File.AppendText(BookFileName))
             {
                 file.WriteLine($"{book.Id}{CsvSeparator}{book.Title}{CsvSeparator}{book.Available}");
             }
-            Books.Add(book);
         }
 
         public void Update(Book book)
         {
-            if (!File.Exists(BookFileName))
+            var bookToUpddate = _books.FirstOrDefault(b => b.Id == book.Id);
+            if (bookToUpddate == null)
             {
-                File.Delete(BookFileName);
+                return;
             }
-            using (var file = File.CreateText(BookFileName))
-            {
-                foreach (var bookToWrite in Books)
-                {
-                    file.WriteLine($"{bookToWrite.Id}{CsvSeparator}{bookToWrite.Title}{CsvSeparator}{bookToWrite.Available}");
-                }
-            }
+            bookToUpddate.Title = book.Title;
+            OverwriteCsvFile();
         }
 
-        private IList<Book> ReadAllBooks()
+        private IList<Book> GetAllBooksFromCsv()
         {
             if (!File.Exists(BookFileName))
             {
@@ -77,6 +67,21 @@ namespace DataAccess
                 var elements = line.Split(CsvSeparator);
                 return new Book { Id = Guid.Parse(elements[0]), Title = elements[1], Available = bool.Parse(elements[2]) };
             }).ToList();
+        }
+
+        private void OverwriteCsvFile()
+        {
+            if (!File.Exists(BookFileName))
+            {
+                File.Delete(BookFileName);
+            }
+            using (var file = File.CreateText(BookFileName))
+            {
+                foreach (var bookToWrite in _books)
+                {
+                    file.WriteLine($"{bookToWrite.Id}{CsvSeparator}{bookToWrite.Title}{CsvSeparator}{bookToWrite.Available}");
+                }
+            }
         }
     }
 }
