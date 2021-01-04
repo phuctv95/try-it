@@ -8,7 +8,7 @@ namespace TryDependencyInjectionWpf.Core
     {
         public override void Load()
         {
-            Bind<IBookRepository>().To<BookCsvRepository>().InSingletonScope();
+            Bind<IBookRepository>().To<BookJsonRepository>().InSingletonScope();
             Bind<IMapper>().ToMethod(context =>
             {
                 var config = new MapperConfiguration(cfg =>
