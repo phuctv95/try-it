@@ -66,7 +66,6 @@ namespace TryDependencyInjection
             Console.Write("Book title: ");
             _bookRepository.Insert(new Book
             {
-                Id = Guid.NewGuid(),
                 Title = Console.ReadLine(),
                 Available = new Random().Next(0, 2) == 0
             });

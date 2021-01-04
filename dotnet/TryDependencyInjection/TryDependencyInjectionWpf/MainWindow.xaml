@@ -1,0 +1,41 @@
+﻿<Window x:Class="TryDependencyInjectionWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TryDependencyInjectionWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid ItemsSource="{Binding Books}" AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectedItem="{Binding SelectedBook}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="Auto"/>
+                <DataGridTextColumn Header="Is available?" Binding="{Binding Available}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Column="1" Margin="5">
+            <TextBlock Text="Title of book to insert:" Margin="5"/>
+            <TextBox Text="{Binding BookTitleToInsert}" Width="200" Margin="5"/>
+            <Grid Margin="5">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Insert" Command="{Binding InsertBookCommand}" Margin="5 0 5 0"/>
+                </StackPanel>
+            </Grid>
+            <Separator/>
+            <TextBlock Text="Selected book:" Margin="5"/>
+            <TextBox Text="{Binding SelectedBookTitle}" Width="200" Margin="5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Update" Command="{Binding UpdateBookCommand}" Margin="5 0 5 0"/>
+                <Button Content="Remove" Command="{Binding RemoveBookCommand}" Margin="5 0 5 0"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

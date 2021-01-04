@@ -40,6 +40,7 @@ namespace DataAccess
 
         public void Insert(Book book)
         {
+            book.Id = Guid.NewGuid();
             using (var file = File.AppendText(BookFileName))
             {
                 file.WriteLine($"{book.Id}{CsvSeparator}{book.Title}{CsvSeparator}{book.Available}");

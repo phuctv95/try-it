@@ -1,0 +1,10 @@
+﻿<Application x:Class="TryDependencyInjectionWpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:TryDependencyInjectionWpf.Core"
+             xmlns:local="clr-namespace:TryDependencyInjectionWpf"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <core:ViewModelLocator x:Key="ViewModelLocator"/>
+    </Application.Resources>
+</Application>
