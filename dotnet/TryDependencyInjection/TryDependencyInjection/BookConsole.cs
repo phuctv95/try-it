@@ -11,20 +11,20 @@ namespace TryDependencyInjection
         private const int ActionRemove = 3;
         private const int ActionExit = 4;
 
-        private IList<Book> Books = new List<Book>();
-        private readonly IBookRepository BookRepository;
+        private IList<Book> _books = new List<Book>();
+        private readonly IBookRepository _bookRepository;
 
         public BookConsole(IBookRepository bookRepository)
         {
-            BookRepository = bookRepository;
+            _bookRepository = bookRepository;
         }
 
         public void Run()
         {
             while (true)
             {
-                Books = BookRepository.GetAllBooks();
-                PrintListBooks(Books);
+                _books = _bookRepository.GetAllBooks();
+                PrintListBooks(_books);
                 var action = GetUserAction();
                 if (action == ActionExit)
                 {
@@ -49,7 +49,7 @@ namespace TryDependencyInjection
         {
             Console.Write("Id of book to update: ");
             var index = int.Parse(Console.ReadLine());
-            BookRepository.Remove(Books[index]);
+            _bookRepository.Remove(_books[index]);
         }
 
         private void UpdateBook()
@@ -57,14 +57,14 @@ namespace TryDependencyInjection
             Console.Write("Id of book to update: ");
             var index = int.Parse(Console.ReadLine());
             Console.Write("New title: ");
-            Books[index].Title = Console.ReadLine();
-            BookRepository.Update(Books[index]);
+            _books[index].Title = Console.ReadLine();
+            _bookRepository.Update(_books[index]);
         }
 
         private void InsertNewBook()
         {
             Console.Write("Book title: ");
-            BookRepository.Insert(new Book
+            _bookRepository.Insert(new Book
             {
                 Id = Guid.NewGuid(),
                 Title = Console.ReadLine(),
