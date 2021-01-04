@@ -1,16 +1,15 @@
 ﻿using DataAccess;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace TryDependencyInjection
 {
     public class BookConsole
     {
-        private const int ACTION_INSERT = 1;
-        private const int ACTION_UPDATE = 2;
-        private const int ACTION_REMOVE = 3;
-        private const int ACTION_EXIT = 4;
+        private const int ActionInsert = 1;
+        private const int ActionUpdate = 2;
+        private const int ActionRemove = 3;
+        private const int ActionExit = 4;
 
         private IList<Book> Books = new List<Book>();
         private readonly IBookRepository BookRepository;
@@ -27,19 +26,19 @@ namespace TryDependencyInjection
                 Books = BookRepository.GetAllBooks();
                 PrintListBooks(Books);
                 var action = GetUserAction();
-                if (action == ACTION_EXIT)
+                if (action == ActionExit)
                 {
                     break;
                 }
-                if (action == ACTION_INSERT)
+                if (action == ActionInsert)
                 {
                     InsertNewBook();
                 }
-                if (action == ACTION_UPDATE)
+                if (action == ActionUpdate)
                 {
                     UpdateBook();
                 }
-                if (action == ACTION_REMOVE)
+                if (action == ActionRemove)
                 {
                     RemoveBook();
                 }
@@ -75,7 +74,7 @@ namespace TryDependencyInjection
 
         private int GetUserAction()
         {
-            Console.WriteLine($"Actions: [{ACTION_INSERT}] Insert | [{ACTION_UPDATE}] Update | [{ACTION_REMOVE}] Remove | [{ACTION_EXIT}] Exit");
+            Console.WriteLine($"Actions: [{ActionInsert}] Insert | [{ActionUpdate}] Update | [{ActionRemove}] Remove | [{ActionExit}] Exit");
             Console.Write("Your choice: ");
             return int.Parse(Console.ReadLine());
         }
