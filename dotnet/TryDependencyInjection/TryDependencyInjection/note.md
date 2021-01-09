@@ -19,3 +19,10 @@ Dependency injection involves four roles:
 - the *client* object that is depending on the service(s) it uses
 - the *interfaces* that define how the client may use the services
 - the *injector*, which is responsible for constructing the services and injecting them into the client
+
+# Testing
+
+- OpenCover: `dotnet $(UserProfile)\.nuget\packages\opencover\x.y.z\tools\netcoreapp3.0\OpenCover.Console.exe -target:"path\to\dotnet.exe" -targetargs:"test TestProjectName" -register:user`.
+- ReportGenerator:
+    + https://danielpalme.github.io/ReportGenerator/usage.html
+    + `dotnet $(UserProfile)\.nuget\packages\reportgenerator\x.y.z\tools\netcoreapp3.0\ReportGenerator.dll "-reports:OpenCover.xml" "-targetdir:coveragereport" -reporttypes:Html "-assemblyfilters:-NUnit3.TestAdapter;-Tests" "-classfilters:-System.Runtime.*;-Microsoft.CodeAnalysis.*"`
