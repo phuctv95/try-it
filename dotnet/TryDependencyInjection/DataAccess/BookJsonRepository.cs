@@ -8,13 +8,8 @@ namespace DataAccess
 {
     public class BookJsonRepository : IBookRepository
     {
-        private IList<Book> _books { get; }
+        private IList<Book> _books { get; set; } = new List<Book>();
         private const string BookFileName = "books.json";
-
-        public BookJsonRepository()
-        {
-            _books = GetAllBooksFromJsonFile();
-        }
 
         public void Remove(Book book)
         {
@@ -29,6 +24,7 @@ namespace DataAccess
 
         public IList<Book> GetAllBooks()
         {
+            _books = GetAllBooksFromJsonFile();
             return _books;
         }
 

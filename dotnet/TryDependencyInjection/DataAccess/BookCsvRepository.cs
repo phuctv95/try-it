@@ -9,12 +9,7 @@ namespace DataAccess
     {
         private const string BookFileName = "books.csv";
         private const char CsvSeparator = ',';
-        private IList<Book> _books { get; }
-
-        public BookCsvRepository()
-        {
-            _books = GetAllBooksFromCsv();
-        }
+        private IList<Book> _books { get; set; } = new List<Book>();
 
         public void Remove(Book book)
         {
@@ -29,6 +24,7 @@ namespace DataAccess
 
         public IList<Book> GetAllBooks()
         {
+            _books = GetAllBooksFromCsv();
             return _books;
         }
 
