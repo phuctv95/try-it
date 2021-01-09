@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using DataAccess;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Tests
@@ -26,10 +27,10 @@ namespace Tests
 
                 var actual = _bookRepository.GetAllBooks();
 
-                Assert.AreEqual(1, actual.Count);
-                Assert.AreEqual(book.Id, actual[0].Id);
-                Assert.AreEqual(book.Title, actual[0].Title);
-                Assert.AreEqual(book.Available, actual[0].Available);
+                actual.Count.Should().Be(1);
+                actual[0].Id.Should().Be(book.Id);
+                actual[0].Title.Should().Be(book.Title);
+                actual[0].Available.Should().Be(book.Available);
             }
             finally
             {
