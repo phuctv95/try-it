@@ -13,10 +13,12 @@ namespace TryDependencyInjection
 
         private IList<Book> _books = new List<Book>();
         private readonly IBookRepository _bookRepository;
+        private readonly IMyConsole _console;
 
-        public BookConsole(IBookRepository bookRepository)
+        public BookConsole(IBookRepository bookRepository, IMyConsole console)
         {
             _bookRepository = bookRepository;
+            _console = console;
         }
 
         public void Run()
@@ -47,35 +49,35 @@ namespace TryDependencyInjection
 
         private void RemoveBook()
         {
-            Console.Write("Id of book to update: ");
-            var index = int.Parse(Console.ReadLine());
+            _console.Write("Id of book to update: ");
+            var index = int.Parse(_console.ReadLine());
             _bookRepository.Remove(_books[index]);
         }
 
         private void UpdateBook()
         {
-            Console.Write("Id of book to update: ");
-            var index = int.Parse(Console.ReadLine());
-            Console.Write("New title: ");
-            _books[index].Title = Console.ReadLine();
+            _console.Write("Id of book to update: ");
+            var index = int.Parse(_console.ReadLine());
+            _console.Write("New title: ");
+            _books[index].Title = _console.ReadLine();
             _bookRepository.Update(_books[index]);
         }
 
         private void InsertNewBook()
         {
-            Console.Write("Book title: ");
+            _console.Write("Book title: ");
             _bookRepository.Insert(new Book
             {
-                Title = Console.ReadLine(),
+                Title = _console.ReadLine(),
                 Available = new Random().Next(0, 2) == 0
             });
         }
 
         private int GetUserAction()
         {
-            Console.WriteLine($"Actions: [{ActionInsert}] Insert | [{ActionUpdate}] Update | [{ActionRemove}] Remove | [{ActionExit}] Exit");
-            Console.Write("Your choice: ");
-            return int.Parse(Console.ReadLine());
+            _console.WriteLine($"Actions: [{ActionInsert}] Insert | [{ActionUpdate}] Update | [{ActionRemove}] Remove | [{ActionExit}] Exit");
+            _console.Write("Your choice: ");
+            return int.Parse(_console.ReadLine());
         }
 
         private void PrintListBooks(IList<Book> books)
@@ -83,7 +85,7 @@ namespace TryDependencyInjection
             var id = 0;
             foreach (var book in books)
             {
-                Console.WriteLine($"{id++} | {book.Title} | {(book.Available ? "Is available" : "Not available")}");
+                _console.WriteLine($"{id++} | {book.Title} | {(book.Available ? "Is available" : "Not available")}");
             }
         }
     }

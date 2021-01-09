@@ -9,6 +9,7 @@ namespace TryDependencyInjection
         {
             var kernel = new StandardKernel();
             kernel.Bind<IBookRepository>().To<BookCsvRepository>();
+            kernel.Bind<IMyConsole>().To<MyConsole>();
             kernel.Get<BookConsole>().Run();
         }
     }
