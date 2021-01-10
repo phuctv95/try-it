@@ -1,3 +1,4 @@
 selenium/node_modules/*
 /dotnet/TryEntityFrameworkCore/.vs/TryEntityFrameworkCore/v16/.suo
 /dotnet/TryEntityFrameworkCore/.vs/TryEntityFrameworkCore/DesignTimeBuild/.dtbcache.v2
+dotnet/TryDependencyInjection/Tests/CoverageReport/*
