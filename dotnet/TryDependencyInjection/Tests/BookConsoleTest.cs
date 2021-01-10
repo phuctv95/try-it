@@ -41,7 +41,7 @@ namespace TryDependencyInjection
         [Test]
         public void Run_WhenUserChooseInsert_CallInsertBook()
         {
-            const string NewBookTitle = "Some Title";
+            const string NewBookTitle = "New Title";
             var bookConsole = new BookConsole(_bookRepository, _console);
             _console.ReadLine().Returns(
                 ActionInsert.ToString(),
@@ -56,7 +56,7 @@ namespace TryDependencyInjection
         [Test]
         public void Run_WhenUserChooseUpdate_CallUpdateBook()
         {
-            const string NewBookTitle = "Some Title";
+            const string NewBookTitle = "New Title";
             var bookConsole = new BookConsole(_bookRepository, _console);
             _console.ReadLine().Returns(
                 ActionUpdate.ToString(),
