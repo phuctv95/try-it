@@ -1,15 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using DataAccess;
 using FluentAssertions;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class BookCsvRepositoryTest
+    public class BookJsonRepositoryTest
     {
-        private const string BookFileName = "books.csv";
-        private const char CsvSeparator = ',';
+        private const string BookFileName = "books.json";
 
         [Test]
         public void GetAllBooksTest()
@@ -22,8 +23,8 @@ namespace Tests
                     Title = "Some title",
                     Available = false,
                 };
-                File.WriteAllText(BookFileName, $"{book.Id}{CsvSeparator}{book.Title}{CsvSeparator}{book.Available}");
-                var bookRepository = new BookCsvRepository();
+                File.WriteAllText(BookFileName, JsonSerializer.Serialize(new List<Book>() { book }));
+                var bookRepository = new BookJsonRepository();
 
                 var actual = bookRepository.GetAllBooks();
 
@@ -48,17 +49,16 @@ namespace Tests
                     Title = "Some title",
                     Available = false,
                 };
-                var bookRepository = new BookCsvRepository();
+                var bookRepository = new BookJsonRepository();
 
                 bookRepository.Insert(book);
 
-                var lines = File.ReadAllText(BookFileName)
-                    .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                lines.Length.Should().Be(1);
-                var rowData = lines[0].Split(CsvSeparator);
-                (Guid.Parse(rowData[0])).Should().NotBeEmpty();
-                rowData[1].Should().Be(book.Title);
-                (bool.Parse(rowData[2])).Should().Be(book.Available);
+                var json = File.ReadAllText(BookFileName);
+                var books = JsonSerializer.Deserialize<List<Book>>(json) ?? new List<Book>();
+                books.Count.Should().Be(1);
+                books[0].Id.Should().NotBeEmpty();
+                books[0].Title.Should().Be(book.Title);
+                books[0].Available.Should().Be(book.Available);
             }
             finally
             {
@@ -77,20 +77,19 @@ namespace Tests
                     Title = "Some title",
                     Available = false,
                 };
-                File.WriteAllText(BookFileName, $"{book.Id}{CsvSeparator}{book.Title}{CsvSeparator}{book.Available}");
-                var bookRepository = new BookCsvRepository();
+                File.WriteAllText(BookFileName, JsonSerializer.Serialize(new List<Book>() { book }));
+                var bookRepository = new BookJsonRepository();
                 bookRepository.GetAllBooks();
 
                 book.Title = "New title";
                 bookRepository.Update(book);
 
-                var lines = File.ReadAllText(BookFileName)
-                    .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                lines.Length.Should().Be(1);
-                var rowData = lines[0].Split(CsvSeparator);
-                (Guid.Parse(rowData[0])).Should().Be(book.Id);
-                rowData[1].Should().Be(book.Title);
-                (bool.Parse(rowData[2])).Should().Be(book.Available);
+                var json = File.ReadAllText(BookFileName);
+                var books = JsonSerializer.Deserialize<List<Book>>(json) ?? new List<Book>();
+                books.Count.Should().Be(1);
+                books[0].Id.Should().Be(book.Id);
+                books[0].Title.Should().Be(book.Title);
+                books[0].Available.Should().Be(book.Available);
             }
             finally
             {
@@ -115,21 +114,18 @@ namespace Tests
                     Title = "Title 2",
                     Available = true,
                 };
-                File.WriteAllText(BookFileName,
-                    $"{book1.Id}{CsvSeparator}{book1.Title}{CsvSeparator}{book1.Available}{Environment.NewLine}"
-                    + $"{book2.Id}{CsvSeparator}{book2.Title}{CsvSeparator}{book2.Available}");
-                var bookRepository = new BookCsvRepository();
+                File.WriteAllText(BookFileName, JsonSerializer.Serialize(new List<Book>() { book1, book2 }));
+                var bookRepository = new BookJsonRepository();
                 bookRepository.GetAllBooks();
 
                 bookRepository.Remove(book1);
 
-                var lines = File.ReadAllText(BookFileName)
-                    .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                lines.Length.Should().Be(1);
-                var rowData = lines[0].Split(CsvSeparator);
-                (Guid.Parse(rowData[0])).Should().Be(book2.Id);
-                rowData[1].Should().Be(book2.Title);
-                (bool.Parse(rowData[2])).Should().Be(book2.Available);
+                var json = File.ReadAllText(BookFileName);
+                var books = JsonSerializer.Deserialize<List<Book>>(json) ?? new List<Book>();
+                books.Count.Should().Be(1);
+                books[0].Id.Should().Be(book2.Id);
+                books[0].Title.Should().Be(book2.Title);
+                books[0].Available.Should().Be(book2.Available);
             }
             finally
             {

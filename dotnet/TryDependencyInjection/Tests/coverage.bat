@@ -9,7 +9,7 @@ set ReportFolder=CoverageReport
     -register:user ^
     -output:%OpenCoverResultFile%
 
-dotnet "C:\Users\puyed\.nuget\packages\reportgenerator\%ReportRegenratorVersion%\tools\netcoreapp3.0\ReportGenerator.dll" ^
+dotnet "%UserProfile%\.nuget\packages\reportgenerator\%ReportRegenratorVersion%\tools\netcoreapp3.0\ReportGenerator.dll" ^
     -reports:%OpenCoverResultFile% ^
     -targetdir:%ReportFolder% ^
     "-assemblyfilters:-NUnit3.TestAdapter;-Tests" ^
