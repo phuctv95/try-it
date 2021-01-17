@@ -1,6 +1,8 @@
-﻿using DataAccess;
+﻿using AutoMapper;
+using DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TryDependencyInjection
 {
@@ -11,21 +13,24 @@ namespace TryDependencyInjection
         private const int ActionRemove = 3;
         private const int ActionExit = 4;
 
-        private IList<Book> _books = new List<Book>();
+        private IList<BookRepresentation> _books = new List<BookRepresentation>();
         private readonly IBookRepository _bookRepository;
         private readonly IMyConsole _console;
+        private readonly IMapper _mapper;
 
-        public BookConsole(IBookRepository bookRepository, IMyConsole console)
+        public BookConsole(IBookRepository bookRepository, IMyConsole console, IMapper mapper)
         {
             _bookRepository = bookRepository;
             _console = console;
+            _mapper = mapper;
         }
 
         public void Run()
         {
             while (true)
             {
-                _books = _bookRepository.GetAllBooks();
+                var books = _bookRepository.GetAllBooks();
+                _books = books.Select(x => _mapper.Map<BookRepresentation>(x)).ToList();
                 PrintListBooks(_books);
                 var action = GetUserAction();
                 if (action == ActionExit)
@@ -51,7 +56,7 @@ namespace TryDependencyInjection
         {
             _console.Write("Id of book to update: ");
             var index = int.Parse(_console.ReadLine());
-            _bookRepository.Remove(_books[index]);
+            _bookRepository.Remove(_mapper.Map<Book>(_books[index]));
         }
 
         private void UpdateBook()
@@ -60,7 +65,7 @@ namespace TryDependencyInjection
             var index = int.Parse(_console.ReadLine());
             _console.Write("New title: ");
             _books[index].Title = _console.ReadLine();
-            _bookRepository.Update(_books[index]);
+            _bookRepository.Update(_mapper.Map<Book>(_books[index]));
         }
 
         private void InsertNewBook()
@@ -69,7 +74,8 @@ namespace TryDependencyInjection
             _bookRepository.Insert(new Book
             {
                 Title = _console.ReadLine(),
-                Available = new Random().Next(0, 2) == 0
+                Available = new Random().Next(0, 2) == 0,
+                Price = new Random().Next(10, 2000),
             });
         }
 
@@ -80,12 +86,12 @@ namespace TryDependencyInjection
             return int.Parse(_console.ReadLine());
         }
 
-        private void PrintListBooks(IList<Book> books)
+        private void PrintListBooks(IList<BookRepresentation> books)
         {
             var id = 0;
             foreach (var book in books)
             {
-                _console.WriteLine($"{id++} | {book.Title} | {(book.Available ? "Is available" : "Not available")}");
+                _console.WriteLine($"{id++} | {book.Title} | {book.Available} | {book.Price} | {book.ExpensiveLevel}");
             }
         }
     }

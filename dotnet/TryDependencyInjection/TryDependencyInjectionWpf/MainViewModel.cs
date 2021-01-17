@@ -74,7 +74,8 @@ namespace TryDependencyInjectionWpf
             var book = new Book
             {
                 Title = BookTitleToInsert,
-                Available = new Random().Next(0, 2) == 0
+                Available = new Random().Next(0, 2) == 0,
+                Price = new Random().Next(10, 2000),
             };
             _bookRepository.Insert(book);
             Books.Add(_mapper.Map<BookModel>(book));

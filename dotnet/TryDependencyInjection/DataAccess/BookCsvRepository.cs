@@ -39,7 +39,7 @@ namespace DataAccess
             _books.Add(book);
             using (var file = File.AppendText(BookFileName))
             {
-                file.WriteLine($"{book.Id}{CsvSeparator}{book.Title}{CsvSeparator}{book.Available}");
+                file.WriteLine($"{book.Id}{CsvSeparator}{book.Title}{CsvSeparator}{book.Available}{CsvSeparator}{book.Price}");
             }
             _logger.Info($"Inserted book \"{book.Title}\".");
         }
@@ -69,7 +69,13 @@ namespace DataAccess
             return lines.Select(line =>
             {
                 var elements = line.Split(CsvSeparator);
-                return new Book { Id = Guid.Parse(elements[0]), Title = elements[1], Available = bool.Parse(elements[2]) };
+                return new Book
+                {
+                    Id = Guid.Parse(elements[0]),
+                    Title = elements[1],
+                    Available = bool.Parse(elements[2]),
+                    Price = int.Parse(elements[3]),
+                };
             }).ToList();
         }
 
@@ -83,7 +89,7 @@ namespace DataAccess
             {
                 foreach (var bookToWrite in _books)
                 {
-                    file.WriteLine($"{bookToWrite.Id}{CsvSeparator}{bookToWrite.Title}{CsvSeparator}{bookToWrite.Available}");
+                    file.WriteLine($"{bookToWrite.Id}{CsvSeparator}{bookToWrite.Title}{CsvSeparator}{bookToWrite.Available}{CsvSeparator}{bookToWrite.Price}");
                 }
             }
         }
