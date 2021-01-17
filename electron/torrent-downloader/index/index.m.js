@@ -1,4 +1,7 @@
 const { BrowserWindow, ipcMain } = require('electron');
+const WebTorrent = require('webtorrent');
+const homedir = require('os').homedir();
+const path = require('path');
 const channels = require('./channels');
 
 module.exports = {
@@ -20,6 +23,22 @@ function createWindow() {
     win.setMenuBarVisibility(false);
 }
 
-ipcMain.on(channels.OpenDevTools, (event, args) => {
+ipcMain.on(channels.ToggleDevTools, (event, arg) => {
     win.webContents.toggleDevTools();
+});
+
+ipcMain.on(channels.DownloadTorrent, (event, magnetUrl) => {
+    let client = new WebTorrent();
+    client.add(
+        magnetUrl,
+        {
+            path: path.join(homedir, 'Desktop', 'New folder')
+        },
+        torrent => {
+            torrent.on('download',
+                bytes => win.webContents.send(channels.OnTorrentDownloading, bytes,
+                    torrent.downloaded, torrent.downloadSpeed, torrent.progress));
+            torrent.on('done',
+                () => win.webContents.send(channels.OnTorrentFinished));
+        });
 });

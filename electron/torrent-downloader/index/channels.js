@@ -1,3 +1,6 @@
 module.exports = {
-    OpenDevTools: '/openDevTools'
+    ToggleDevTools: '/toggleDevTools',
+    DownloadTorrent: '/downloadTorrent',
+    OnTorrentDownloading: '/onTorrentDownloading',
+    OnTorrentFinished: '/onTorrentFinished',
 };

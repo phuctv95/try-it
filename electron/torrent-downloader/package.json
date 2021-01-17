@@ -12,5 +12,8 @@
   "devDependencies": {
     "electron": "^11.2.0",
     "electron-reloader": "^1.2.0"
+  },
+  "dependencies": {
+    "webtorrent": "^0.112.0"
   }
 }

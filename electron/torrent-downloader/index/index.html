@@ -26,9 +26,22 @@
                 <button type="button" class="btn btn-primary" id="downloadBtn" disabled>Download</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <div class="progress mt-3">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        style="width: 0%" id="downloadProgressBar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <textarea class="form-control mt-3 h-100" id="logTextarea" rows="10" disabled></textarea>
+            </div>
+        </div>
     </div>
     <a class="dev-tools" id="openDevToolsBtn">Dev Tools</button>
-    <script>require('./index.r.js')</script>
+        <script>require('./index.r.js')</script>
 </body>
 
 </html>
