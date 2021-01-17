@@ -1,0 +1,8 @@
+.dev-tools {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: x-small !important;
+    color: black;
+}

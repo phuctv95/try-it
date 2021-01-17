@@ -1,18 +1,5 @@
 const { app, BrowserWindow } = require('electron');
-
-require('./index/index.m')
-
-function createWindow() {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
-
-    win.loadFile('index/index.html');
-}
+const { createWindow } = require('./index/index.m');
 
 app.whenReady().then(createWindow);
 
@@ -27,3 +14,7 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+try {
+	require('electron-reloader')(module);
+} catch {}
