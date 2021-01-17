@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using log4net;
 
 namespace DataAccess
 {
@@ -9,6 +10,7 @@ namespace DataAccess
     {
         private const string BookFileName = "books.csv";
         private const char CsvSeparator = ',';
+		private static readonly ILog _logger = LogManager.GetLogger(typeof(BookCsvRepository));
         private IList<Book> _books { get; set; } = new List<Book>();
 
         public void Remove(Book book)
@@ -16,15 +18,18 @@ namespace DataAccess
             var bookToRemove = _books.FirstOrDefault(b => b.Id == book.Id);
             if (bookToRemove == null)
             {
-                return;
+                _logger.Error($"Unexpected result, not found the book \"{book.Title}\" to remove.");
+                throw new NullReferenceException();
             }
             _books.RemoveAt(_books.IndexOf(bookToRemove));
             OverwriteCsvFile();
+            _logger.Info($"Removed book \"{book.Title}\".");
         }
 
         public IList<Book> GetAllBooks()
         {
             _books = GetAllBooksFromCsv();
+            _logger.Info($"Got {_books.Count} books.");
             return _books;
         }
 
@@ -36,6 +41,7 @@ namespace DataAccess
             {
                 file.WriteLine($"{book.Id}{CsvSeparator}{book.Title}{CsvSeparator}{book.Available}");
             }
+            _logger.Info($"Inserted book \"{book.Title}\".");
         }
 
         public void Update(Book book)
@@ -43,10 +49,12 @@ namespace DataAccess
             var bookToUpddate = _books.FirstOrDefault(b => b.Id == book.Id);
             if (bookToUpddate == null)
             {
-                return;
+                _logger.Error($"Unexpected result, not found the book \"{book.Title}\" to update.");
+                throw new NullReferenceException();
             }
             bookToUpddate.Title = book.Title;
             OverwriteCsvFile();
+            _logger.Info($"Updated book \"{book.Title}\".");
         }
 
         private IList<Book> GetAllBooksFromCsv()
