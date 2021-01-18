@@ -1,5 +1,6 @@
 import { Channels } from './../../channels';
-import { BrowserWindow, ipcMain } from "electron";
+import { BrowserWindow } from "electron";
+import * as path from 'path';
 
 export function createDialogWindow(msg: string) {
     const win = new BrowserWindow({
@@ -9,6 +10,6 @@ export function createDialogWindow(msg: string) {
             nodeIntegration: true
         },
     });
-    win.loadFile('./index/dialog/dialog.html');
+    win.loadFile(path.join(__dirname, 'dialog.html'));
     win.webContents.on('dom-ready', e => win.webContents.send(Channels.UpdateDialogContent, msg));
 }

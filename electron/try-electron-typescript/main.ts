@@ -1,8 +1,10 @@
 import { app, BrowserWindow } from 'electron';
 import { createIndexWindow } from './index/index.m';
-const electronReload = require('electron-reload');
 
-electronReload(__dirname);
+const env = process.env.NODE_ENV || 'development';
+if (env === 'development') {
+    require('electron-reloader')(module);
+}
 
 app.whenReady().then(() => {
     createIndexWindow();
