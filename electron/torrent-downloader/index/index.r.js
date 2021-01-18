@@ -8,7 +8,7 @@ const logTextarea = document.querySelector('#logTextarea');
 const downloadProgressBar = document.querySelector('#downloadProgressBar');
 
 function writeLog(msg) {
-    logTextarea.value += `${msg}\n`;
+    logTextarea.value += `${new Date().toString()}: ${msg}\n`;
     logTextarea.scrollTop = logTextarea.scrollHeight;
 }
 
@@ -24,13 +24,8 @@ magnetUrlInput.addEventListener('input', () => {
     downloadBtn.disabled = magnetUrlInput.value === '';
 });
 
-ipcRenderer.on(channels.OnTorrentDownloading, (event, ...args) => {
-    writeLog(`just downloaded ${args[0]}`
-        + ` | total downloaded ${args[1]}`
-        + ` | download speed ${args[2]}`
-        + ` | progress ${args[3]}`
-        );
-    downloadProgressBar.style.width = `${args[3] * 100}%`;
+ipcRenderer.on(channels.OnTorrentDownloading, (event, progress) => {
+    downloadProgressBar.style.width = `${progress * 100}%`;
 });
 
 ipcRenderer.on(channels.OnTorrentFinished, (event, args) => {

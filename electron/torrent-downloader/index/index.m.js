@@ -19,7 +19,7 @@ function createWindow() {
         }
     });
 
-    win.loadFile('index/index.html');
+    win.loadFile(path.join(__dirname, 'index.html'));
     win.setMenuBarVisibility(false);
 }
 
@@ -36,9 +36,13 @@ ipcMain.on(channels.DownloadTorrent, (event, magnetUrl) => {
         },
         torrent => {
             torrent.on('download',
-                bytes => win.webContents.send(channels.OnTorrentDownloading, bytes,
-                    torrent.downloaded, torrent.downloadSpeed, torrent.progress));
+                bytes => {
+                    win.webContents.send(channels.OnTorrentDownloading, torrent.progress);
+                });
             torrent.on('done',
-                () => win.webContents.send(channels.OnTorrentFinished));
+                () => {
+                    win.webContents.send(channels.OnTorrentFinished);
+                    torrent.destroy();
+                });
         });
 });
