@@ -48,6 +48,8 @@ ipcMain.on(channels.DownloadTorrent, (event, magnetUrl, selectedFolder) => {
 });
 
 ipcMain.on(channels.OpenSelectFolderDialog, (_, __) => {
-    let selectedFolder = dialog.showOpenDialogSync({properties: ['openDirectory']})[0];
-    win.webContents.send(channels.OnSelectedFolder, selectedFolder);
+    let selected = dialog.showOpenDialogSync({properties: ['openDirectory']});
+    if (!selected) { return; }
+
+    win.webContents.send(channels.OnSelectedFolder, selected[0]);
 });
