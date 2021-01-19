@@ -15,6 +15,7 @@
     "electron-reloader": "^1.2.0"
   },
   "dependencies": {
+    "moment": "^2.29.1",
     "webtorrent": "^0.112.0"
   }
 }
