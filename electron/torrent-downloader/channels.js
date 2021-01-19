@@ -3,4 +3,6 @@ module.exports = {
     DownloadTorrent: '/downloadTorrent',
     OnTorrentDownloading: '/onTorrentDownloading',
     OnTorrentFinished: '/onTorrentFinished',
+    OpenSelectFolderDialog: '/openSelectFolderDialog',
+    OnSelectedFolder: '/onSelectedFolder',
 };
