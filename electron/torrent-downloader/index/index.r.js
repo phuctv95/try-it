@@ -14,6 +14,10 @@ function writeLog(msg) {
     logTextarea.scrollTop = logTextarea.scrollHeight;
 }
 
+function isEnoughInputToDownload() {
+    return magnetUrlInput.value !== '' && savingLocationInput.value !== '';
+}
+
 downloadBtn.addEventListener('click', () => {
     ipcRenderer.send(channels.DownloadTorrent, magnetUrlInput.value, savingLocationInput.value);
 });
@@ -22,9 +26,9 @@ openDevToolsBtn.addEventListener('click', () => {
     ipcRenderer.send(channels.ToggleDevTools);
 });
 
-magnetUrlInput.addEventListener('input', () => {
-    downloadBtn.disabled = magnetUrlInput.value === '';
-});
+magnetUrlInput.addEventListener('input', () => downloadBtn.disabled = !isEnoughInputToDownload());
+
+savingLocationInput.addEventListener('input', () => downloadBtn.disabled = !isEnoughInputToDownload());
 
 browseBtn.addEventListener('click', () => ipcRenderer.send(channels.OpenSelectFolderDialog, magnetUrlInput.value));
 
@@ -36,4 +40,7 @@ ipcRenderer.on(channels.OnTorrentFinished, (event, args) => {
     writeLog('Download finished.');
 });
 
-ipcRenderer.on(channels.OnSelectedFolder, (_, selectedFolder) => savingLocationInput.value = selectedFolder);
+ipcRenderer.on(channels.OnSelectedFolder, (_, selectedFolder) => {
+    savingLocationInput.value = selectedFolder;
+    downloadBtn.disabled = !isEnoughInputToDownload();
+});
