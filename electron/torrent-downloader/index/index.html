@@ -11,44 +11,36 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col text-center h1">Torrent Downloader</div>
+    <div class="d-flex flex-column vh-100 p-3">
+        <div class="align-self-center h1">Torrent Downloader</div>
+        <div class="mb-3">
+            <label for="magnetUrlInput" class="form-label">Magnet Url:</label>
+            <input class="form-control" id="magnetUrlInput">
         </div>
-        <div class="row">
-            <div class="mb-3">
-                <label for="magnetUrlInput" class="form-label">Magnet Url:</label>
-                <input class="form-control" id="magnetUrlInput">
-            </div>
-        </div>
-        <div class="row">
+        <div>
             <label for="savingLocationInput" class="form-label">Saving location:</label>
             <div class="input-group mb-3">
                 <button class="btn btn-outline-secondary" type="button" id="browseBtn">Browse</button>
                 <input type="text" class="form-control" id="savingLocationInput">
             </div>
         </div>
-        <div class="row">
-            <div class="col text-center">
-                <button type="button" class="btn btn-primary" id="downloadBtn" disabled>Download</button>
-            </div>
+        <div class="align-self-center">
+            <button type="button" class="btn btn-primary" id="downloadBtn" disabled>Download</button>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="progress mt-3">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                        style="width: 0%" id="downloadProgressBar"></div>
-                </div>
-            </div>
+        <div class="progress mt-3">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                style="width: 0%;" id="downloadProgressBar"></div>
         </div>
-        <div class="row">
-            <div class="col">
-                <textarea class="form-control mt-3 h-100" id="logTextarea" rows="10" disabled></textarea>
-            </div>
+        <div class="flex-grow-1 pb-5">
+            <textarea class="form-control mt-3 h-100" id="logTextarea" rows="10" disabled></textarea>
         </div>
     </div>
     <a class="dev-tools" id="openDevToolsBtn">Dev Tools</button>
-        <script>require('./index.r.js')</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script>require('./index.r.js')</script>
 </body>
 
 </html>
