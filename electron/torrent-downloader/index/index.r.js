@@ -43,7 +43,7 @@ savingLocationInput.addEventListener('input', () => downloadBtn.disabled = !isEn
 browseBtn.addEventListener('click', () => ipcRenderer.send(channels.OpenSelectFolderDialog, magnetUrlInput.value));
 
 ipcRenderer.on(channels.OnTorrentDownloading, (event, report) => {
-    let remaining = moment.duration(report.timeRemaining / 1000, 'seconds').humanize() + ' remaining.';
+    let remaining = moment.duration(report.timeRemaining / 1000, 'seconds').humanize() + ' remaining';
     writeLog(`${report.numPeers} peer(s)`
         + ` | ${formatBytes(report.downloaded)}/${formatBytes(report.length)}`
         + ` | ${remaining}`
