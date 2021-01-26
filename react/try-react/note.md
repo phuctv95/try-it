@@ -41,7 +41,7 @@ Components:
     ```js
     ReactDOM.render(<Welcome name="Leo"/>, document.getElementById('root'));
     ```
-- All React components must act like pure functions with respect to their props (not try to edit props).
+- All React components must act like pure functions with respect to their *props* (not try to edit props).
 
 State:
 - `setState()` checks state changes and call `render()` to show up the new changes.
@@ -58,5 +58,14 @@ State:
     this.setState({ comments: response.comments });
     ```
 
+Some life cycle:
+- The `componentDidMount()` method runs after the component output has been rendered to the DOM.
+- The `componentWillUnmount()` method will called whenever the component output is removed from the DOM.
+
 The data flows down:
 - This is commonly called a “top-down” or “unidirectional” data flow. Any state is always owned by some specific component, and any data or UI derived from that state can only affect components “below” them in the tree.
+
+Handling events:
+- You have to be careful about the meaning of this in JSX callbacks. In JavaScript, class methods are not *bound* by default. If you forget to bind `this.handleClick` and pass it to `onClick`, this will be `undefined` when the function is actually called.
+- You can use an arrow function in the callback.
+- The problem with this syntax is that a different callback is created each time the component's output renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.
