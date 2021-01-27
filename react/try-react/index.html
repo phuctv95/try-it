@@ -54,6 +54,20 @@
             }
         }
 
+        class ListPosts extends React.Component {
+            render() {
+                let posts = [
+                    { id: 1, title: 'Title 1'},
+                    { id: 2, title: 'Title 2'},
+                ];
+                return (
+                    <ul>
+                        {posts.map(x => <li key={x.id}>{x.title}</li>)}
+                    </ul>
+                );
+            }
+        }
+
         ReactDOM.render(
             <Clock />,
             document.getElementById('root')

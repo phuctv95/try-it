@@ -69,3 +69,13 @@ Handling events:
 - You have to be careful about the meaning of this in JSX callbacks. In JavaScript, class methods are not *bound* by default. If you forget to bind `this.handleClick` and pass it to `onClick`, this will be `undefined` when the function is actually called.
 - You can use an arrow function in the callback.
 - The problem with this syntax is that a different callback is created each time the component's output renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.
+
+Keys:
+- Keys help React identify which items have changed, are added, or are removed. 
+- Keys only make sense in the context of the surrounding array. E.g. if you extract a `ListItem` component, you should keep the key on the `<ListItem />` elements in the array rather than on the `<li>` element in the `ListItem` itself.
+- A good rule of thumb is that elements inside the `map()` call need keys.
+
+Others:
+- To prevent components from rendering, just return `null`.
+
+(be reading at "Extracting Components with Keys")
