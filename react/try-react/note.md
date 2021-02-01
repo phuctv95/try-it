@@ -74,8 +74,12 @@ Keys:
 - Keys help React identify which items have changed, are added, or are removed. 
 - Keys only make sense in the context of the surrounding array. E.g. if you extract a `ListItem` component, you should keep the key on the `<ListItem />` elements in the array rather than on the `<li>` element in the `ListItem` itself.
 - A good rule of thumb is that elements inside the `map()` call need keys.
+- Keys serve as a hint to React but they don’t get passed to your components. If you need the same value in your component, pass it explicitly as a prop with a different name.
+
+Forms:
+- Controlled components: handle the submission of the form and has access to the data that the user entered into the form.
+- Controlled components handle the changes by component's state, and only update it with `setState()`.
+- Read more about `textarea`, `select` in https://reactjs.org/docs/forms.html
 
 Others:
 - To prevent components from rendering, just return `null`.
-
-(be reading at "Extracting Components with Keys")
