@@ -8,15 +8,23 @@ class SalaryCalculator extends Component {
         super(props);
 
         this.handleGrossChange = this.handleGrossChange.bind(this);
+        this.handleNumberOfDependantChange = this.handleNumberOfDependantChange.bind(this);
 
         this.state = {
-            gross: 0
+            gross: 0,
+            numberOfDependant: 0,
         };
     }
 
     handleGrossChange(gross) {
         this.setState({
-            gross: gross
+            gross: gross,
+        });
+    }
+
+    handleNumberOfDependantChange(numberOfDependant) {
+        this.setState({
+            numberOfDependant: numberOfDependant,
         });
     }
 
@@ -30,12 +38,13 @@ class SalaryCalculator extends Component {
                 </div>
                 <div className="row justify-content-center">
                     <div className="col col-md-6">
-                        <DataInput gross={this.state.gross} onGrossChange={this.handleGrossChange}/>
+                        <DataInput gross={this.state.gross} onGrossChange={this.handleGrossChange}
+                            numberOfDependant={this.state.numberOfDependant} onNumberOfDependantChange={this.handleNumberOfDependantChange}/>
                     </div>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col col-md-6">
-                        <CalculatedResult gross={this.state.gross}/>
+                        <CalculatedResult gross={this.state.gross} numberOfDependant={this.state.numberOfDependant}/>
                     </div>
                 </div>
             </div>

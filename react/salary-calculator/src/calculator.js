@@ -25,7 +25,7 @@ function calculateTax(taxableIncome) {
     return 0.35 * taxableIncome - 9.85 * OneMillion;
 }
 
-function calculateNet(gross) {
+function calculateNet(gross, numberOfDependant) {
     let result = {};
     
     result.socialInsurance = gross * 0.08;
@@ -41,7 +41,9 @@ function calculateNet(gross) {
     result.incomeBeforeTax = gross - (result.socialInsurance +
         result.healthInsurance + result.unemploymentInsurance);
     result.personalReduction = 11 * OneMillion;
-    result.taxableIncome = result.incomeBeforeTax - result.personalReduction;
+    result.dependantReduction = 4.4 * OneMillion * numberOfDependant;
+    result.taxableIncome = result.incomeBeforeTax -
+        (result.personalReduction + result.dependantReduction);
     result.taxableIncome = result.taxableIncome < 0 ? 0 : result.taxableIncome;
     result.tax = calculateTax(result.taxableIncome);
     result.net = result.incomeBeforeTax - result.tax;

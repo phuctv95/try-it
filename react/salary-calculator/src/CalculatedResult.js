@@ -3,7 +3,7 @@ import calculateNet from './calculator';
 
 class CalculatedResult extends Component {
     render() {
-        let calculated = calculateNet(this.props.gross);
+        let calculated = calculateNet(this.props.gross, this.props.numberOfDependant);
         return (
             <table className="table table-sm table-bordered table-hover mt-3">
                 <tbody>
@@ -30,6 +30,10 @@ class CalculatedResult extends Component {
                     <tr>
                         <td>Giảm trừ gia cảnh bản thân</td>
                         <td className="text-right">-{calculated.personalReduction.toLocaleString()}</td>
+                    </tr>
+                    <tr>
+                        <td>Giảm trừ gia cảnh người phụ thuộc</td>
+                        <td className="text-right">-{calculated.dependantReduction.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td>Thu nhập chịu thuế</td>
