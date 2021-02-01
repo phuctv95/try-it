@@ -1,4 +1,7 @@
 const OneMillion = 1000000;
+const MaxSocialInsurance = 2.384 * OneMillion;
+const MaxHealthInsurance = 0.447 * OneMillion;
+const MaxUnemploymentInsurance = 0.884 * OneMillion;
 
 function calculateTax(taxableIncome) {
     if (taxableIncome <= 5 * OneMillion) {
@@ -24,9 +27,17 @@ function calculateTax(taxableIncome) {
 
 function calculateNet(gross) {
     let result = {};
+    
     result.socialInsurance = gross * 0.08;
+    result.socialInsurance = result.socialInsurance > MaxSocialInsurance
+        ? MaxSocialInsurance : result.socialInsurance;
     result.healthInsurance = gross * 0.015;
+    result.healthInsurance = result.healthInsurance > MaxHealthInsurance
+        ? MaxHealthInsurance : result.healthInsurance;
     result.unemploymentInsurance = gross * 0.01;
+    result.unemploymentInsurance = result.unemploymentInsurance > MaxUnemploymentInsurance
+        ? MaxUnemploymentInsurance : result.unemploymentInsurance;
+    
     result.incomeBeforeTax = gross - (result.socialInsurance +
         result.healthInsurance + result.unemploymentInsurance);
     result.personalReduction = 11 * OneMillion;
