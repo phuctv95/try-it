@@ -1,0 +1,17 @@
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+td {
+    padding: 5px;
+}
+
+tr > td:nth-child(2) {
+    padding-left: 1em;
+    text-align: right;
+}
