@@ -13,7 +13,7 @@ class DataInput extends Component {
     render() {
         return (
             <div>
-                <label>Gross:
+                <label>GROSS:
                     <input value={this.props.gross} onChange={this.handleGrossChange}/>
                 </label>
             </div>

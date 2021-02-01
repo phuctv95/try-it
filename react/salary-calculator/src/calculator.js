@@ -40,6 +40,7 @@ function calculateNet(gross) {
         result.healthInsurance + result.unemploymentInsurance);
     result.personalReduction = 11 * OneMillion;
     result.taxableIncome = result.incomeBeforeTax - result.personalReduction;
+    result.taxableIncome = result.taxableIncome < 0 ? 0 : result.taxableIncome;
     result.tax = calculateTax(result.taxableIncome);
     result.net = result.incomeBeforeTax - result.tax;
 
