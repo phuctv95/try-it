@@ -7,7 +7,7 @@ class CalculatedResult extends Component {
         return (
             <table className="table table-sm table-bordered table-hover mt-3">
                 <tbody>
-                    <tr>
+                    <tr className="font-weight-bold">
                         <td>GROSS</td>
                         <td className="text-right">{(+this.props.gross).toLocaleString()}</td>
                     </tr>
@@ -39,7 +39,7 @@ class CalculatedResult extends Component {
                         <td>Thuế thu nhập cá nhân</td>
                         <td className="text-right">{calculated.tax.toLocaleString()}</td>
                     </tr>
-                    <tr>
+                    <tr className="font-weight-bold">
                         <td>NET</td>
                         <td className="text-right">{calculated.net.toLocaleString()}</td>
                     </tr>
