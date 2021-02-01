@@ -22,10 +22,22 @@ class SalaryCalculator extends Component {
 
     render() {
         return (
-            <div>
-                <Header/>
-                <DataInput gross={this.state.gross} onGrossChange={this.handleGrossChange}/>
-                <CalculatedResult gross={this.state.gross}/>
+            <div className="container">
+                <div className="row mb-4 mt-3">
+                    <div className="col">
+                        <Header/>
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col col-md-6">
+                        <DataInput gross={this.state.gross} onGrossChange={this.handleGrossChange}/>
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col col-md-6">
+                        <CalculatedResult gross={this.state.gross}/>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -13,9 +13,11 @@ class DataInput extends Component {
     render() {
         return (
             <div>
-                <label>GROSS:
-                    <input value={this.props.gross} onChange={this.handleGrossChange}/>
-                </label>
+                <label htmlFor="gross">GROSS:</label>
+                <div className="input-group mb-3">
+                    <input value={this.props.gross} onChange={this.handleGrossChange}
+                        type="text" className="form-control" id="gross"/>
+                </div>
             </div>
         );
     }
