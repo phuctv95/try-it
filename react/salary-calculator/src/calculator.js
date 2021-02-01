@@ -5,34 +5,25 @@ function calculateTax(taxableIncome) {
         return 0.05 * taxableIncome;
     }
     if (taxableIncome <= 10 * OneMillion) {
-        return 0.25 * OneMillion + 0.1 * taxableIncome;
+        return 0.1 * taxableIncome - 0.25 * OneMillion;
     }
     if (taxableIncome <= 18 * OneMillion) {
-        return 0.75 * OneMillion + 0.15 * taxableIncome;
+        return 0.15 * taxableIncome - 0.75 * OneMillion;
     }
     if (taxableIncome <= 32 * OneMillion) {
-        return 1.95 * OneMillion + 0.2 * taxableIncome;
+        return 0.2 * taxableIncome - 1.65 * OneMillion;
     }
     if (taxableIncome <= 52 * OneMillion) {
-        return 4.75 * OneMillion + 0.25 * taxableIncome;
+        return 0.25 * taxableIncome - 3.25 * OneMillion;
     }
     if (taxableIncome <= 80 * OneMillion) {
-        return 9.75 * OneMillion + 0.3 * taxableIncome;
+        return 0.3 * taxableIncome - 5.85 * OneMillion;
     }
-    return 18.15 * OneMillion + 0.35 * taxableIncome;
+    return 0.35 * taxableIncome - 9.85 * OneMillion;
 }
 
 function calculateNet(gross) {
-    let result = {
-        socialInsurance: 0,
-        healthInsurance: 0,
-        unemploymentInsurance: 0,
-        incomeBeforeTax: 0,
-        personalReduction: 0,
-        taxableIncome: 0,
-        tax: 0,
-        net: 0,
-    };
+    let result = {};
     result.socialInsurance = gross * 0.08;
     result.healthInsurance = gross * 0.015;
     result.unemploymentInsurance = gross * 0.01;
