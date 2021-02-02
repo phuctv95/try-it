@@ -3,7 +3,19 @@ const MaxSocialInsurance = 2.384 * OneMillion;
 const MaxHealthInsurance = 0.447 * OneMillion;
 const MaxUnemploymentInsurance = 0.884 * OneMillion;
 
-function calculateTax(taxableIncome) {
+interface Net {
+    socialInsurance: number;
+    healthInsurance: number;
+    unemploymentInsurance: number;
+    incomeBeforeTax: number;
+    personalReduction: number;
+    dependantReduction: number;
+    taxableIncome: number;
+    tax: number;
+    net: number;
+}
+
+function calculateTax(taxableIncome: number): number {
     if (taxableIncome <= 5 * OneMillion) {
         return 0.05 * taxableIncome;
     }
@@ -25,8 +37,8 @@ function calculateTax(taxableIncome) {
     return 0.35 * taxableIncome - 9.85 * OneMillion;
 }
 
-function calculateNet(gross, numberOfDependant) {
-    let result = {};
+function calculateNet(gross: number, numberOfDependant: number): Net {
+    let result = {} as Net;
     
     result.socialInsurance = gross * 0.08;
     result.socialInsurance = result.socialInsurance > MaxSocialInsurance

@@ -3,8 +3,13 @@ import Header from './Header';
 import DataInput from './DataInput';
 import CalculatedResult from './CalculatedResult';
 
-class SalaryCalculator extends Component {
-    constructor(props) {
+interface State {
+    gross: number;
+    numberOfDependant: number;
+}
+
+class SalaryCalculator extends Component<{}, State> {
+    constructor(props: any) {
         super(props);
 
         this.handleGrossChange = this.handleGrossChange.bind(this);
@@ -16,13 +21,13 @@ class SalaryCalculator extends Component {
         };
     }
 
-    handleGrossChange(gross) {
+    handleGrossChange(gross: number) {
         this.setState({
             gross: gross,
         });
     }
 
-    handleNumberOfDependantChange(numberOfDependant) {
+    handleNumberOfDependantChange(numberOfDependant: number) {
         this.setState({
             numberOfDependant: numberOfDependant,
         });

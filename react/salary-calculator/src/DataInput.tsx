@@ -1,18 +1,25 @@
 import { Component } from 'react';
 
-class DataInput extends Component {
-    constructor(props) {
+interface Property {
+    onGrossChange: (gross: number) => void;
+    onNumberOfDependantChange: (numberOfDependant: number) => void;
+    gross: number;
+    numberOfDependant: number;
+}
+
+class DataInput extends Component<Property, {}> {
+    constructor(props: any) {
         super(props);
         this.handleGrossChange = this.handleGrossChange.bind(this);
         this.handleNumberOfDependantChange = this.handleNumberOfDependantChange.bind(this);
     }
 
-    handleGrossChange(e) {
-        this.props.onGrossChange(e.target.value);
+    handleGrossChange(e: any) {
+        this.props.onGrossChange(+ e.target.value);
     }
 
-    handleNumberOfDependantChange(e) {
-        this.props.onNumberOfDependantChange(e.target.value);
+    handleNumberOfDependantChange(e: any) {
+        this.props.onNumberOfDependantChange(+ e.target.value);
     }
     
     render() {

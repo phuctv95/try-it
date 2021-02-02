@@ -1,7 +1,12 @@
 import { Component } from 'react';
 import calculateNet from './calculator';
 
-class CalculatedResult extends Component {
+interface Property {
+    gross: number;
+    numberOfDependant: number;
+}
+
+class CalculatedResult extends Component<Property, {}> {
     render() {
         let calculated = calculateNet(this.props.gross, this.props.numberOfDependant);
         return (
@@ -9,7 +14,7 @@ class CalculatedResult extends Component {
                 <tbody>
                     <tr className="font-weight-bold">
                         <td>GROSS</td>
-                        <td className="text-right">{(+this.props.gross).toLocaleString()}</td>
+                        <td className="text-right">{this.props.gross.toLocaleString()}</td>
                     </tr>
                     <tr>
                         <td>BHXH (8%)</td>
