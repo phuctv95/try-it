@@ -1,0 +1,25 @@
+.shape {
+    position: fixed;
+    bottom: -100vh;
+    z-index: -1;
+    background-color: gray;
+    opacity: 0.1;
+    animation-name: bottom-up-animation;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+@keyframes bottom-up-animation {
+    0% {
+        bottom: -10vh;
+        transform: rotate(0deg);
+    }
+    100% {
+        bottom: 100vh;
+        transform: rotate(360deg);
+    }
+}

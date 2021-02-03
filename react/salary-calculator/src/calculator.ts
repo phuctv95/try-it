@@ -37,7 +37,7 @@ function calculateTax(taxableIncome: number): number {
     return 0.35 * taxableIncome - 9.85 * OneMillion;
 }
 
-function calculateNet(gross: number, numberOfDependant: number): Net {
+export function calculateNet(gross: number, numberOfDependant: number): Net {
     let result = {} as Net;
     
     result.socialInsurance = gross * 0.08;
@@ -62,5 +62,3 @@ function calculateNet(gross: number, numberOfDependant: number): Net {
 
     return result;
 }
-
-export default calculateNet;

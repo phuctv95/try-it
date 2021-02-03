@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import calculateNet from './calculator';
+import { calculateNet } from './calculator';
 
 interface Property {
     gross: number;
