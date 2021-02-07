@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { NumberInput } from './NumberInput';
 
 interface Property {
     onGrossChange: (gross: number) => void;
@@ -7,19 +8,20 @@ interface Property {
     numberOfDependant: number;
 }
 
-class DataInput extends Component<Property, {}> {
+class DataInput extends Component<Property, {value: number}> {
     constructor(props: any) {
         super(props);
         this.handleGrossChange = this.handleGrossChange.bind(this);
         this.handleNumberOfDependantChange = this.handleNumberOfDependantChange.bind(this);
+        this.state = {value: 123};
     }
 
-    handleGrossChange(e: any) {
-        this.props.onGrossChange(+ e.target.value);
+    handleGrossChange(value: number) {
+        this.props.onGrossChange(value);
     }
 
-    handleNumberOfDependantChange(e: any) {
-        this.props.onNumberOfDependantChange(+ e.target.value);
+    handleNumberOfDependantChange(value: number) {
+        this.props.onNumberOfDependantChange(value);
     }
     
     render() {
@@ -27,13 +29,13 @@ class DataInput extends Component<Property, {}> {
             <div>
                 <label htmlFor="gross">GROSS (VND):</label>
                 <div className="input-group mb-3">
-                    <input value={this.props.gross} onChange={this.handleGrossChange}
-                        type="number" min="0" step="1000000" className="form-control" id="gross"/>
+                    <NumberInput value={this.props.gross} onChange={this.handleGrossChange}
+                        thousandSeparator={true} selectAllOnFocus={true} id="gross"/>
                 </div>
                 <label htmlFor="numberOfDependant">Số người phụ thuộc:</label>
                 <div className="input-group mb-3">
-                    <input value={this.props.numberOfDependant} onChange={this.handleNumberOfDependantChange}
-                        type="number" min="0" className="form-control" id="numberOfDependant"/>
+                    <NumberInput value={this.props.numberOfDependant} onChange={this.handleNumberOfDependantChange}
+                        thousandSeparator={true} selectAllOnFocus={true} id="numberOfDependant"/>
                 </div>
             </div>
         );
