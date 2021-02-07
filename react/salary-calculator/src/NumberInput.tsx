@@ -7,6 +7,7 @@ interface Properties {
     thousandSeparator: boolean;
     selectAllOnFocus: boolean;
     step: number;
+    min: number;
 }
 
 interface State {
@@ -38,9 +39,12 @@ export class NumberInput extends Component<Properties, State> {
     }
 
     handleOnWheel(e: React.WheelEvent<HTMLInputElement>) {
-        this.props.onChange(e.deltaY < 0
+        const newValue = e.deltaY < 0
             ? this.props.value + this.props.step
-            : this.props.value - this.props.step);
+            : this.props.value - this.props.step;
+        if (newValue >= this.props.min) {
+            this.props.onChange(newValue);
+        }
     }
 
     removeNoneDigitsLetter(userEnterNumber: string): number {
