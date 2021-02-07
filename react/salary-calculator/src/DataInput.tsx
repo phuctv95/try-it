@@ -30,12 +30,12 @@ class DataInput extends Component<Property, {value: number}> {
                 <label htmlFor="gross">GROSS (VND):</label>
                 <div className="input-group mb-3">
                     <NumberInput value={this.props.gross} onChange={this.handleGrossChange}
-                        thousandSeparator={true} selectAllOnFocus={true} id="gross"/>
+                        thousandSeparator={true} selectAllOnFocus={true} step={1000000} id="gross"/>
                 </div>
                 <label htmlFor="numberOfDependant">Số người phụ thuộc:</label>
                 <div className="input-group mb-3">
                     <NumberInput value={this.props.numberOfDependant} onChange={this.handleNumberOfDependantChange}
-                        thousandSeparator={true} selectAllOnFocus={true} id="numberOfDependant"/>
+                        thousandSeparator={true} selectAllOnFocus={true} step={1} id="numberOfDependant"/>
                 </div>
             </div>
         );

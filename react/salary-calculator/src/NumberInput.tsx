@@ -6,6 +6,7 @@ interface Properties {
     onChange: (value: number) => void;
     thousandSeparator: boolean;
     selectAllOnFocus: boolean;
+    step: number;
 }
 
 interface State {
@@ -16,6 +17,7 @@ export class NumberInput extends Component<Properties, State> {
         super(props);
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnFocus = this.handleOnFocus.bind(this);
+        this.handleOnWheel = this.handleOnWheel.bind(this);
     }
 
     getDisplayValue(value: number): string {
@@ -35,6 +37,12 @@ export class NumberInput extends Component<Properties, State> {
         }
     }
 
+    handleOnWheel(e: React.WheelEvent<HTMLInputElement>) {
+        this.props.onChange(e.deltaY < 0
+            ? this.props.value + this.props.step
+            : this.props.value - this.props.step);
+    }
+
     removeNoneDigitsLetter(userEnterNumber: string): number {
         const isNegative = userEnterNumber[0] === '-';
         const removedAllNoneDigits = userEnterNumber.replace(/\D+/g, '');
@@ -44,7 +52,8 @@ export class NumberInput extends Component<Properties, State> {
     render() {
         return (
             <input value={this.getDisplayValue(this.props.value)} onChange={this.handleOnChange}
-                id={this.props.id} onFocus={this.handleOnFocus} type="text" className="form-control"/>
+                id={this.props.id} onFocus={this.handleOnFocus} onWheel={this.handleOnWheel}
+                type="text" className="form-control"/>
         );
     }
 }
