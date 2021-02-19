@@ -1,8 +1,8 @@
 ## virtualenv
 
-`virtualenv project-name`: to init the project.
+`py -3 -m venv env` (Windows) or `python3 -m venv env` (Linux/Mac) or `virtualenv env`: to init the project.
 
-`Scripts/activate.bat`: to activate scripts like `pip list` to execute in current local context.
+`env/Scripts/activate.bat`: to activate scripts like `pip list` to execute in current local context.
 
 `deactivate`: to back to normal, global environment.
 
