@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val editText = findViewById<EditText>(R.id.editText)
-        editText.setOnKeyListener { v, keyCode, event ->
+        editText.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 sendMessage()
                 return@setOnKeyListener true
