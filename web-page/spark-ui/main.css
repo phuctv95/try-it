@@ -1,0 +1,69 @@
+:root {
+    --bg: #555555;
+    --border-inactive: #8f8f8f;
+    --border-active: #3995ff;
+}
+
+* {
+    font-family: sans-serif;
+    color: white;
+    font-size: medium;
+}
+
+body {
+    background-color: #353535;
+}
+
+label > input[type=text] {
+    display: block;
+    margin-top: 5px;
+    color: white;
+    background-color: var(--bg);
+    border: var(--border-inactive) solid 1px;
+    border-radius: 2px;
+    padding: 3px 10px;
+}
+
+label > input[type=text]:focus {
+    outline: none;
+    border-color: var(--border-active);
+    box-shadow: 0 0 0 1px var(--border-active);
+}
+
+label > input[type=checkbox] {
+    appearance: none;
+}
+
+label > input[type=checkbox]::after {
+    content: "v";
+    display: none;
+}
+
+label > input[type=checkbox]:checked::after {
+    display: block;
+}
+
+button {
+    padding: 3px 10px;
+    color: white;
+    background-color: #112a46;
+    border: var(--border-active) solid 1px;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+button:hover {
+    border: var(--border-active) solid 1px;
+    background-color: #1b406b;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--border-active);
+    border-color: var(--border-active);
+}
+
+.btn-secondary {
+    border-color: var(--border-inactive);
+    background-color: var(--bg);
+}
