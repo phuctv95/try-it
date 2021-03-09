@@ -112,6 +112,18 @@ input[type=radio]:focus {
     border-color: var(--border-active);
 }
 
+label > select {
+    background-color: var(--bg);
+    border-radius: 2px;
+    padding-right: 3px;
+}
+
+label > select:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--border-active);
+    border-color: var(--border-active);
+}
+
 button {
     padding: 3px 10px;
     color: white;
