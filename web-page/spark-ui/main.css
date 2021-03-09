@@ -1,11 +1,12 @@
 :root {
     --bg: #555555;
+    --bg-hover: #36577c;
     --border-inactive: #8f8f8f;
     --border-active: #3995ff;
 }
 
 * {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     font-size: medium;
 }
@@ -14,9 +15,17 @@ body {
     background-color: #353535;
 }
 
+.heading {
+    font-size: xx-large;
+    color: #fff;
+    text-shadow: 0px 0px 20px var(--border-active);
+    text-decoration: underline;
+    text-decoration-color: var(--border-active);
+}
+
 label > input[type=text] {
     display: block;
-    margin-top: 5px;
+    margin: 5px 0;
     color: white;
     background-color: var(--bg);
     border: var(--border-inactive) solid 1px;
@@ -30,17 +39,77 @@ label > input[type=text]:focus {
     box-shadow: 0 0 0 1px var(--border-active);
 }
 
-label > input[type=checkbox] {
+input[type=checkbox] {
     appearance: none;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: var(--bg);
+    vertical-align: middle;
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    border: var(--border-inactive) solid 1px;
 }
 
-label > input[type=checkbox]::after {
-    content: "v";
-    display: none;
+input[type=checkbox]::after {
+    content: " ";
 }
 
-label > input[type=checkbox]:checked::after {
-    display: block;
+input[type=checkbox]:checked:after {
+    content: "✔";
+}
+
+input[type=checkbox]:hover {
+    background-color: var(--bg-hover);
+}
+
+input[type=checkbox]:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--border-active);
+    border-color: var(--border-active);
+}
+
+input[type=radio] {
+    appearance: none;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: var(--bg);
+    vertical-align: middle;
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: var(--border-inactive) solid 1px;
+}
+
+input[type=radio]::after {
+    content: " ";
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0;
+}
+
+input[type=radio]:checked::after {
+    opacity: 1;
+}
+
+input[type=radio]:hover {
+    background-color: var(--bg-hover);
+}
+
+input[type=radio]:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--border-active);
+    border-color: var(--border-active);
 }
 
 button {
@@ -54,7 +123,7 @@ button {
 
 button:hover {
     border: var(--border-active) solid 1px;
-    background-color: #1b406b;
+    background-color: var(--bg-hover);
 }
 
 button:focus {
