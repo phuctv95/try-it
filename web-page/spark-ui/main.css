@@ -148,3 +148,17 @@ button:focus {
     border-color: var(--border-inactive);
     background-color: var(--bg);
 }
+
+.progress {
+    width: 400px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--bg);
+}
+
+.progress > .progress-fill {
+    height: 100%;
+    width: 20%;
+    background: linear-gradient(to left, #c9fbff, var(--border-active) 10px, var(--border-active) 100%);
+    transition: width 0.5s;
+}
