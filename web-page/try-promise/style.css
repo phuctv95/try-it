@@ -1,0 +1,23 @@
+.shape {
+    width: 10rem;
+    height: 10rem;
+    background-color: burlywood;
+    margin: 5rem;
+    animation: animation1 10s infinite linear;
+}
+
+@keyframes animation1 {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+button:hover {
+    background-color: blueviolet;
+}
+button:active {
+    background-color: brown;
+}
