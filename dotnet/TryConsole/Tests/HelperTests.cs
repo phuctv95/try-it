@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data;
 using System.Drawing;
@@ -19,7 +20,7 @@ namespace TryConsole.Tests
             foreach (var expression in Helper.Expression100())
             {
                 var actual = computer.Compute(expression, string.Empty);
-                Assert.AreEqual(100, actual);
+                actual.Should().Be(100);
             }
         }
 
@@ -30,32 +31,40 @@ namespace TryConsole.Tests
             const string FilePath = "test.txt";
             Helper.Overwrite(FilePath, content);
 
-            Assert.IsTrue(File.Exists(FilePath));
+            File.Exists(FilePath).Should().BeTrue();
             var lines = File.ReadAllLines(FilePath);
-            Assert.AreEqual(1, lines.Length);
-            Assert.AreEqual(content, lines[0]);
+            lines.Length.Should().Be(1);
+            lines[0].Should().Be(content);
             File.Delete(FilePath);
         }
 
         [TestMethod()]
         public void TestReflection()
         {
-            Assert.AreEqual(123.GetType(), Type.GetType("System.Int32"));
-            Assert.AreEqual(123.GetType(), typeof(int));
+            123.GetType()
+                .Should().Be(Type.GetType("System.Int32"));
+            123.GetType()
+                .Should().Be(typeof(int));
 
             var type = Type.GetType("TryConsole.Tests.TestClass");
 
-            Assert.IsNotNull(type);
-            Assert.AreEqual(typeof(int), type!.GetProperty("X")?.PropertyType);
-            Assert.AreEqual(typeof(string), type!.GetProperty("Y")?.PropertyType);
-            Assert.AreEqual(null, type!.GetProperty("Z")?.PropertyType);
-            Assert.AreEqual(typeof(string), type!.GetProperty("Z", BindingFlags.NonPublic | BindingFlags.Instance)?.PropertyType);
+            type.Should().NotBeNull();
+            type!.GetProperty("X")?.PropertyType
+                .Should().Be(typeof(int));
+            type!.GetProperty("Y")?.PropertyType
+                .Should().Be(typeof(string));
+            type!.GetProperty("Z")?.PropertyType
+                .Should().BeNull();
+            type!.GetProperty("Z", BindingFlags.NonPublic | BindingFlags.Instance)?.PropertyType
+                .Should().Be(typeof(string));
 
-            Assert.AreEqual(typeof(string), type!.GetMethod("GetValue")?.ReturnType);
-            Assert.IsNotNull(type!.GetConstructor(new Type[] { typeof(int) }));
+            type!.GetMethod("GetValue")?.ReturnType
+                .Should().Be(typeof(string));
+            type!.GetConstructor(new Type[] { typeof(int) })
+                .Should().NotBeNull();
 
             var assembly = Assembly.Load("System");
-            Assert.AreEqual("System.dll", assembly.ManifestModule.Name);
+            "System.dll".Should().Be(assembly.ManifestModule.Name);
         }
 
         [TestMethod]
@@ -73,7 +82,7 @@ namespace TryConsole.Tests
         #endregion
         public void Fibonacci(int n, int expected)
         {
-            Assert.AreEqual(expected, Helper.Fibonacci(n));
+            expected.Should().Be(Helper.Fibonacci(n));
         }
 
         [TestMethod]
@@ -88,10 +97,10 @@ namespace TryConsole.Tests
                 _ => throw new ArgumentException(message: "Invalid param.", paramName: nameof(color)),
             };
 
-            Assert.AreEqual(Color.Red, GetColor(MyColor.Red));
-            Assert.AreEqual(Color.Green, GetColor(MyColor.Green));
-            Assert.AreEqual(Color.Blue, GetColor(MyColor.Blue));
-            Assert.ThrowsException<ArgumentException>(() => GetColor((MyColor)100));
+            GetColor(MyColor.Red).Should().Be(Color.Red);
+            GetColor(MyColor.Green).Should().Be(Color.Green);
+            GetColor(MyColor.Blue).Should().Be(Color.Blue);
+            FluentActions.Invoking(() => GetColor((MyColor)100)).Should().Throw<ArgumentException>();
 
             // Property pattern.
             Func<TestClass, int> ParseY = instance => instance switch
@@ -102,9 +111,9 @@ namespace TryConsole.Tests
                 _ => throw new NotSupportedException(),
             };
 
-            Assert.AreEqual(1, ParseY(new TestClass { Y = "1" }));
-            Assert.AreEqual(2, ParseY(new TestClass { Y = "2" }));
-            Assert.AreEqual(3, ParseY(new TestClass { Y = "3" }));
+            ParseY(new TestClass { Y = "1" }).Should().Be(1);
+            ParseY(new TestClass { Y = "2" }).Should().Be(2);
+            ParseY(new TestClass { Y = "3" }).Should().Be(3);
 
             // Tuple pattern.
             Func<MyColor, MyColor, Color> MixColor = (c1, c2) => (c1, c2) switch
@@ -114,16 +123,16 @@ namespace TryConsole.Tests
                 (MyColor.Green, MyColor.Blue) => Color.Cyan,
                 (_, _) => throw new NotSupportedException(),
             };
-            Assert.AreEqual(Color.Yellow, MixColor(MyColor.Red, MyColor.Green));
-            Assert.AreEqual(Color.Magenta, MixColor(MyColor.Red, MyColor.Blue));
-            Assert.AreEqual(Color.Cyan, MixColor(MyColor.Green, MyColor.Blue));
+            MixColor(MyColor.Red, MyColor.Green).Should().Be(Color.Yellow);
+            MixColor(MyColor.Red, MyColor.Blue).Should().Be(Color.Magenta);
+            MixColor(MyColor.Green, MyColor.Blue).Should().Be(Color.Cyan);
 
             // Positional pattern.
             var myTestClass = new TestClass { X = 1, Y = "2" };
             if (myTestClass is TestClass(int x, string y))
             {
-                Assert.AreEqual(myTestClass.X, x);
-                Assert.AreEqual(myTestClass.Y, y);
+                x.Should().Be(myTestClass.X);
+                y.Should().Be(myTestClass.Y);
             }
             else
             {
@@ -141,7 +150,7 @@ namespace TryConsole.Tests
                 counter++;
                 Console.WriteLine($"Report received item: {item}.");
             }
-            Assert.AreEqual(10, counter);
+            counter.Should().Be(10);
         }
 
 
@@ -156,21 +165,25 @@ namespace TryConsole.Tests
         {
             var arr = new string[] { "a", "b", "c", "d", "e" };
 
-            Assert.AreEqual("a", arr[0]);
-            Assert.AreEqual("b", arr[1]);
-            Assert.AreEqual("e", arr[^1]);
-            Assert.AreEqual("d", arr[^2]);
+            arr[0].Should().Be("a");
+            arr[1].Should().Be("b");
+            arr[^1].Should().Be("e");
+            arr[^2].Should().Be("d");
 
-            Assert.ThrowsException<IndexOutOfRangeException>(() => arr[^0]);
-            Assert.ThrowsException<IndexOutOfRangeException>(() => arr[^(arr.Length + 1)]);
+            FluentActions.Invoking(() => arr[^0]).Should().Throw<IndexOutOfRangeException>();
+            FluentActions.Invoking(() => arr[^(arr.Length + 1)]).Should().Throw<IndexOutOfRangeException>();
 
             Assert.IsTrue(arr[0..2].SequenceEqual(new string[] { "a", "b" }));
             Assert.IsTrue(arr[..2].SequenceEqual(new string[] { "a", "b" }));
             Assert.IsTrue(arr[3..].SequenceEqual(new string[] { "d", "e" }));
             Assert.IsTrue(arr[^2..].SequenceEqual(new string[] { "d", "e" }));
+            arr[0..2].Should().BeEquivalentTo(new string[] { "a", "b" }, opt => opt.WithStrictOrdering());
+            arr[..2].Should().BeEquivalentTo(new string[] { "a", "b" }, opt => opt.WithStrictOrdering());
+            arr[3..].Should().BeEquivalentTo(new string[] { "d", "e" }, opt => opt.WithStrictOrdering());
+            arr[^2..].Should().BeEquivalentTo(new string[] { "d", "e" }, opt => opt.WithStrictOrdering());
 
             var range = ^2..;
-            Assert.IsTrue(arr[range].SequenceEqual(new string[] { "d", "e" }));
+            arr[range].Should().BeEquivalentTo(new string[] { "d", "e" }, opt => opt.WithStrictOrdering());
         }
 
         [TestMethod]
@@ -178,11 +191,11 @@ namespace TryConsole.Tests
         {
             int? x = 1;
             x ??= 2;
-            Assert.AreEqual(1, x);
+            x.Should().Be(1);
 
             x = null;
             x ??= 2;
-            Assert.AreEqual(2, x);
+            x.Should().Be(2);
         }
 
         [TestMethod]
@@ -204,9 +217,10 @@ namespace TryConsole.Tests
                 .Take(1)
                 .ToList();
 
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(cities.First(), result.First());
-            Assert.IsTrue(cities.Select(x => x.IsBig).SequenceEqual(new bool[] { true, false }));
+            result.Count.Should().Be(1);
+            result.First().Should().Be(cities.First());
+            cities.Select(x => x.IsBig)
+                .Should().BeEquivalentTo(new bool[] { true, false }, opt => opt.WithStrictOrdering());
         }
 
         [TestMethod]
@@ -228,9 +242,10 @@ namespace TryConsole.Tests
                 .Take(1)
                 .ToList();
 
-            Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(cities.Skip(1).First(), result.First());
-            Assert.IsTrue(cities.Select(x => x.IsBig).SequenceEqual(new bool[] { true, true }));
+            result.Count.Should().Be(1);
+            result.First().Should().Be(cities.Skip(1).First());
+            cities.Select(x => x.IsBig)
+                .Should().BeEquivalentTo(new bool[] { true, true }, opt => opt.WithStrictOrdering());
         }
     }
 
