@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Tests.MappingByCode
 {
-    public class CatStoreMbcTests
+    public class CatStoreTests
     {
         private IRepository<CatStore> _catStoreRepository;
         private IRepository<Cat> _catRepository;

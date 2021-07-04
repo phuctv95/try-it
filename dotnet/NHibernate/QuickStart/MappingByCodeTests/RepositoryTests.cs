@@ -8,7 +8,7 @@ using RepositoryMapByCode.Repositories;
 
 namespace Tests.MappingByCode
 {
-    public class RepositoryMapByCodeTests
+    public class RepositoryTests
     {
         private ISessionFactory _sessionFactory;
         private Configuration _configuration;

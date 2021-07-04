@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RepositoryMapByCode\RepositoryMapByCode.csproj" />
-    <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
 </Project>
