@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="Repository.Models" assembly="Repository">
+
+	<class name="CatStore" table="CatStore">
+		<id name="Id" generator="guid"/>
+		<property name="Name" />
+		<bag name="Cats" table="Cat" cascade="all-delete-orphan">
+			<key column="CatStoreId"/>
+			<one-to-many class="Cat"/>
+		</bag>
+		<set name="PhoneNumbers" table="PhoneNumber">
+			<key column="CatStoreId"/>
+			<element column="PhoneNumber" type="String"/>
+		</set>
+	</class>
+
+</hibernate-mapping>

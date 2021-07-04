@@ -20,5 +20,45 @@ Instance states:
 persistent: The instance is currently associated with a persistence context. It has a persistent identity (primary key value) and, perhaps, a corresponding row in the database. For a particular persistence context, NHibernate guarantees that persistent identity is equivalent to CLR identity (in-memory location of the object).
 - detached: The instance was once associated with a persistence context, but that context was closed, or the instance was serialized to another process. It has a persistent identity and, perhaps, a corresponding row in the database. For detached instances, NHibernate makes no guarantees about the relationship between persistent identity and CLR identity.
 
+## ISessionFactory Configuration
 
+Configuration and SessionFactory:
+- An instance of `NHibernate.Cfg.Configuration` represents an entire set of mappings of an application's .NET types to a SQL database.
+- When all mappings have been parsed by the Configuration, the application must obtain a factory for ISession instances: `ISessionFactory sessions = cfg.BuildSessionFactory();`
+- (We can have multiple ISessionFactory if we have multiple databases).
+
+User provided ADO.NET connection:
+- An ISessionFactory may open an ISession on a user-provided ADO.NET connection:
+	```C#
+	var conn = myApp.GetOpenConnection();
+	var session = sessions.OpenSession(conn);
+	```
+Settings for ADO.NET connection: https://nhibernate.info/doc/nhibernate-reference/session-configuration.html#configuration-hibernatejdbc
+
+All other configurations: https://nhibernate.info/doc/nhibernate-reference/session-configuration.html
+
+## Mapping
+
+Collection mapping:
+- NHibernate requires that persistent collection-valued fields be declared as a generic interface type.
+- cascade: https://ayende.com/blog/1890/nhibernate-cascades-the-different-between-all-all-delete-orphans-and-save-update
+- cascade in removing context, for example in CatStore:
+	+ normal case: remove a CatStore instance will NOT remove all associated cats.
+	+ delete: remove a CatStore instance will remove all associated cats.
+	+ delete: remove a cat from CatStore associated collection of cats will set cat's foriegn key to null (orphan)
+	+ all-delete-orphan: remove a cat from CatStore associated collection of cats will remove the cat if it's orphan
+- fetch:
+	+ select: lazy loading the collection
+	+ join: eager loading the collection by left join query
+	+ subselect: when access a collection, fetch all collections using a sub-query (e.g. `select ... from posts where blogId in (select top(5) Id from blogs)`)
+- inverse: in bidirectional associations, to tell the non-inversed side to have the responsible of persisting the data. By default, both sides will persist twice if we call persisting twice.
+- batch-size: loading n bunch of collections to reduce n+1 issue. E.g. for each n blogs, loadings posts will produce n+1 queries, but if using batch-size, it will produce n/batch-size + 1 queryies.
+
+Mapping is often used:
+- Tags: class, property, id, many-to-one, bag, one-to-many.
+
+Attributes to notice:
+- `lazy` (true/false): in set/bag, specify loading the collection when getting the entity or when we calling the collection property.
+
+## Open points
 

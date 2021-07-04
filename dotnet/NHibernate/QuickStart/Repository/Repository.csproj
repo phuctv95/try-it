@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Mappings\Cat.hbm.xml" />
+    <None Remove="Mappings\CatStore.hbm.xml" />
+    <None Remove="Mappings\Course.hbm.xml" />
+    <None Remove="Mappings\Employee.hbm.xml" />
+    <None Remove="Mappings\Person.hbm.xml" />
+    <None Remove="Mappings\Student.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Course.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Employee.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Student.hbm.xml" />
+    <EmbeddedResource Include="Mappings\CatStore.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Person.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Cat.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="5.3.8" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

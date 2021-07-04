@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="Repository.Models" assembly="Repository">
+
+	<class name="Course" table="Course">
+		<id name="Id" generator="guid"/>
+		<property name="Name"/>
+		<bag name="Students" table="CourseStudent">
+			<key column="CourseId"/>
+			<many-to-many class="Student" column="StudentId"/>
+		</bag>
+	</class>
+
+</hibernate-mapping>
