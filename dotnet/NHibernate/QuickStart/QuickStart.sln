@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryMapByCode", "Repo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.MappingByCode", "MappingByCodeTests\Tests.MappingByCode.csproj", "{4F43D177-6693-4D2B-9EE0-9166925AF6AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.CriteriaQueries", "Tests.CriteriaQueries\Tests.CriteriaQueries.csproj", "{B0CBBB53-3353-4621-9EAC-83EDC2204605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4F43D177-6693-4D2B-9EE0-9166925AF6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F43D177-6693-4D2B-9EE0-9166925AF6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F43D177-6693-4D2B-9EE0-9166925AF6AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0CBBB53-3353-4621-9EAC-83EDC2204605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0CBBB53-3353-4621-9EAC-83EDC2204605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0CBBB53-3353-4621-9EAC-83EDC2204605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0CBBB53-3353-4621-9EAC-83EDC2204605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
