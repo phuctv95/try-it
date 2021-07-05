@@ -60,5 +60,33 @@ Mapping is often used:
 Attributes to notice:
 - `lazy` (true/false): in set/bag, specify loading the collection when getting the entity or when we calling the collection property.
 
+## Query
+
+Transformers:
+- AliasToEntityMap: Each row of results is a map (IDictionary) from alias to values/entities
+- ToList: Each row of results is a IList
+- DistinctRootEntity: remove duplicated *root* entities (useful for join queries)
+- AliasToBean: map results using a custom type (useful when using projection).
+
+Criteria:
+- CreateAlias() vs CreateCriteria() in associtations. They commonly work the same, there's a bit different:
+	+ CreateAlias(): returns original criteria, adding restrictions is adding to the original entity (except adding restriction using alias)
+	+ CreateCriteria(): returns new criteria, adding restrictions is adding to the newly created entity
+- Restrictions, Projections and Subqueries now support Lambda Expressions.
+
+QueryOver:
+- QueryOver uses Lambda Expressions to provide some extra syntax to remove the 'magic strings' from your ICriteria queries.
+- QueryOver API is built on top of the ICriteria API. Internally the structures are the same, so following two query are stored as exactly the same ICriterion:
+	+ `.Where(Restrictions.Eq("Name", "Max"))`
+	+ `.Where(c => c.Name == "Max")`
+- Restrictions:
+	+ We can use: `Where()`, `WhereRestrictionOn()` or `Where(Restrictions.On<Cat>(...))`
+	+ We can use extension method in `Where`, e.g.: `IsLike()`, `IsIn()`.
+- Association:
+	+ `IQueryOver<TRoot, TSubType>`: TRoot is the root type (the type of entity that the query returns), and TSubType is the type of 'current' entity being queried. 
+
+Others:
+- `YearPart()` was removed in NH 5, use `Year` in DateTime instead (https://nhibernate.jira.com/browse/NH-3684).
+
 ## Open points
 

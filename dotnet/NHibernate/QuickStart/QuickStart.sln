@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MappingByXml", "Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryMapByCode", "RepositoryMapByCode\RepositoryMapByCode.csproj", "{61F76B96-EC2F-4077-949D-7A82281AE79C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.MappingByCode", "MappingByCodeTests\Tests.MappingByCode.csproj", "{4F43D177-6693-4D2B-9EE0-9166925AF6AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MappingByCode", "MappingByCodeTests\Tests.MappingByCode.csproj", "{4F43D177-6693-4D2B-9EE0-9166925AF6AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.CriteriaQueries", "Tests.CriteriaQueries\Tests.CriteriaQueries.csproj", "{B0CBBB53-3353-4621-9EAC-83EDC2204605}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.CriteriaQueries", "Tests.CriteriaQueries\Tests.CriteriaQueries.csproj", "{B0CBBB53-3353-4621-9EAC-83EDC2204605}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.QueryOverQueries", "Tests.QueryOverQueries\Tests.QueryOverQueries.csproj", "{F153D3D6-2231-4CC9-AD6A-D1E96EB70573}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B0CBBB53-3353-4621-9EAC-83EDC2204605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0CBBB53-3353-4621-9EAC-83EDC2204605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0CBBB53-3353-4621-9EAC-83EDC2204605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F153D3D6-2231-4CC9-AD6A-D1E96EB70573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F153D3D6-2231-4CC9-AD6A-D1E96EB70573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F153D3D6-2231-4CC9-AD6A-D1E96EB70573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F153D3D6-2231-4CC9-AD6A-D1E96EB70573}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
