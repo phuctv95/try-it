@@ -1,3 +1,4 @@
+using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Transform;
 using NUnit.Framework;
@@ -176,6 +177,33 @@ namespace Tests.QueryOverQueries
                 .WithSubquery.Where(c => c.Weight > avgWeight.As<float>())
                 .List();
             AssertTwoListContainSameItems(actual.Select(c => c.Id), expected.Select(c => c.Id));
+        }
+
+        [Test]
+        public void ForceFetchTest()
+        {
+            CatStore catStore;
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                catStore = session.QueryOver<CatStore>()
+                    .Where(cs => cs.Id == _catStores[0].Id)
+                    .List<CatStore>()
+                    .First();
+            }
+            Assert.Throws<LazyInitializationException>(() =>
+            {
+                _ = catStore.Cats.Count;
+            });
+
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                catStore = session.QueryOver<CatStore>()
+                    .Where(cs => cs.Id == _catStores[0].Id)
+                    .Fetch(SelectMode.Fetch, cs => cs.Cats)
+                    .List<CatStore>()
+                    .First();
+            }
+            catStore.Cats.Count.ShouldBe(_catStores[0].Cats.Count);
         }
 
         class CatSumarry
