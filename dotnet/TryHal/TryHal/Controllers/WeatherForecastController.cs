@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TryHal.Representations;
 
 namespace TryHal.Controllers;
 
@@ -28,5 +29,31 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
+    }
+
+    [HttpGet]
+    [Route("today")]
+    public WeatherForecastRepresentation GetToday()
+    {
+        var today = new WeatherForecastRepresentation
+        {
+            Date = DateTime.Now,
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        };
+        today.Links.Add(LinkTemplates.WeatherForecasts.Tomorrow.CreateLink());
+        return today;
+    }
+
+    [HttpGet]
+    [Route("tomorrow")]
+    public WeatherForecastRepresentation GetTomorrow()
+    {
+        return new WeatherForecastRepresentation
+        {
+            Date = DateTime.Now.AddDays(1),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        };
     }
 }
