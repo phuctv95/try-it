@@ -1,0 +1,19 @@
+<fieldset [formGroup]="form">
+    <legend>Address</legend>
+    <div>
+        Address Line 1:
+        <input type="text" formControlName="addressLine1" (blur)="onTouched()">
+    </div>
+    <div>
+        Address Line 2:
+        <input type="text" formControlName="addressLine2" (blur)="onTouched()">
+    </div>
+    <div>
+        Zip Code:
+        <input type="text" formControlName="zipCode" (blur)="onTouched()">
+    </div>
+    <div>
+        City:
+        <input type="text" formControlName="city" (blur)="onTouched()">
+    </div>
+</fieldset>

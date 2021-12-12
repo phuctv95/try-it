@@ -5,11 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QuantityComponent } from './components/quantity/quantity.component';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuantityComponent
+    QuantityComponent,
+    AddressFormComponent
   ],
   imports: [
     BrowserModule,
