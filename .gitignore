@@ -3,3 +3,5 @@ selenium/node_modules/*
 /dotnet/TryEntityFrameworkCore/.vs/TryEntityFrameworkCore/DesignTimeBuild/.dtbcache.v2
 dotnet/TryDependencyInjection/Tests/CoverageReport/*
 dotnet/TryDependencyInjection/Tests/opencover-result.xml
+.DS_Store
+
