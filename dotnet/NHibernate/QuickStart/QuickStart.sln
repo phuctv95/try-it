@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickStart", "QuickStart\Qu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{2E2C6D3B-B665-453C-9D3F-9A5B9FE1F7F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MappingByXml", "Tests\Tests.MappingByXml.csproj", "{026FF9CB-B29D-42A7-8B71-62058A73C1C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MappingByXml", "Tests.MappingByXml\Tests.MappingByXml.csproj", "{026FF9CB-B29D-42A7-8B71-62058A73C1C9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryMapByCode", "RepositoryMapByCode\RepositoryMapByCode.csproj", "{61F76B96-EC2F-4077-949D-7A82281AE79C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MappingByCode", "MappingByCodeTests\Tests.MappingByCode.csproj", "{4F43D177-6693-4D2B-9EE0-9166925AF6AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.MappingByCode", "Tests.MappingByCode\Tests.MappingByCode.csproj", "{4F43D177-6693-4D2B-9EE0-9166925AF6AA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.CriteriaQueries", "Tests.CriteriaQueries\Tests.CriteriaQueries.csproj", "{B0CBBB53-3353-4621-9EAC-83EDC2204605}"
 EndProject

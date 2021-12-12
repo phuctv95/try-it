@@ -31,12 +31,14 @@ namespace Tests.MappingByCode
             {
                 Name = "Tom 1",
                 Weight = 1.0f,
+                Sex = 'm',
                 CatStore = catStore,
             };
             var cat2 = new Cat
             {
                 Name = "Tom 2",
                 Weight = 1.0f,
+                Sex = 'm',
                 CatStore = catStore,
             };
             catStore.Cats.Add(cat1);
@@ -64,12 +66,14 @@ namespace Tests.MappingByCode
             {
                 Name = "Tom 1",
                 Weight = 1.0f,
+                Sex = 'm',
                 CatStore = catStore,
             };
             var cat2 = new Cat
             {
                 Name = "Tom 2",
                 Weight = 1.0f,
+                Sex = 'm',
                 CatStore = catStore,
             };
             catStore.Cats.Add(cat1);

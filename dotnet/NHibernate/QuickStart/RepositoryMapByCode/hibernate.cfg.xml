@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
 	<session-factory>
-		<property name="dialect">NHibernate.Dialect.MsSql2012Dialect</property>
-		<property name="connection.connection_string">Server=.;Database=Test;Integrated Security=true;</property>
+		<property name="dialect">NHibernate.Dialect.PostgreSQL83Dialect</property>
+		<property name="connection.connection_string">Server=localhost;Database=Test;Integrated Security=true;</property>
 
 		<mapping assembly="RepositoryMapByCode"/>
 	</session-factory>
