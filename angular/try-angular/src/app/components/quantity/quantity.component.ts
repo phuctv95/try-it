@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
 @Component({
   selector: 'app-quantity',
@@ -10,10 +10,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       provide: NG_VALUE_ACCESSOR,
       multi:true,
       useExisting: QuantityComponent
-    }
+    },
+    {
+      provide: NG_VALIDATORS,
+      multi:true,
+      useExisting: QuantityComponent
+    },
   ],
 })
-export class QuantityComponent implements OnInit, ControlValueAccessor {
+export class QuantityComponent implements OnInit, ControlValueAccessor, Validator {
 
   @Input() increment = 1;
 
@@ -45,6 +50,14 @@ export class QuantityComponent implements OnInit, ControlValueAccessor {
     this.disabled = disabled;
   }
 
+  validate(control: AbstractControl): ValidationErrors | null {
+    const quantity = control.value as number;
+    if (quantity < 0) {
+      return { mustBePositive: { quantity } };
+    }
+    return null;
+  }
+
   markAsTouchedIfNotYet() {
     if (!this.touched) {
       this.onTouched();
@@ -58,9 +71,6 @@ export class QuantityComponent implements OnInit, ControlValueAccessor {
     }
     this.markAsTouchedIfNotYet();
     this.quantity -= this.increment;
-    if (this.quantity < 0) {
-      this.quantity = 0;
-    }
     this.onChange(this.quantity);
   }
 
