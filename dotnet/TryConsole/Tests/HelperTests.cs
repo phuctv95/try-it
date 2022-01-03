@@ -1,14 +1,11 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using TryConsole;
 
-namespace TryConsole.Tests
+namespace Tests
 {
     [TestClass]
     public class HelperTests
@@ -46,7 +43,7 @@ namespace TryConsole.Tests
             123.GetType()
                 .Should().Be(typeof(int));
 
-            var type = Type.GetType("TryConsole.Tests.TestClass");
+            var type = Type.GetType("Tests.TestClass");
 
             type.Should().NotBeNull();
             type!.GetProperty("X")?.PropertyType
